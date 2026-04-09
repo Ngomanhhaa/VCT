@@ -6,6 +6,11 @@ Imports Autodesk.AutoCAD.EditorInput
 Imports Autodesk.AutoCAD.Geometry
 
 Module molFun
+
+    Public SYS_MATH_LAM_TRON_SO As Integer = 5
+    Public SYS_Rebar_Space_Min As Integer = 100
+    Public SYS_Rebar_Space_Max As Integer = 300
+
     'Hàm khởi tạo style
     Public Sub CopyStyle(filePath As String)
         Dim doc As Document = Application.DocumentManager.MdiActiveDocument
@@ -399,28 +404,123 @@ Module molFun
 
     End Sub
 
-    Class cSTR_Point
+    Public Class cSTR_Point
         Public Property id As Integer
         Public Property model_id As Integer 'ID của drawingObject, Dùng khi tạo model, để lấy ngược lại UniqueName
         Public Property label As String 'uniquename
         Public Property X As Decimal
         Public Property Y As Decimal
         Public Property Z As Decimal
+
+        Public Sub New()
+        End Sub
+
+        Public Sub New(x As Decimal, y As Decimal, Optional z As Decimal = 0)
+            Me.X = x
+            Me.Y = y
+            Me.Z = z
+        End Sub
     End Class
 
     Public Class cSTR_Line
-        Public Property X1 As cSTR_Line
-        Public Property Y1 As cSTR_Line
-        Public Property X2 As cSTR_Line
-        Public Property Y2 As cSTR_Line
+        Public Sub New(x1 As Decimal, y1 As Decimal, x2 As Decimal, y2 As Decimal)
+            Me.X1 = x1
+            Me.Y1 = y1
+            Me.X2 = x2
+            Me.Y2 = y2
+        End Sub
 
+        Public Property id As Integer
+        Public Property X1 As Decimal
+        Public Property Y1 As Decimal
+        Public Property X2 As Decimal
+        Public Property Y2 As Decimal
+        Public Property Get_P1 As cSTR_Point
+        Public Property Get_P2 As cSTR_Point
     End Class
 
-    Function Return_Giao_Diem_Hai_Doan_Thang(Line1 As cSTR_Line, Line2 As cSTR_Line) As cSTR_Point
+
+
+    Public Function Return_Giao_Diem_Hai_Doan_Thang(Line1 As cSTR_Line, Line2 As cSTR_Line) As cSTR_Point
         Dim xPoint As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Line1.X1, Line1.Y1, Line1.X2, Line1.Y2, Line2.X1, Line2.Y1, Line2.X2, Line2.Y2)
         Return xPoint
     End Function
 
+    Public Function Return_Giao_Diem_Hai_Doan_Thang(
+        x1 As Decimal, y1 As Decimal,
+        x2 As Decimal, y2 As Decimal,
+        x3 As Decimal, y3 As Decimal,
+        x4 As Decimal, y4 As Decimal) As cSTR_Point
 
+        Dim denominator As Decimal = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+
+        If denominator = 0 Then
+            Return Nothing
+        End If
+
+        Dim px As Decimal =
+            ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / denominator
+
+        Dim py As Decimal =
+            ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / denominator
+
+        'xác đinh 2 đoạn thẳng có cắt nhau không, nếu không thì kéo dài và trả về giao diểm
+        Dim PointOnSeg1 As Boolean = PointOnSegment(px, py, x1, y1, x2, y2)
+        Dim PointOnSeg2 As Boolean = PointOnSegment(px, py, x3, y3, x4, y4)
+
+        If PointOnSeg1 <> PointOnSeg2 Then
+            Return New cSTR_Point(px, py, 0)
+        End If
+        Return New cSTR_Point(px, py, 0)
+
+        Return Nothing
+    End Function
+
+    'xác định phạm vi đoạn thẳng
+    Private Function PointOnSegment(
+        px As Decimal, py As Decimal,
+        x1 As Decimal, y1 As Decimal,
+        x2 As Decimal, y2 As Decimal) As Boolean
+
+        Dim minX As Decimal = Math.Min(x1, x2)
+        Dim maxX As Decimal = Math.Max(x1, x2)
+        Dim minY As Decimal = Math.Min(y1, y2)
+        Dim maxY As Decimal = Math.Max(y1, y2)
+        Dim tol As Decimal = 0.000001
+
+        If px < minX - tol OrElse px > maxX + tol Then Return False
+        If py < minY - tol OrElse py > maxY + tol Then Return False
+
+        Return True
+    End Function
+
+
+    Function Return_Offset_Point(p1 As cSTR_Point, p2 As cSTR_Point, pSource As cSTR_Point, delta As Decimal) As cSTR_Point
+        ' Compute angle from p1 to p2 (radians)
+        Dim vx As Double = CDbl(p2.X - p1.X)
+        Dim vy As Double = CDbl(p2.Y - p1.Y)
+        Dim anfa As Double = Math.Atan2(vy, vx)
+        Dim anfa1 As Double = anfa + Math.PI / 2.0
+
+        Dim x As Decimal = pSource.X + CDec(delta * Math.Cos(anfa1))
+        Dim y As Decimal = pSource.Y + CDec(delta * Math.Sin(anfa1))
+
+        x = Math.Round(x, SYS_MATH_LAM_TRON_SO)
+        y = Math.Round(y, SYS_MATH_LAM_TRON_SO)
+
+        Dim pt As New cSTR_Point()
+        pt.X = x
+        pt.Y = y
+        pt.Z = 0
+        Return pt
+    End Function
+
+    Function Return_Offset_Line(P1 As cSTR_Point, P2 As cSTR_Point, offset_value As Decimal) As cSTR_Line
+        ' Offset the line to the left (relative to P1->P2)
+        Dim P1A As cSTR_Point = Return_Offset_Point(P1, P2, P1, offset_value)
+        Dim P2A As cSTR_Point = Return_Offset_Point(P1, P2, P2, offset_value)
+        Return New cSTR_Line(P1A.X, P1A.Y, P2A.X, P2A.Y)
+    End Function
 End Module
+
 

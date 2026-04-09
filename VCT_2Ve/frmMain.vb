@@ -25,37 +25,44 @@ Public Class frmMain
         'Copy file vào bản vẽ
         CopyStyle("C:\KetcauSoft\Com\KCS_STYLE.dwg")
 
-        Dim H1 As Double = txtH1.Text
-        Dim H2 As Double = txtH2.Text
-        Dim H3 As Double = txtH3.Text
-        Dim a1 As Double = txtA1.Text * 1000
-        Dim a2 As Double = txtA2.Text * 1000
+        Dim A1 As Double = txtA1.Text
+        Dim A2 As Double = txtA2.Text
+        Dim A3 As Double = txtA3.Text
+        Dim h1 As Double = txtH1.Text * 1000
+        Dim h2 As Double = txth2.Text * 1000
         Dim t As Double = txtT.Text
-        Dim KcTr As Double = txtKcTr.Text
-        Dim KcD As Double = txtKcD.Text
+        Dim x As Double = txtX.Text
 
         '1. vẽ hình dưới
-        AddLine(P1.X, P1.Y, P1.X + H1, P1.Y)
-        AddLine(P1.X + H1, P1.Y, P1.X + H1 + H2, P1.Y - a1)
+        Dim pNgang1 As New cSTR_Point(P1.X, P1.Y)
+        Dim pNgang2 As New cSTR_Point(P1.X + A1, P1.Y)
+        AddLine(pNgang1.X, pNgang1.Y, pNgang2.X, pNgang2.Y)
+
+        Dim pNgangD1 As New cSTR_Point(P1.X, P1.Y - t)
+        Dim pNgangD2 As New cSTR_Point(P1.X + 10, P1.Y - t)
+
+        Dim lineNgangDuoi As New cSTR_Line(pNgangD1.X, pNgangD1.Y, pNgangD2.X, pNgangD2.Y)
+        AddLine(lineNgangDuoi.X1, lineNgangDuoi.Y1, lineNgangDuoi.X2, lineNgangDuoi.Y2)
+        'Dim lineOffsetN As cSTR_Line = Return_Offset_Line(pNgang1, pNgang2, -t)
+        'AddLine(lineOffsetN.X1, lineOffsetN.Y1, lineOffsetN.X2, lineOffsetN.Y2)
+        'AddLine(P1.X, P1.Y, P1.X + A1, P1.Y)
+        AddLine(P1.X + A1, P1.Y, P1.X + A1, P1.Y - x)
+        'AddLine(P1.X + A1, P1.Y - x, P1.X + A1 + A2, P1.Y - h1)
         AddLine(P1.X, P1.Y, P1.X, P1.Y - t)
-        AddLine(P1.X + H1 + H2, P1.Y - a1, P1.X + H1 + H2 + 800, P1.Y - a1)
-        OffsetLine(P1.X, P1.Y, P1.X + H1, P1.Y, -t)
-        OffsetLine(P1.X + H1, P1.Y, P1.X + H1 + H2, P1.Y - a1, -t)
-        OffsetLine(P1.X + H1 + H2, P1.Y - a1, P1.X + H1 + H2 + 800, P1.Y - a1, -t)
-        Add_BreakLineY(P1.X + H1 + H2 + 800, P1.Y - a1, P1.Y - a1 - t, SYS_LAYER_THIN_NAME)
+        'OffsetLine(P1.X + A1, P1.Y - x, P1.X + A1 + A2, P1.Y - h1, -t)
+        'đoạn chéo trên
+        Dim pCheo1 As New cSTR_Point(P1.X + A1, P1.Y - x)
+        Dim pCheo2 As New cSTR_Point(P1.X + A1 + A2, P1.Y - h1)
+        AddLine(pCheo1.X, pCheo1.Y, pCheo2.X, pCheo2.Y)
+        ' offset xuống khoảng t
+        Dim lineOffsetC As cSTR_Line = Return_Offset_Line(pCheo1, pCheo2, -t)
+        AddLine(lineOffsetC.X1, lineOffsetC.Y1, lineOffsetC.X2, lineOffsetC.Y2)
 
-        'AddSteelNode(P1.X + 150, P1.Y + 35,SYS_LAYER_STEEL_NAME)
-
-        ''vẽ hình trên
-        'AddLine(P1.X, P1.Y + 2000, P1.X + H1, P1.Y + 2000)
-        'AddLine(P1.X + H1, P1.Y + 2000, P1.X + H1 + H3, P1.Y + 2000 + a2)
-        'AddLine(P1.X, P1.Y + 2000, P1.X, P1.Y + 2000 - t)
-        'AddLine(P1.X + H1 + H3, P1.Y + 2000 + a2, P1.X + H1 + H3 + 800, P1.Y + 2000 + a2)
-        'OffsetLine(P1.X, P1.Y + 2000, P1.X + H1, P1.Y + 2000, -t)
-        'OffsetLine(P1.X + H1, P1.Y + 2000, P1.X + H1 + H3, P1.Y + 2000 + a2, -t)
-        'OffsetLine(P1.X + H1 + H3, P1.Y + 2000 + a2, P1.X + H1 + H3 + 800, P1.Y + 2000 + a2, -t)
-        'Add_BreakLineY(P1.X + H1 + H3 + 800, P1.Y + 2000 + a2, P1.Y + 2000 + a2 - t, SYS_LAYER_THIN_NAME)
-
+        Dim pGiao As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineNgangDuoi, lineOffsetC)
+        If pGiao IsNot Nothing Then
+            AddLine(lineNgangDuoi.X1, lineNgangDuoi.Y1, pGiao.X, pGiao.Y)
+            AddLine(pGiao.X, pGiao.Y, lineOffsetC.X2, lineOffsetC.Y2)
+        End If
 
         DialogResult = Windows.Forms.DialogResult.OK
     End Sub
