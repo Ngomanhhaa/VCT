@@ -390,19 +390,19 @@ Module molFun
         End Using
     End Sub
 
-    Public Sub AddTagThepChu(X As Double, Y As Double, sh As String, info As String, listPointRebar As List(Of Point2d))
-        AddCircle(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, SYS_TAG_CIRCLE_DIA / 2 * 25, SYS_LAYER_THIN_NAME)
-        AddMCText(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, sh, SYS_TEXT_HEIGHT * 25)
+    'Public Sub AddTagThepChu(X As Double, Y As Double, sh As String, info As String, listPointRebar As List(Of Point2d))
+    '    AddCircle(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, SYS_TAG_CIRCLE_DIA / 2 * 25, SYS_LAYER_THIN_NAME)
+    '    AddMCText(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, sh, SYS_TEXT_HEIGHT * 25)
 
-        For i = 0 To listPointRebar.Count - 1
-            Dim pt As Point2d = listPointRebar(i)
-            AddLine(pt.X, pt.Y, pt.X - 62.5, Y, SYS_LAYER_THIN_NAME)
-        Next
-        AddLine(X, Y, listPointRebar.Last.X - 62.5, Y, SYS_LAYER_THIN_NAME)
+    '    For i = 0 To listPointRebar.Count - 1
+    '        Dim pt As Point2d = listPointRebar(i)
+    '        AddLine(pt.X, pt.Y, pt.X - 62.5, Y, SYS_LAYER_THIN_NAME)
+    '    Next
+    '    AddLine(X, Y, listPointRebar.Last.X - 62.5, Y, SYS_LAYER_THIN_NAME)
 
-        AddLText(X + 25, Y + 20, info, SYS_TEXT_HEIGHT * 25)
+    '    AddLText(X + 25, Y + 20, info, SYS_TEXT_HEIGHT * 25)
 
-    End Sub
+    'End Sub
 
     Public Class cSTR_Point
         Public Property id As Integer
@@ -521,6 +521,62 @@ Module molFun
         Dim P2A As cSTR_Point = Return_Offset_Point(P1, P2, P2, offset_value)
         Return New cSTR_Line(P1A.X, P1A.Y, P2A.X, P2A.Y)
     End Function
+
+    Sub Add_CosCD(ByVal X As Decimal, ByVal Y As Decimal, ByVal EL As Decimal)
+        Add_CosCD_Symbol(X, Y)
+        AddLine(X + 87.5, Y, X + 87.5, Y + 250, SYS_LAYER_THIN_NAME)
+        AddLine(X + 87.5 - 75, Y + 115, X + 87.5 - 75 + 350, Y + 115, SYS_LAYER_THIN_NAME)
+
+        Dim tText As String = Str(Math.Round(EL, 3)).Trim
+        If EL >= 0 Then
+            If EL >= 1 Then
+                tText = "+" & tText
+            Else
+                If Left(tText, 1) = "." Then tText = "+0" & tText
+            End If
+            If Left(Right(tText, 2), 1) = "." Then tText = tText & "00"
+            If Left(Right(tText, 3), 1) = "." Then tText = tText & "0"
+            If Left(Right(tText, 4), 1) <> "." Then tText = tText & ".000"
+        Else
+            If EL > -1 Then
+                If Left(tText, 2) = "-." Then tText = "-0" & Right(tText, Len(tText) - 1)
+            End If
+            If Left(Right(tText, 2), 1) = "." Then tText = tText & "00"
+            If Left(Right(tText, 3), 1) = "." Then tText = tText & "0"
+            If Left(Right(tText, 4), 1) <> "." Then tText = tText & ".000"
+        End If
+        If EL = 0 Then tText = "%%p" & tText
+        AddLText(X + 87.5 - 75 + 100, Y + 115 + 20, tText, 62.5)
+    End Sub
+
+    Sub Add_CosCD_Symbol(ByVal X As Decimal, ByVal Y As Decimal)
+        Dim acDoc As Document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acCurDb As Database = acDoc.Database
+        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+            Dim acBlkTbl As BlockTable = acTrans.GetObject(acCurDb.BlockTableId, OpenMode.ForRead)
+            Dim acBlkTblRec As BlockTableRecord = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), OpenMode.ForWrite)
+            Dim InsertID As ObjectId = acBlkTbl.Item("COS_CD")
+            Dim BlockRef As BlockReference = New BlockReference(New Point3d(X, Y, 0), InsertID)
+            BlockRef.Layer = SYS_LAYER_THIN_NAME
+            acBlkTblRec.AppendEntity(BlockRef)
+            acTrans.AddNewlyCreatedDBObject(BlockRef, True)
+            acTrans.Commit()
+        End Using
+    End Sub
+
+    Public Sub AddTagThepChu(X As Double, Y As Double, sh As String, info As String, listPointRebar As List(Of Point2d))
+        AddCircle(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, SYS_TAG_CIRCLE_DIA / 2 * 25, SYS_LAYER_THIN_NAME)
+        AddMCText(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, sh, SYS_TEXT_HEIGHT * 25)
+
+        For i = 0 To listPointRebar.Count - 1
+            Dim pt As Point2d = listPointRebar(i)
+            AddLine(pt.X, pt.Y, pt.X - 62.5, Y, SYS_LAYER_THIN_NAME)
+        Next
+        AddLine(X, Y, listPointRebar.Last.X - 62.5, Y, SYS_LAYER_THIN_NAME)
+
+        AddLText(X + 25, Y + 20, info, SYS_TEXT_HEIGHT * 25)
+
+    End Sub
 End Module
 
 

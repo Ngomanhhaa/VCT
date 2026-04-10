@@ -32,8 +32,22 @@ Public Class frmMain
         Dim h2 As Double = txth2.Text * 1000
         Dim t As Double = txtT.Text
         Dim x As Double = txtX.Text
+        've truc
+        Dim pTrx1 As New cSTR_Point(P1.X, P1.Y + 450)
+        Dim pTrx2 As New cSTR_Point(P1.X, P1.Y - h1 - 600)
+        AddLine(pTrx1.X, pTrx1.Y, pTrx2.X, pTrx2.Y, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTrx1 As cSTR_Line = Return_Offset_Line(pTrx1, pTrx2, A1)
+        AddLine(lineOffsetTrx1.X1, lineOffsetTrx1.Y1, lineOffsetTrx1.X2, lineOffsetTrx1.Y2, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTrx2 As cSTR_Line = Return_Offset_Line(pTrx1, pTrx2, A1 + A2)
+        AddLine(lineOffsetTrx2.X1, lineOffsetTrx2.Y1, lineOffsetTrx2.X2, lineOffsetTrx2.Y2, SYS_LAYER_AXIS_NAME)
 
-        '1. vẽ hình dưới
+        Dim pTry1 As New cSTR_Point(P1.X - 300, P1.Y)
+        Dim pTry2 As New cSTR_Point(P1.X + A1 + A2 + 660, P1.Y)
+        AddLine(pTry1.X, pTry1.Y, pTry2.X, pTry2.Y, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTry As cSTR_Line = Return_Offset_Line(pTry1, pTry2, -h1)
+        AddLine(lineOffsetTry.X1, lineOffsetTry.Y1, lineOffsetTry.X2, lineOffsetTry.Y2, SYS_LAYER_AXIS_NAME)
+
+        ' vẽ hình dưới
         Dim pNgang1 As New cSTR_Point(P1.X, P1.Y)
         Dim pNgang2 As New cSTR_Point(P1.X + A1, P1.Y)
         AddLine(pNgang1.X, pNgang1.Y, pNgang2.X, pNgang2.Y)
@@ -50,20 +64,30 @@ Public Class frmMain
         'AddLine(P1.X + A1, P1.Y - x, P1.X + A1 + A2, P1.Y - h1)
         AddLine(P1.X, P1.Y, P1.X, P1.Y - t)
         'OffsetLine(P1.X + A1, P1.Y - x, P1.X + A1 + A2, P1.Y - h1, -t)
+
         'đoạn chéo trên
         Dim pCheo1 As New cSTR_Point(P1.X + A1, P1.Y - x)
         Dim pCheo2 As New cSTR_Point(P1.X + A1 + A2, P1.Y - h1)
         AddLine(pCheo1.X, pCheo1.Y, pCheo2.X, pCheo2.Y)
+
         ' offset xuống khoảng t
         Dim lineOffsetC As cSTR_Line = Return_Offset_Line(pCheo1, pCheo2, -t)
-        AddLine(lineOffsetC.X1, lineOffsetC.Y1, lineOffsetC.X2, lineOffsetC.Y2)
+        'AddLine(lineOffsetC.X1, lineOffsetC.Y1, lineOffsetC.X2, lineOffsetC.Y2)
 
         Dim pGiao As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineNgangDuoi, lineOffsetC)
-        If pGiao IsNot Nothing Then
-            AddLine(lineNgangDuoi.X1, lineNgangDuoi.Y1, pGiao.X, pGiao.Y)
-            AddLine(pGiao.X, pGiao.Y, lineOffsetC.X2, lineOffsetC.Y2)
-        End If
+        AddLine(lineNgangDuoi.X1, lineNgangDuoi.Y1, pGiao.X, pGiao.Y)
+        Dim pGiao2 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineOffsetC, lineOffsetTry)
+        AddLine(pGiao.X, pGiao.Y, pGiao2.X, pGiao2.Y)
 
+        'dim
+        AddDimX(P1.X, P1.X + A1, P1.Y - h1 - 600 - 50, -175)
+        AddDimX(P1.X + A1, P1.X + A1 + A2, P1.Y - h1 - 600 - 50, -175)
+
+        AddDimY(P1.X + A1 + 200, P1.Y, P1.Y - x, 175)
+        AddDimY(P1.X + A1 + +A2 + 600 + 200, P1.Y, P1.Y - h1, 175)
+        AddDimY(P1.X - 50, P1.Y, P1.Y - t, -175)
+
+        'Add_CosCD(P1.X - 50 - 175 + 50, P1.Y, h1)
         DialogResult = Windows.Forms.DialogResult.OK
     End Sub
 
