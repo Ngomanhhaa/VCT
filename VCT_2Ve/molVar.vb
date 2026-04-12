@@ -10,8 +10,14 @@
     Public Const SYS_LAYER_HATCH_NAME As String = "HATCH"
     Public Const SYS_LAYER_DIM_NAME As String = "KCS_DIM"
     Public Const SYS_TEXT_WIDTH_FACTOR As Double = 0.75
-    Public Const SYS_TEXT_STYLE_NAME As String = "TEXT"
+    Public Const SYS_TEXT_STYLE_NAME As String = "KCS_TEXT"
     Public Const SYS_DIM_STYLE_NAME As String = "KCS_DIM25"
     Public Const SYS_TAG_CIRCLE_DIA As Double = 5
     Public Const SYS_TEXT_HEIGHT As Double = 2.5
+
+    Public t As Double
+    Public Abv As Double = 20
+    Public Diembatdauvethep As Double
+    Public sothanhmoc As Double
+    Public Chieucaomoc As Double
 End Module

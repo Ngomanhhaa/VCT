@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Drawing.Text
+Imports System.IO.Ports
 Imports System.Xml
 Imports Autodesk.AutoCAD.ApplicationServices
 Imports Autodesk.AutoCAD.DatabaseServices
@@ -88,6 +89,28 @@ Public Class frmMain
         AddDimY(P1.X - 50, P1.Y, P1.Y - t, -175)
 
         'Add_CosCD(P1.X - 50 - 175 + 50, P1.Y, h1)
+        'Add_CosCD(X2 + 100, Y0_2 + 100, h1)
+
+        'thep
+        'Add_SteelTop(P1.X, P1.Y, P1.X + A1, P1.Y, True)
+        'Add_SNode(P1.X + 150, P1.Y - 35, 25)
+
+        AddLine(P1.X + 35, P1.Y - t + Abv, P1.X + A1 - 35, P1.Y - t + Abv, SYS_LAYER_STEEL_NAME)
+        Dim Point_Array As New ArrayList()
+        Point_Array.Add(New Point2d(P1.X + Abv, P1.Y - t + Abv))        ' điểm dưới trái
+        Point_Array.Add(New Point2d(P1.X + Abv, P1.Y - Abv))            ' điểm trên trái
+        Point_Array.Add(New Point2d(P1.X + A1 - Abv, P1.Y - Abv))       ' điểm trên phải
+        Point_Array.Add(New Point2d(P1.X + A1 - Abv, P1.Y - t - 100))   ' điểm dưới phải
+        Add_PLine(Point_Array, SYS_LAYER_STEEL_NAME)
+
+        'Dim pGiao3 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang()
+
+        Dim Point_Array1 As New ArrayList()
+        Point_Array1.Add(New Point2d(P1.X + A1 - 93, P1.Y - Abv))
+        Point_Array1.Add(New Point2d(P1.X + A1 - 93 - 200, P1.Y - Abv))
+        Point_Array1.Add(New Point2d(P1.X + A1 - 93 - 200 + 50, P1.Y - Abv - 30))
+        Add_PLine(Point_Array1, SYS_LAYER_STEEL_NAME)
+
         DialogResult = Windows.Forms.DialogResult.OK
     End Sub
 

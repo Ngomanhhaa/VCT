@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports Autodesk
 Imports Autodesk.AutoCAD.ApplicationServices
 Imports Autodesk.AutoCAD.Colors
 Imports Autodesk.AutoCAD.DatabaseServices
@@ -63,6 +64,30 @@ Module molFun
             '6. kết thúc giao dịch ( Commit, Abort)
             tr.Commit()
 
+        End Using
+    End Sub
+
+    Public Sub Add_PLine(ByVal pArray As ArrayList, ByVal tLayer As String)
+        Dim acDoc As Document = AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acCurDb As Database = acDoc.Database
+        If pArray.Count = 0 Then Exit Sub
+        Using LOCDOC As DocumentLock = acDoc.LockDocument
+            Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+                Dim acBlkTbl As BlockTable
+                acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId, DatabaseServices.OpenMode.ForRead)
+                Dim acBlkTblRec As BlockTableRecord
+                acBlkTblRec = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), DatabaseServices.OpenMode.ForWrite)
+                Dim acPoly As Polyline = New Polyline()
+                acPoly.SetDatabaseDefaults()
+                For i = 0 To pArray.Count - 1
+                    Dim tPoint2D As Point2d = pArray(i)
+                    acPoly.AddVertexAt(i, tPoint2D, 0, 0, 0)
+                Next
+                acPoly.Layer = tLayer
+                acBlkTblRec.AppendEntity(acPoly)
+                acTrans.AddNewlyCreatedDBObject(acPoly, True)
+                acTrans.Commit()
+            End Using
         End Using
     End Sub
 
@@ -576,6 +601,48 @@ Module molFun
 
         AddLText(X + 25, Y + 20, info, SYS_TEXT_HEIGHT * 25)
 
+    End Sub
+
+
+    Public Sub Add_SNode(ByVal X As Decimal, ByVal Y As Decimal, ByVal Draw_Scale As Decimal)
+        Dim acDoc As Document = AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acCurDb As Database = acDoc.Database
+        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+            Dim acBlkTbl As BlockTable = acTrans.GetObject(acCurDb.BlockTableId, DatabaseServices.OpenMode.ForRead)
+            Dim acBlkTblRec As BlockTableRecord = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), DatabaseServices.OpenMode.ForWrite)
+            Dim InsertID As ObjectId = acBlkTbl.Item("KCS_SNODE")
+            Dim BlockRef As BlockReference = New BlockReference(New Point3d(X, Y, 0), InsertID)
+            BlockRef.Layer = SYS_LAYER_STEEL_NAME
+            BlockRef.ScaleFactors = New Scale3d(Draw_Scale / 25, Draw_Scale / 25, Draw_Scale / 25)
+            acBlkTblRec.AppendEntity(BlockRef)
+            acTrans.AddNewlyCreatedDBObject(BlockRef, True)
+            acTrans.Commit()
+        End Using
+    End Sub
+
+    Sub Add_SteelTop(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, Is_X_Direction As Boolean)
+        Dim Point_Array As ArrayList = New ArrayList()
+        Select Case Is_X_Direction
+            Case True
+                Dim P1 As Point2d = New Point2d(X1, Y1 - 75)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X1, Y1)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X2, Y2)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X2, Y2 - 75)
+                Point_Array.Add(P1)
+            Case False
+                Dim P1 As Point2d = New Point2d(X1 + 75, Y1)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X1, Y1)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X2, Y2)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X2 + 75, Y2)
+                Point_Array.Add(P1)
+        End Select
+        Add_PLine(Point_Array, SYS_LAYER_STEEL_NAME)
     End Sub
 End Module
 
