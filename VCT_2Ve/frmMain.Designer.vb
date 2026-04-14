@@ -22,8 +22,10 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtA1 = New System.Windows.Forms.TextBox()
+        Me.txtL1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtX = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtH2 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -32,27 +34,25 @@ Partial Class frmMain
         Me.txtT = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtA2 = New System.Windows.Forms.TextBox()
+        Me.txtL2 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtA3 = New System.Windows.Forms.TextBox()
+        Me.txtL3 = New System.Windows.Forms.TextBox()
         Me.btnVe = New System.Windows.Forms.Button()
         Me.btnThoat = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtX = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'txtA1
+        'txtL1
         '
-        Me.txtA1.Location = New System.Drawing.Point(107, 16)
-        Me.txtA1.Name = "txtA1"
-        Me.txtA1.Size = New System.Drawing.Size(74, 20)
-        Me.txtA1.TabIndex = 0
-        Me.txtA1.Text = "1500"
+        Me.txtL1.Location = New System.Drawing.Point(107, 16)
+        Me.txtL1.Name = "txtL1"
+        Me.txtL1.Size = New System.Drawing.Size(74, 20)
+        Me.txtL1.TabIndex = 0
+        Me.txtL1.Text = "1500"
         '
         'GroupBox1
         '
@@ -66,10 +66,10 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.txtT)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.txtA2)
-        Me.GroupBox1.Controls.Add(Me.txtA1)
+        Me.GroupBox1.Controls.Add(Me.txtL2)
+        Me.GroupBox1.Controls.Add(Me.txtL1)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.txtA3)
+        Me.GroupBox1.Controls.Add(Me.txtL3)
         Me.GroupBox1.ForeColor = System.Drawing.Color.Blue
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
@@ -77,6 +77,24 @@ Partial Class frmMain
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Thông số"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.Color.Black
+        Me.Label7.Location = New System.Drawing.Point(16, 129)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(37, 13)
+        Me.Label7.TabIndex = 19
+        Me.Label7.Text = "x (mm)"
+        '
+        'txtX
+        '
+        Me.txtX.Location = New System.Drawing.Point(107, 122)
+        Me.txtX.Name = "txtX"
+        Me.txtX.Size = New System.Drawing.Size(74, 20)
+        Me.txtX.TabIndex = 18
+        Me.txtX.Text = "176"
         '
         'Label6
         '
@@ -138,9 +156,9 @@ Partial Class frmMain
         Me.Label3.ForeColor = System.Drawing.Color.Black
         Me.Label3.Location = New System.Drawing.Point(12, 49)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(45, 13)
+        Me.Label3.Size = New System.Drawing.Size(44, 13)
         Me.Label3.TabIndex = 11
-        Me.Label3.Text = "A2 (mm)"
+        Me.Label3.Text = "L2 (mm)"
         '
         'Label1
         '
@@ -148,17 +166,17 @@ Partial Class frmMain
         Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(12, 23)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(45, 13)
+        Me.Label1.Size = New System.Drawing.Size(44, 13)
         Me.Label1.TabIndex = 7
-        Me.Label1.Text = "A1 (mm)"
+        Me.Label1.Text = "L1 (mm)"
         '
-        'txtA2
+        'txtL2
         '
-        Me.txtA2.Location = New System.Drawing.Point(107, 42)
-        Me.txtA2.Name = "txtA2"
-        Me.txtA2.Size = New System.Drawing.Size(74, 20)
-        Me.txtA2.TabIndex = 10
-        Me.txtA2.Text = "1000"
+        Me.txtL2.Location = New System.Drawing.Point(107, 42)
+        Me.txtL2.Name = "txtL2"
+        Me.txtL2.Size = New System.Drawing.Size(74, 20)
+        Me.txtL2.TabIndex = 10
+        Me.txtL2.Text = "1000"
         '
         'Label2
         '
@@ -166,17 +184,17 @@ Partial Class frmMain
         Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(12, 75)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 13)
+        Me.Label2.Size = New System.Drawing.Size(44, 13)
         Me.Label2.TabIndex = 9
-        Me.Label2.Text = "A3 (mm)"
+        Me.Label2.Text = "L3 (mm)"
         '
-        'txtA3
+        'txtL3
         '
-        Me.txtA3.Location = New System.Drawing.Point(107, 68)
-        Me.txtA3.Name = "txtA3"
-        Me.txtA3.Size = New System.Drawing.Size(74, 20)
-        Me.txtA3.TabIndex = 8
-        Me.txtA3.Text = "2000"
+        Me.txtL3.Location = New System.Drawing.Point(107, 68)
+        Me.txtL3.Name = "txtL3"
+        Me.txtL3.Size = New System.Drawing.Size(74, 20)
+        Me.txtL3.TabIndex = 8
+        Me.txtL3.Text = "2000"
         '
         'btnVe
         '
@@ -218,24 +236,6 @@ Partial Class frmMain
         Me.PictureBox1.TabIndex = 5
         Me.PictureBox1.TabStop = False
         '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(16, 129)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(37, 13)
-        Me.Label7.TabIndex = 19
-        Me.Label7.Text = "x (mm)"
-        '
-        'txtX
-        '
-        Me.txtX.Location = New System.Drawing.Point(107, 122)
-        Me.txtX.Name = "txtX"
-        Me.txtX.Size = New System.Drawing.Size(74, 20)
-        Me.txtX.TabIndex = 18
-        Me.txtX.Text = "176"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -269,13 +269,13 @@ Partial Class frmMain
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents txtH2 As Windows.Forms.TextBox
     Friend WithEvents Label2 As Windows.Forms.Label
-    Friend WithEvents txtA3 As Windows.Forms.TextBox
+    Friend WithEvents txtL3 As Windows.Forms.TextBox
     Friend WithEvents Label4 As Windows.Forms.Label
     Friend WithEvents txtT As Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents txtA2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtL2 As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents txtA1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtL1 As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtX As System.Windows.Forms.TextBox
 End Class
