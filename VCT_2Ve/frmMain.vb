@@ -33,6 +33,15 @@ Public Class frmMain
         Dim h2 As Double = txtH2.Text * 1000
         Dim t As Double = txtT.Text
         Dim x As Double = txtX.Text
+        'chieu nghi
+        Dim Fi1 As Double = cbxFi1.Text
+        Dim Fi2 As Double = cbxFi2.Text
+        Dim Fi3 As Double = cbxFi3.Text
+        Dim Fi4 As Double = cbxFi4.Text
+        Dim a1 As Double = txta1.Text
+        Dim a2 As Double = txta2.Text
+        Dim a3 As Double = txta3.Text
+        Dim a4 As Double = txta4.Text
         've truc
         Dim pTrx1 As New cSTR_Point(P1.X, P1.Y + 450)
         Dim pTrx2 As New cSTR_Point(P1.X, P1.Y - h1 - 600)
@@ -107,7 +116,8 @@ Public Class frmMain
         Dim lineOffset_Thep_Cheo_Tren As cSTR_Line = Return_Offset_Line(pCheo1, pCheo2, -Abv)
         Dim lineNull As New cSTR_Line(P1.X + Abv, P1.Y - Abv, P1.X + L1 - Abv, P1.Y - Abv) ' đoạn ảo offset của đoạn ngang trên để tìm giao điểm
         Dim GiaoThepMoc1 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineOffset_Thep_Cheo_Tren, lineNull)
-        AddLine(lineOffset_Thep_Cheo_Tren.X2, lineOffset_Thep_Cheo_Tren.Y2, GiaoThepMoc1.X, GiaoThepMoc1.Y, SYS_LAYER_STEEL_NAME)
+        Dim Giaothep As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineOffset_Thep_Cheo_Tren, lineOffsetTry) ' giao điểm của thép chính lớp trên với trục y-a1
+        AddLine(Giaothep.X, Giaothep.Y, GiaoThepMoc1.X, GiaoThepMoc1.Y, SYS_LAYER_STEEL_NAME)
 
         Dim Point_Array1 As New ArrayList()
         Point_Array1.Add(New Point2d(GiaoThepMoc1.X, GiaoThepMoc1.Y))
@@ -118,13 +128,23 @@ Public Class frmMain
         Dim lineOffset_Thep_Cheo_Duoi As cSTR_Line = Return_Offset_Line(pCheo1, pCheo2, -t + Abv)
         Dim lineNull2 As cSTR_Line = Return_Offset_Line(pNgang1, pNgang2, -Abv - 10)
         Dim GiaoThepMoc2 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineOffset_Thep_Cheo_Duoi, lineNull2)
-        AddLine(lineOffset_Thep_Cheo_Duoi.X2, lineOffset_Thep_Cheo_Duoi.Y2, GiaoThepMoc2.X, GiaoThepMoc2.Y, SYS_LAYER_STEEL_NAME)
+        Dim GiaoThep2 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineOffset_Thep_Cheo_Duoi, lineOffsetTry) 'giao điểm của thép chính lớp dưới với trục y-a1
+        AddLine(GiaoThep2.X, GiaoThep2.Y, GiaoThepMoc2.X, GiaoThepMoc2.Y, SYS_LAYER_STEEL_NAME)
 
         Dim Point_Array2 As New ArrayList()
         Point_Array2.Add(New Point2d(GiaoThepMoc2.X, GiaoThepMoc2.Y))
         Point_Array2.Add(New Point2d(GiaoThepMoc2.X - 200, GiaoThepMoc2.Y))
         Point_Array2.Add(New Point2d(GiaoThepMoc2.X - 200 + 50, GiaoThepMoc2.Y - 30))
         Add_PLine(Point_Array2, SYS_LAYER_STEEL_NAME)
+
+        Dim a_bardot As Integer = 22
+        Dim Loca_Bar3 As ArrayList
+        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, False, a_bardot)
+        Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, True, a_bardot)
+
+        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, False, a_bardot)
+        Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, True, a_bardot)
+
 
         DialogResult = Windows.Forms.DialogResult.OK
     End Sub

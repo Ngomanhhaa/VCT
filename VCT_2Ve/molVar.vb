@@ -20,4 +20,5 @@
     Public Diembatdauvethep As Double
     Public sothanhmoc As Double
     Public Chieucaomoc As Double
+    Dim a_bardot As Integer = 22
 End Module

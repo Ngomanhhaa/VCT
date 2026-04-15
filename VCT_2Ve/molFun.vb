@@ -644,6 +644,116 @@ Module molFun
         End Select
         Add_PLine(Point_Array, SYS_LAYER_STEEL_NAME)
     End Sub
+
+    Function Get_OffSet_Line(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, Curves As Decimal) As DBObjectCollection
+        Dim acDbObjColl As DBObjectCollection
+        Dim acLine1 As Line = New Line(New Point3d(X1, Y1, 0), New Point3d(X2, Y2, 0))
+        acDbObjColl = acLine1.GetOffsetCurves(Curves)
+
+        Return acDbObjColl
+    End Function
+    Sub Add_SNode(ByVal X As Decimal, ByVal Y As Decimal)
+        Dim acDoc As Document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acCurDb As Database = acDoc.Database
+        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+            Dim acBlkTbl As BlockTable = acTrans.GetObject(acCurDb.BlockTableId, DatabaseServices.OpenMode.ForRead)
+            Dim acBlkTblRec As BlockTableRecord = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), DatabaseServices.OpenMode.ForWrite)
+            Dim InsertID As ObjectId = acBlkTbl.Item("KCS_SNODE")
+            Dim BlockRef As BlockReference = New BlockReference(New Point3d(X, Y, 0), InsertID)
+            BlockRef.Layer = SYS_LAYER_STEEL_NAME
+            acBlkTblRec.AppendEntity(BlockRef)
+            acTrans.AddNewlyCreatedDBObject(BlockRef, True)
+            acTrans.Commit()
+        End Using
+    End Sub
+    Function Add_Bar_Dot(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, A As Decimal, Is_bot As Boolean, Optional a_bardot As Integer = 15) As ArrayList
+        Dim L As Line = New Line(New Point3d(X1, Y1, 0), New Point3d(X2, Y2, 0))
+        Dim Length As Decimal = L.Length - 104
+        Dim N As Decimal = Length \ A
+        Dim Center_SNode As Decimal = (Length - A * N) / 2
+        Dim P1 As Point3d
+        Dim P2 As Point3d
+        Dim L1 As Line
+
+        For i As Integer = 0 To N
+            Add_SNode(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y)
+            If i = N \ 3 Then
+                If Is_bot = True Then
+                    L1 = Get_OffSet_Line(X1, Y1, X2, Y2, -a_bardot)(0)
+                    P1 = L.GetPointAtDist(52 + i * A + Center_SNode)
+                    P2 = L1.GetPointAtDist(52 + i * A + Center_SNode - 100)
+                Else
+                    L1 = Get_OffSet_Line(X1, Y1, X2, Y2, a_bardot)(0)
+                    P1 = L.GetPointAtDist(52 + i * A + Center_SNode)
+                    P2 = L1.GetPointAtDist(52 + i * A + Center_SNode + 100)
+                End If
+            End If
+        Next
+        Return New ArrayList({P1, P2})
+    End Function
+
+    'Public Shared SYS_L_DIM As String
+    'Sub Add_QLeader(P1 As Point3d, P2 As Point3d, P3 As Point3d, ArrLdrName As String)
+    '    Dim acDoc As Document = ApplicationServices.Application.DocumentManager.MdiActiveDocument
+    '    Dim acCurDb As Database = acDoc.Database
+    '    '' Start a transaction
+    '    Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+    '        '' Open the Block table for read
+    '        Dim acBlkTbl As BlockTable
+    '        acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId, DatabaseServices.OpenMode.ForRead)
+    '        '' Open the Block table record Model space for write
+    '        Dim acBlkTblRec As BlockTableRecord
+    '        acBlkTblRec = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), DatabaseServices.OpenMode.ForWrite)
+    '        Dim acDimStyleTbl As DimStyleTable
+    '        acDimStyleTbl = acTrans.GetObject(acCurDb.DimStyleTableId, Autodesk.AutoCAD.DatabaseServices.OpenMode.ForRead)
+    '        '' Create the leader
+    '        Dim acLdr As Leader = New Leader()
+    '        acLdr.SetDatabaseDefaults()
+    '        acLdr.AppendVertex(P1)
+    '        acLdr.AppendVertex(P2)
+    '        acLdr.AppendVertex(P3)
+    '        acLdr.Dimldrblk = GetArrowObjectId(ArrLdrName) '"_ArchTick" "_DotBlank"
+    '        acLdr.DimensionStyle = acDimStyleTbl.Item(SYS_DIM_STYLE_NAME)
+    '        acLdr.Layer = SYS_L_DIM
+    '        '' Add the new object to Model space and the transaction
+    '        acBlkTblRec.AppendEntity(acLdr)
+    '        acTrans.AddNewlyCreatedDBObject(acLdr, True)
+    '        '' Commit the changes and dispose of the transaction
+    '        acTrans.Commit()
+    '    End Using
+    'End Sub
+    'Sub Add_Bar_Tag(Bar_Dot_Point As Point3d, Bar_Long_Point As Point3d, L As Line, Bar_Dot_Text As String, Bar_Long_Text As String, Bar_Dot_Num As String, Bar_Long_Num As String, Is_Bar_Bot As Boolean)
+    '    Dim _Bar_Dot_Point As Point3d = L.GetClosestPointTo(Bar_Dot_Point, False)
+    '    Dim Vecto As Vector3d = New Vector3d(_Bar_Dot_Point.X - Bar_Dot_Point.X, _Bar_Dot_Point.Y - Bar_Dot_Point.Y, _Bar_Dot_Point.Z - Bar_Dot_Point.Z)
+    '    Dim Bar_Dot_Point1 As Point3d
+    '    Dim Bar_Dot_Point2 As Point3d
+    '    Dim Bar_Long_Point1 As Point3d
+    '    Dim Bar_Long_Point2 As Point3d
+    '    If Is_Bar_Bot = True Then
+    '        Bar_Dot_Point1 = ReturnPointByVecto(Vecto, Bar_Dot_Point, 185)
+    '        Bar_Dot_Point2 = New Point3d(Bar_Dot_Point1.X + 350, Bar_Dot_Point1.Y, Bar_Dot_Point1.Z)
+    '        Bar_Long_Point1 = Get_Intersect_Point(Bar_Dot_Point.X, Bar_Dot_Point.Y, Bar_Dot_Point1.X, Bar_Dot_Point1.Y,
+    '                                              Bar_Dot_Point1.X, Bar_Dot_Point1.Y, Bar_Dot_Point2.X, Bar_Dot_Point2.Y, -100, -125, 1)(0)
+    '        Bar_Long_Point2 = New Point3d(Bar_Dot_Point2.X, Bar_Dot_Point2.Y - 125, Bar_Long_Point1.Z)
+    '        Add_SoThep(Bar_Dot_Point2.X + 62.5, Bar_Dot_Point2.Y + 62.5, Bar_Dot_Num, True)
+    '        Add_Text_R_SMText(Bar_Dot_Point2.X - 15, Bar_Dot_Point2.Y + 25, Bar_Dot_Text, True)
+    '        Add_SoThep(Bar_Long_Point2.X + 62.5, Bar_Long_Point2.Y + 62.5, Bar_Long_Num, True)
+    '        Add_Text_R_SMText(Bar_Long_Point2.X - 15, Bar_Long_Point2.Y + 25, Bar_Long_Text, True)
+    '    Else
+    '        Bar_Dot_Point1 = ReturnPointByVecto(Vecto, Bar_Dot_Point, 160)
+    '        Bar_Dot_Point2 = New Point3d(Bar_Dot_Point1.X - 350, Bar_Dot_Point1.Y, Bar_Dot_Point1.Z)
+    '        Bar_Long_Point1 = Get_Intersect_Point(Bar_Dot_Point.X, Bar_Dot_Point.Y, Bar_Dot_Point1.X, Bar_Dot_Point1.Y,
+    '                                              Bar_Dot_Point1.X, Bar_Dot_Point1.Y, Bar_Dot_Point2.X, Bar_Dot_Point2.Y, -100, -125, 1)(0)
+    '        Bar_Long_Point2 = New Point3d(Bar_Dot_Point2.X, Bar_Dot_Point2.Y + 125, Bar_Long_Point1.Z)
+    '        Add_SoThep(Bar_Dot_Point2.X - 62.5, Bar_Dot_Point2.Y + 62.5, Bar_Dot_Num, True)
+    '        Add_Text_L_SMText(Bar_Dot_Point2.X + 15, Bar_Dot_Point2.Y + 25, Bar_Dot_Text, True)
+    '        Add_SoThep(Bar_Long_Point2.X - 62.5, Bar_Long_Point2.Y + 62.5, Bar_Long_Num, True)
+    '        Add_Text_L_SMText(Bar_Long_Point2.X + 15, Bar_Long_Point2.Y + 25, Bar_Long_Text, True)
+    '    End If
+
+    '    Add_QLeader(Bar_Dot_Point, Bar_Dot_Point1, Bar_Dot_Point2, "_DotBlank")
+    '    Add_QLeader(Bar_Long_Point, Bar_Long_Point1, Bar_Long_Point2, "_ArchTick")
+    'End Sub
 End Module
 
 
