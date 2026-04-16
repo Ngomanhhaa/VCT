@@ -292,6 +292,39 @@ Module molFun
         End Using
     End Sub
 
+    Sub SET_TEXT_STYLE(ByVal acText As Object, ByVal TextTypeTable As Object)
+        Try
+            acText.TextStyle = TextTypeTable
+        Catch ex As System.Exception
+            'MsgBox(ex.Message)
+            acText.TextStyleID = TextTypeTable
+        End Try
+    End Sub
+    Sub Add_Text_M_BIGText_with_Layer_WFactor(ByVal X As Decimal, ByVal Y As Decimal, ByVal tText As String, ByVal tLayer As String, ByVal WFactor As Decimal)
+        Dim acDoc As Document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acCurDb As Database = acDoc.Database
+        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+            Dim acBlkTbl As BlockTable
+            acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId, Autodesk.AutoCAD.DatabaseServices.OpenMode.ForRead)
+            Dim acBlkTblRec As BlockTableRecord
+            acBlkTblRec = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), Autodesk.AutoCAD.DatabaseServices.OpenMode.ForWrite)
+            Dim acTextStyleTblRec As TextStyleTable
+            acTextStyleTblRec = acTrans.GetObject(acCurDb.TextStyleTableId, Autodesk.AutoCAD.DatabaseServices.OpenMode.ForRead)
+            Dim acText As DBText = New DBText()
+            acText.SetDatabaseDefaults()
+            acText.HorizontalMode = TextHorizontalMode.TextCenter
+            acText.AlignmentPoint = New Point3d(X, Y, 0)
+            SET_TEXT_STYLE(acText, acTextStyleTblRec.Item(SYS_TextStyle))
+            acText.Height = SYS_D_TextH_BIG
+            acText.TextString = tText
+            acText.WidthFactor = WFactor
+            acText.Layer = tLayer
+            acText.ColorIndex = 4
+            acBlkTblRec.AppendEntity(acText)
+            acTrans.AddNewlyCreatedDBObject(acText, True)
+            acTrans.Commit()
+        End Using
+    End Sub
     Public Sub AddCText(X As Double, Y As Double, contents As String, height As Double, Optional layerName As String = SYS_LAYER_TEXT_NAME)
         Dim doc As Document = Application.DocumentManager.MdiActiveDocument
         Dim db As Database = doc.Database

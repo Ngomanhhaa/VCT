@@ -98,13 +98,11 @@ Public Class frmMain
         AddDimY(P1.X + L1 + +L2 + 600 + 200, P1.Y, P1.Y - h1, 175)
         AddDimY(P1.X - 50, P1.Y, P1.Y - t, -175)
 
-        'Add_CosCD(P1.X - 50 - 175 + 50, P1.Y, h1)
-        'Add_CosCD(X2 + 100, Y0_2 + 100, h1)
-
+        Add_CosCD(P1.X - 50 - 175 + 50 * SYS_D_DimFoot1, P1.Y, h1)
+        'Dim xText As String = "%%UMẶT CẮT 1-1"
+        'Add_Text_M_BIGText_with_Layer_WFactor(X0 + (L1 + L2 + L3) / 2, Y0 - Y - 300 - SYS_D_DimFoot1 - SYS_D_TextH_BIG - 200, xText, SYS_L_TEXT_TCK, 0.8)
         'thep
-        'Add_SteelTop(P1.X, P1.Y, P1.X + L1, P1.Y, True)
-        'Add_SNode(P1.X + 150, P1.Y - 35, 25)
-
+        'L1
         AddLine(P1.X + 35, P1.Y - t + Abv, P1.X + L1 - 35, P1.Y - t + Abv, SYS_LAYER_STEEL_NAME)
         Dim Point_Array As New ArrayList()
         Point_Array.Add(New Point2d(P1.X + Abv, P1.Y - t + Abv))        ' điểm dưới trái
@@ -145,7 +143,7 @@ Public Class frmMain
         Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, False, a_bardot)
         Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, True, a_bardot)
 
-
+        'l2
         DialogResult = Windows.Forms.DialogResult.OK
     End Sub
 
