@@ -1,4 +1,5 @@
 ﻿Module molVar
+
     ' biến hệ thống
     Public Const SYS_STEEL_NODE_BLOCK_NAME As String = "KCS_STEEL"
     Public Const SYS_LAYER_AXIS_NAME As String = "KCS_AXIS"
@@ -36,4 +37,16 @@
     Public Const SYS_D_DimFoot3 As Decimal = 125
     Public Const SYS_D_DimFoot4 As Decimal = 50
     Public Const SYS_D_DimFoot5 As Decimal = 150
+
+    Public SYS_L_DIM As String
+    Public SYS_L_SOTHEP_CIRCLE As String
+    Public SYS_L_SOTHEP_TEXT As String
+    Public SYS_L_TEXT As String
+
+    Public SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh As String = "%%c"
+    Public SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach As String = "@"
+
+    Public TK_Dot_L2 As Decimal
+
+    Public ThangBo_Config As STR_ThangBo_CONFIG
 End Module

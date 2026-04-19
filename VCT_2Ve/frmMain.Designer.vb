@@ -42,24 +42,24 @@ Partial Class frmMain
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.cbxFi2L2 = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.txta2L2 = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
+        Me.cbxFi4L2 = New System.Windows.Forms.ComboBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txta4L2 = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.cbxFi3L2 = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txta3L2 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cbxFi1L2 = New System.Windows.Forms.ComboBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txta1L2 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -80,26 +80,26 @@ Partial Class frmMain
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.cbxFi2 = New System.Windows.Forms.ComboBox()
+        Me.cb2 = New System.Windows.Forms.CheckBox()
+        Me.cb1 = New System.Windows.Forms.CheckBox()
+        Me.cbxFi2L1 = New System.Windows.Forms.ComboBox()
         Me.Label28 = New System.Windows.Forms.Label()
-        Me.txta2 = New System.Windows.Forms.TextBox()
+        Me.txta2L1 = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.cbxFi4 = New System.Windows.Forms.ComboBox()
+        Me.cbxFi4L1 = New System.Windows.Forms.ComboBox()
         Me.Label30 = New System.Windows.Forms.Label()
-        Me.txta4 = New System.Windows.Forms.TextBox()
+        Me.txta4L1 = New System.Windows.Forms.TextBox()
         Me.Label31 = New System.Windows.Forms.Label()
-        Me.cbxFi3 = New System.Windows.Forms.ComboBox()
+        Me.cbxFi3L1 = New System.Windows.Forms.ComboBox()
         Me.Label32 = New System.Windows.Forms.Label()
-        Me.txta3 = New System.Windows.Forms.TextBox()
+        Me.txta3L1 = New System.Windows.Forms.TextBox()
         Me.Label33 = New System.Windows.Forms.Label()
-        Me.cbxFi1 = New System.Windows.Forms.ComboBox()
+        Me.cbxFi1L1 = New System.Windows.Forms.ComboBox()
         Me.Label34 = New System.Windows.Forms.Label()
-        Me.txta1 = New System.Windows.Forms.TextBox()
+        Me.txta1L1 = New System.Windows.Forms.TextBox()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
-        Me.cb1 = New System.Windows.Forms.CheckBox()
-        Me.cb2 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
@@ -298,21 +298,21 @@ Partial Class frmMain
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.ComboBox4)
+        Me.GroupBox3.Controls.Add(Me.cbxFi2L2)
         Me.GroupBox3.Controls.Add(Me.Label16)
-        Me.GroupBox3.Controls.Add(Me.TextBox4)
+        Me.GroupBox3.Controls.Add(Me.txta2L2)
         Me.GroupBox3.Controls.Add(Me.Label17)
-        Me.GroupBox3.Controls.Add(Me.ComboBox3)
+        Me.GroupBox3.Controls.Add(Me.cbxFi4L2)
         Me.GroupBox3.Controls.Add(Me.Label12)
-        Me.GroupBox3.Controls.Add(Me.TextBox2)
+        Me.GroupBox3.Controls.Add(Me.txta4L2)
         Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Controls.Add(Me.ComboBox2)
+        Me.GroupBox3.Controls.Add(Me.cbxFi3L2)
         Me.GroupBox3.Controls.Add(Me.Label10)
-        Me.GroupBox3.Controls.Add(Me.TextBox1)
+        Me.GroupBox3.Controls.Add(Me.txta3L2)
         Me.GroupBox3.Controls.Add(Me.Label11)
-        Me.GroupBox3.Controls.Add(Me.ComboBox1)
+        Me.GroupBox3.Controls.Add(Me.cbxFi1L2)
         Me.GroupBox3.Controls.Add(Me.Label14)
-        Me.GroupBox3.Controls.Add(Me.TextBox3)
+        Me.GroupBox3.Controls.Add(Me.txta1L2)
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Controls.Add(Me.Label8)
         Me.GroupBox3.Controls.Add(Me.Label13)
@@ -324,145 +324,15 @@ Partial Class frmMain
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Thép bản thang1"
         '
-        'Label13
+        'cbxFi2L2
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.ForeColor = System.Drawing.Color.Black
-        Me.Label13.Location = New System.Drawing.Point(78, 17)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(15, 13)
-        Me.Label13.TabIndex = 7
-        Me.Label13.Text = "D"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.ForeColor = System.Drawing.Color.Black
-        Me.Label8.Location = New System.Drawing.Point(10, 16)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(54, 13)
-        Me.Label8.TabIndex = 12
-        Me.Label8.Text = "Phương X"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.ForeColor = System.Drawing.Color.Black
-        Me.Label9.Location = New System.Drawing.Point(10, 68)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(54, 13)
-        Me.Label9.TabIndex = 17
-        Me.Label9.Text = "Phương X"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.ForeColor = System.Drawing.Color.Black
-        Me.Label14.Location = New System.Drawing.Point(148, 17)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(13, 13)
-        Me.Label14.TabIndex = 19
-        Me.Label14.Text = "a"
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(167, 13)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(41, 20)
-        Me.TextBox3.TabIndex = 18
-        Me.TextBox3.Text = "1500"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
-        Me.ComboBox1.Location = New System.Drawing.Point(99, 13)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(37, 21)
-        Me.ComboBox1.TabIndex = 20
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
-        Me.ComboBox2.Location = New System.Drawing.Point(99, 65)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(37, 21)
-        Me.ComboBox2.TabIndex = 24
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(148, 69)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(13, 13)
-        Me.Label10.TabIndex = 23
-        Me.Label10.Text = "a"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(167, 65)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(41, 20)
-        Me.TextBox1.TabIndex = 22
-        Me.TextBox1.Text = "1500"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.ForeColor = System.Drawing.Color.Black
-        Me.Label11.Location = New System.Drawing.Point(78, 69)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(15, 13)
-        Me.Label11.TabIndex = 21
-        Me.Label11.Text = "D"
-        '
-        'ComboBox3
-        '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
-        Me.ComboBox3.Location = New System.Drawing.Point(99, 92)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(37, 21)
-        Me.ComboBox3.TabIndex = 28
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.ForeColor = System.Drawing.Color.Black
-        Me.Label12.Location = New System.Drawing.Point(148, 96)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(13, 13)
-        Me.Label12.TabIndex = 27
-        Me.Label12.Text = "a"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(167, 92)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(41, 20)
-        Me.TextBox2.TabIndex = 26
-        Me.TextBox2.Text = "1500"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(78, 96)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(15, 13)
-        Me.Label15.TabIndex = 25
-        Me.Label15.Text = "D"
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
-        Me.ComboBox4.Location = New System.Drawing.Point(99, 38)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(37, 21)
-        Me.ComboBox4.TabIndex = 32
+        Me.cbxFi2L2.FormattingEnabled = True
+        Me.cbxFi2L2.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
+        Me.cbxFi2L2.Location = New System.Drawing.Point(99, 38)
+        Me.cbxFi2L2.Name = "cbxFi2L2"
+        Me.cbxFi2L2.Size = New System.Drawing.Size(37, 21)
+        Me.cbxFi2L2.TabIndex = 32
+        Me.cbxFi2L2.Text = "14"
         '
         'Label16
         '
@@ -474,13 +344,13 @@ Partial Class frmMain
         Me.Label16.TabIndex = 31
         Me.Label16.Text = "a"
         '
-        'TextBox4
+        'txta2L2
         '
-        Me.TextBox4.Location = New System.Drawing.Point(167, 38)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(41, 20)
-        Me.TextBox4.TabIndex = 30
-        Me.TextBox4.Text = "1500"
+        Me.txta2L2.Location = New System.Drawing.Point(167, 38)
+        Me.txta2L2.Name = "txta2L2"
+        Me.txta2L2.Size = New System.Drawing.Size(41, 20)
+        Me.txta2L2.TabIndex = 30
+        Me.txta2L2.Text = "200"
         '
         'Label17
         '
@@ -491,6 +361,140 @@ Partial Class frmMain
         Me.Label17.Size = New System.Drawing.Size(15, 13)
         Me.Label17.TabIndex = 29
         Me.Label17.Text = "D"
+        '
+        'cbxFi4L2
+        '
+        Me.cbxFi4L2.FormattingEnabled = True
+        Me.cbxFi4L2.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
+        Me.cbxFi4L2.Location = New System.Drawing.Point(99, 92)
+        Me.cbxFi4L2.Name = "cbxFi4L2"
+        Me.cbxFi4L2.Size = New System.Drawing.Size(37, 21)
+        Me.cbxFi4L2.TabIndex = 28
+        Me.cbxFi4L2.Text = "14"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.ForeColor = System.Drawing.Color.Black
+        Me.Label12.Location = New System.Drawing.Point(148, 96)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(13, 13)
+        Me.Label12.TabIndex = 27
+        Me.Label12.Text = "a"
+        '
+        'txta4L2
+        '
+        Me.txta4L2.Location = New System.Drawing.Point(167, 92)
+        Me.txta4L2.Name = "txta4L2"
+        Me.txta4L2.Size = New System.Drawing.Size(41, 20)
+        Me.txta4L2.TabIndex = 26
+        Me.txta4L2.Text = "200"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.ForeColor = System.Drawing.Color.Black
+        Me.Label15.Location = New System.Drawing.Point(78, 96)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(15, 13)
+        Me.Label15.TabIndex = 25
+        Me.Label15.Text = "D"
+        '
+        'cbxFi3L2
+        '
+        Me.cbxFi3L2.FormattingEnabled = True
+        Me.cbxFi3L2.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
+        Me.cbxFi3L2.Location = New System.Drawing.Point(99, 65)
+        Me.cbxFi3L2.Name = "cbxFi3L2"
+        Me.cbxFi3L2.Size = New System.Drawing.Size(37, 21)
+        Me.cbxFi3L2.TabIndex = 24
+        Me.cbxFi3L2.Text = "14"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.ForeColor = System.Drawing.Color.Black
+        Me.Label10.Location = New System.Drawing.Point(148, 69)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(13, 13)
+        Me.Label10.TabIndex = 23
+        Me.Label10.Text = "a"
+        '
+        'txta3L2
+        '
+        Me.txta3L2.Location = New System.Drawing.Point(167, 65)
+        Me.txta3L2.Name = "txta3L2"
+        Me.txta3L2.Size = New System.Drawing.Size(41, 20)
+        Me.txta3L2.TabIndex = 22
+        Me.txta3L2.Text = "200"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.ForeColor = System.Drawing.Color.Black
+        Me.Label11.Location = New System.Drawing.Point(78, 69)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(15, 13)
+        Me.Label11.TabIndex = 21
+        Me.Label11.Text = "D"
+        '
+        'cbxFi1L2
+        '
+        Me.cbxFi1L2.FormattingEnabled = True
+        Me.cbxFi1L2.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
+        Me.cbxFi1L2.Location = New System.Drawing.Point(99, 13)
+        Me.cbxFi1L2.Name = "cbxFi1L2"
+        Me.cbxFi1L2.Size = New System.Drawing.Size(37, 21)
+        Me.cbxFi1L2.TabIndex = 20
+        Me.cbxFi1L2.Text = "14"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.ForeColor = System.Drawing.Color.Black
+        Me.Label14.Location = New System.Drawing.Point(148, 17)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(13, 13)
+        Me.Label14.TabIndex = 19
+        Me.Label14.Text = "a"
+        '
+        'txta1L2
+        '
+        Me.txta1L2.Location = New System.Drawing.Point(167, 13)
+        Me.txta1L2.Name = "txta1L2"
+        Me.txta1L2.Size = New System.Drawing.Size(41, 20)
+        Me.txta1L2.TabIndex = 18
+        Me.txta1L2.Text = "200"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.ForeColor = System.Drawing.Color.Black
+        Me.Label9.Location = New System.Drawing.Point(10, 68)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(54, 13)
+        Me.Label9.TabIndex = 17
+        Me.Label9.Text = "Phương X"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.ForeColor = System.Drawing.Color.Black
+        Me.Label8.Location = New System.Drawing.Point(10, 16)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(54, 13)
+        Me.Label8.TabIndex = 12
+        Me.Label8.Text = "Phương X"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.ForeColor = System.Drawing.Color.Black
+        Me.Label13.Location = New System.Drawing.Point(78, 17)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(15, 13)
+        Me.Label13.TabIndex = 7
+        Me.Label13.Text = "D"
         '
         'GroupBox4
         '
@@ -692,21 +696,21 @@ Partial Class frmMain
         '
         Me.GroupBox5.Controls.Add(Me.cb2)
         Me.GroupBox5.Controls.Add(Me.cb1)
-        Me.GroupBox5.Controls.Add(Me.cbxFi2)
+        Me.GroupBox5.Controls.Add(Me.cbxFi2L1)
         Me.GroupBox5.Controls.Add(Me.Label28)
-        Me.GroupBox5.Controls.Add(Me.txta2)
+        Me.GroupBox5.Controls.Add(Me.txta2L1)
         Me.GroupBox5.Controls.Add(Me.Label29)
-        Me.GroupBox5.Controls.Add(Me.cbxFi4)
+        Me.GroupBox5.Controls.Add(Me.cbxFi4L1)
         Me.GroupBox5.Controls.Add(Me.Label30)
-        Me.GroupBox5.Controls.Add(Me.txta4)
+        Me.GroupBox5.Controls.Add(Me.txta4L1)
         Me.GroupBox5.Controls.Add(Me.Label31)
-        Me.GroupBox5.Controls.Add(Me.cbxFi3)
+        Me.GroupBox5.Controls.Add(Me.cbxFi3L1)
         Me.GroupBox5.Controls.Add(Me.Label32)
-        Me.GroupBox5.Controls.Add(Me.txta3)
+        Me.GroupBox5.Controls.Add(Me.txta3L1)
         Me.GroupBox5.Controls.Add(Me.Label33)
-        Me.GroupBox5.Controls.Add(Me.cbxFi1)
+        Me.GroupBox5.Controls.Add(Me.cbxFi1L1)
         Me.GroupBox5.Controls.Add(Me.Label34)
-        Me.GroupBox5.Controls.Add(Me.txta1)
+        Me.GroupBox5.Controls.Add(Me.txta1L1)
         Me.GroupBox5.Controls.Add(Me.Label35)
         Me.GroupBox5.Controls.Add(Me.Label36)
         Me.GroupBox5.Controls.Add(Me.Label37)
@@ -718,15 +722,37 @@ Partial Class frmMain
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Thép chiếu nghỉ"
         '
-        'cbxFi2
+        'cb2
         '
-        Me.cbxFi2.FormattingEnabled = True
-        Me.cbxFi2.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
-        Me.cbxFi2.Location = New System.Drawing.Point(99, 38)
-        Me.cbxFi2.Name = "cbxFi2"
-        Me.cbxFi2.Size = New System.Drawing.Size(37, 21)
-        Me.cbxFi2.TabIndex = 32
-        Me.cbxFi2.Text = "14"
+        Me.cb2.AutoSize = True
+        Me.cb2.ForeColor = System.Drawing.Color.Black
+        Me.cb2.Location = New System.Drawing.Point(5, 92)
+        Me.cb2.Name = "cb2"
+        Me.cb2.Size = New System.Drawing.Size(67, 17)
+        Me.cb2.TabIndex = 34
+        Me.cb2.Text = "Lớp dưới"
+        Me.cb2.UseVisualStyleBackColor = True
+        '
+        'cb1
+        '
+        Me.cb1.AutoSize = True
+        Me.cb1.ForeColor = System.Drawing.Color.Black
+        Me.cb1.Location = New System.Drawing.Point(5, 38)
+        Me.cb1.Name = "cb1"
+        Me.cb1.Size = New System.Drawing.Size(67, 17)
+        Me.cb1.TabIndex = 33
+        Me.cb1.Text = "Lớp dưới"
+        Me.cb1.UseVisualStyleBackColor = True
+        '
+        'cbxFi2L1
+        '
+        Me.cbxFi2L1.FormattingEnabled = True
+        Me.cbxFi2L1.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
+        Me.cbxFi2L1.Location = New System.Drawing.Point(99, 38)
+        Me.cbxFi2L1.Name = "cbxFi2L1"
+        Me.cbxFi2L1.Size = New System.Drawing.Size(37, 21)
+        Me.cbxFi2L1.TabIndex = 32
+        Me.cbxFi2L1.Text = "14"
         '
         'Label28
         '
@@ -738,13 +764,13 @@ Partial Class frmMain
         Me.Label28.TabIndex = 31
         Me.Label28.Text = "a"
         '
-        'txta2
+        'txta2L1
         '
-        Me.txta2.Location = New System.Drawing.Point(167, 38)
-        Me.txta2.Name = "txta2"
-        Me.txta2.Size = New System.Drawing.Size(41, 20)
-        Me.txta2.TabIndex = 30
-        Me.txta2.Text = "200"
+        Me.txta2L1.Location = New System.Drawing.Point(167, 38)
+        Me.txta2L1.Name = "txta2L1"
+        Me.txta2L1.Size = New System.Drawing.Size(41, 20)
+        Me.txta2L1.TabIndex = 30
+        Me.txta2L1.Text = "200"
         '
         'Label29
         '
@@ -756,15 +782,15 @@ Partial Class frmMain
         Me.Label29.TabIndex = 29
         Me.Label29.Text = "D"
         '
-        'cbxFi4
+        'cbxFi4L1
         '
-        Me.cbxFi4.FormattingEnabled = True
-        Me.cbxFi4.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
-        Me.cbxFi4.Location = New System.Drawing.Point(99, 92)
-        Me.cbxFi4.Name = "cbxFi4"
-        Me.cbxFi4.Size = New System.Drawing.Size(37, 21)
-        Me.cbxFi4.TabIndex = 28
-        Me.cbxFi4.Text = "14"
+        Me.cbxFi4L1.FormattingEnabled = True
+        Me.cbxFi4L1.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
+        Me.cbxFi4L1.Location = New System.Drawing.Point(99, 92)
+        Me.cbxFi4L1.Name = "cbxFi4L1"
+        Me.cbxFi4L1.Size = New System.Drawing.Size(37, 21)
+        Me.cbxFi4L1.TabIndex = 28
+        Me.cbxFi4L1.Text = "14"
         '
         'Label30
         '
@@ -776,13 +802,13 @@ Partial Class frmMain
         Me.Label30.TabIndex = 27
         Me.Label30.Text = "a"
         '
-        'txta4
+        'txta4L1
         '
-        Me.txta4.Location = New System.Drawing.Point(167, 92)
-        Me.txta4.Name = "txta4"
-        Me.txta4.Size = New System.Drawing.Size(41, 20)
-        Me.txta4.TabIndex = 26
-        Me.txta4.Text = "200"
+        Me.txta4L1.Location = New System.Drawing.Point(167, 92)
+        Me.txta4L1.Name = "txta4L1"
+        Me.txta4L1.Size = New System.Drawing.Size(41, 20)
+        Me.txta4L1.TabIndex = 26
+        Me.txta4L1.Text = "200"
         '
         'Label31
         '
@@ -794,15 +820,15 @@ Partial Class frmMain
         Me.Label31.TabIndex = 25
         Me.Label31.Text = "D"
         '
-        'cbxFi3
+        'cbxFi3L1
         '
-        Me.cbxFi3.FormattingEnabled = True
-        Me.cbxFi3.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
-        Me.cbxFi3.Location = New System.Drawing.Point(99, 65)
-        Me.cbxFi3.Name = "cbxFi3"
-        Me.cbxFi3.Size = New System.Drawing.Size(37, 21)
-        Me.cbxFi3.TabIndex = 24
-        Me.cbxFi3.Text = "14"
+        Me.cbxFi3L1.FormattingEnabled = True
+        Me.cbxFi3L1.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
+        Me.cbxFi3L1.Location = New System.Drawing.Point(99, 65)
+        Me.cbxFi3L1.Name = "cbxFi3L1"
+        Me.cbxFi3L1.Size = New System.Drawing.Size(37, 21)
+        Me.cbxFi3L1.TabIndex = 24
+        Me.cbxFi3L1.Text = "14"
         '
         'Label32
         '
@@ -814,13 +840,13 @@ Partial Class frmMain
         Me.Label32.TabIndex = 23
         Me.Label32.Text = "a"
         '
-        'txta3
+        'txta3L1
         '
-        Me.txta3.Location = New System.Drawing.Point(167, 65)
-        Me.txta3.Name = "txta3"
-        Me.txta3.Size = New System.Drawing.Size(41, 20)
-        Me.txta3.TabIndex = 22
-        Me.txta3.Text = "200"
+        Me.txta3L1.Location = New System.Drawing.Point(167, 65)
+        Me.txta3L1.Name = "txta3L1"
+        Me.txta3L1.Size = New System.Drawing.Size(41, 20)
+        Me.txta3L1.TabIndex = 22
+        Me.txta3L1.Text = "200"
         '
         'Label33
         '
@@ -832,15 +858,16 @@ Partial Class frmMain
         Me.Label33.TabIndex = 21
         Me.Label33.Text = "D"
         '
-        'cbxFi1
+        'cbxFi1L1
         '
-        Me.cbxFi1.FormattingEnabled = True
-        Me.cbxFi1.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
-        Me.cbxFi1.Location = New System.Drawing.Point(99, 13)
-        Me.cbxFi1.Name = "cbxFi1"
-        Me.cbxFi1.Size = New System.Drawing.Size(37, 21)
-        Me.cbxFi1.TabIndex = 20
-        Me.cbxFi1.Text = "14"
+        Me.cbxFi1L1.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.cbxFi1L1.FormattingEnabled = True
+        Me.cbxFi1L1.Items.AddRange(New Object() {"8", "10", "12", "14", "16", "18", "20"})
+        Me.cbxFi1L1.Location = New System.Drawing.Point(99, 13)
+        Me.cbxFi1L1.Name = "cbxFi1L1"
+        Me.cbxFi1L1.Size = New System.Drawing.Size(37, 21)
+        Me.cbxFi1L1.TabIndex = 20
+        Me.cbxFi1L1.Text = "14"
         '
         'Label34
         '
@@ -852,13 +879,13 @@ Partial Class frmMain
         Me.Label34.TabIndex = 19
         Me.Label34.Text = "a"
         '
-        'txta1
+        'txta1L1
         '
-        Me.txta1.Location = New System.Drawing.Point(167, 13)
-        Me.txta1.Name = "txta1"
-        Me.txta1.Size = New System.Drawing.Size(41, 20)
-        Me.txta1.TabIndex = 18
-        Me.txta1.Text = "200"
+        Me.txta1L1.Location = New System.Drawing.Point(167, 13)
+        Me.txta1L1.Name = "txta1L1"
+        Me.txta1L1.Size = New System.Drawing.Size(41, 20)
+        Me.txta1L1.TabIndex = 18
+        Me.txta1L1.Text = "200"
         '
         'Label35
         '
@@ -889,28 +916,6 @@ Partial Class frmMain
         Me.Label37.Size = New System.Drawing.Size(15, 13)
         Me.Label37.TabIndex = 7
         Me.Label37.Text = "D"
-        '
-        'cb1
-        '
-        Me.cb1.AutoSize = True
-        Me.cb1.ForeColor = System.Drawing.Color.Black
-        Me.cb1.Location = New System.Drawing.Point(5, 38)
-        Me.cb1.Name = "cb1"
-        Me.cb1.Size = New System.Drawing.Size(67, 17)
-        Me.cb1.TabIndex = 33
-        Me.cb1.Text = "Lớp dưới"
-        Me.cb1.UseVisualStyleBackColor = True
-        '
-        'cb2
-        '
-        Me.cb2.AutoSize = True
-        Me.cb2.ForeColor = System.Drawing.Color.Black
-        Me.cb2.Location = New System.Drawing.Point(5, 92)
-        Me.cb2.Name = "cb2"
-        Me.cb2.Size = New System.Drawing.Size(67, 17)
-        Me.cb2.TabIndex = 34
-        Me.cb2.Text = "Lớp dưới"
-        Me.cb2.UseVisualStyleBackColor = True
         '
         'frmMain
         '
@@ -965,21 +970,21 @@ Partial Class frmMain
     Friend WithEvents txtX As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox4 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxFi2L2 As System.Windows.Forms.ComboBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents txta2L2 As System.Windows.Forms.TextBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxFi4L2 As System.Windows.Forms.ComboBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents txta4L2 As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxFi3L2 As System.Windows.Forms.ComboBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txta3L2 As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxFi1L2 As System.Windows.Forms.ComboBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents txta1L2 As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
@@ -1003,21 +1008,21 @@ Partial Class frmMain
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents cb1 As System.Windows.Forms.CheckBox
-    Friend WithEvents cbxFi2 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxFi2L1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label28 As System.Windows.Forms.Label
-    Friend WithEvents txta2 As System.Windows.Forms.TextBox
+    Friend WithEvents txta2L1 As System.Windows.Forms.TextBox
     Friend WithEvents Label29 As System.Windows.Forms.Label
-    Friend WithEvents cbxFi4 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxFi4L1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label30 As System.Windows.Forms.Label
-    Friend WithEvents txta4 As System.Windows.Forms.TextBox
+    Friend WithEvents txta4L1 As System.Windows.Forms.TextBox
     Friend WithEvents Label31 As System.Windows.Forms.Label
-    Friend WithEvents cbxFi3 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxFi3L1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label32 As System.Windows.Forms.Label
-    Friend WithEvents txta3 As System.Windows.Forms.TextBox
+    Friend WithEvents txta3L1 As System.Windows.Forms.TextBox
     Friend WithEvents Label33 As System.Windows.Forms.Label
-    Friend WithEvents cbxFi1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxFi1L1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label34 As System.Windows.Forms.Label
-    Friend WithEvents txta1 As System.Windows.Forms.TextBox
+    Friend WithEvents txta1L1 As System.Windows.Forms.TextBox
     Friend WithEvents Label35 As System.Windows.Forms.Label
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents Label37 As System.Windows.Forms.Label
