@@ -1,6 +1,7 @@
 ﻿Imports Autodesk
 Imports Autodesk.AutoCAD.ApplicationServices
 Imports Autodesk.AutoCAD.DatabaseServices
+Imports Autodesk.AutoCAD.DatabaseServices.Filters
 Imports Autodesk.AutoCAD.EditorInput
 Imports Autodesk.AutoCAD.Geometry
 
@@ -186,9 +187,9 @@ Module molDRAW
         End Using
     End Sub
 
-    Public Sub AddTagThepChu(X As Double, Y As Double, sh As String, info As String, listPointRebar As List(Of Point2d))
+    Public Sub AddTagThepChu(X As Double, Y As Double, SH As String, ChieuCaoText As String, listPointRebar As List(Of Point2d))
         AddCircle(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, SYS_TAG_CIRCLE_DIA / 2 * 25, SYS_LAYER_THIN_NAME)
-        AddMCText(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, sh, SYS_TEXT_HEIGHT * 25)
+        AddMCText(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, SH, SYS_TEXT_HEIGHT * 25)
 
         For i = 0 To listPointRebar.Count - 1
             Dim pt As Point2d = listPointRebar(i)
@@ -196,7 +197,7 @@ Module molDRAW
         Next
         AddLine(X, Y, listPointRebar.Last.X - 62.5, Y, SYS_LAYER_THIN_NAME)
 
-        AddLText(X + 25, Y + 20, info, SYS_TEXT_HEIGHT * 25)
+        AddLText(X + 25, Y + 20, ChieuCaoText, SYS_TEXT_HEIGHT * 25)
 
     End Sub
     Public Sub Add_PLine(ByVal pArray As ArrayList, ByVal tLayer As String)
@@ -261,7 +262,7 @@ Module molDRAW
             acTrans.Commit()
         End Using
     End Sub
-    Sub Add_Text_ST(ByVal X As Decimal, ByVal Y As Decimal, ByVal tText As String, Is_X_Direction As Boolean)
+    Public Sub Add_Text_ST(ByVal X As Decimal, ByVal Y As Decimal, ByVal tText As String, Is_X_Direction As Boolean)
         Dim acDoc As Document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
         Dim acCurDb As Database = acDoc.Database
         Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
@@ -509,5 +510,6 @@ Module molDRAW
             acTrans.Commit()
         End Using
     End Sub
+
 
 End Module

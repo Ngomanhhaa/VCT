@@ -16,7 +16,7 @@
     Public Const SYS_TAG_CIRCLE_DIA As Double = 5
     Public Const SYS_TEXT_HEIGHT As Double = 2.5
 
-    Public Const SYS_TextStyle As String = "KCS_SMTEXT"
+    Public Const SYS_TextStyle As String = "KCS_TEXT"
 
     Public t As Double
     Public Abv As Double = 20
@@ -39,9 +39,9 @@
     Public Const SYS_D_DimFoot5 As Decimal = 150
 
     Public SYS_L_DIM As String
-    Public SYS_L_SOTHEP_CIRCLE As String
-    Public SYS_L_SOTHEP_TEXT As String
-    Public SYS_L_TEXT As String
+    Public Const SYS_L_SOTHEP_CIRCLE As String = "KCS_TEXT"
+    Public Const SYS_L_SOTHEP_TEXT As String = "KCS_TEXT"
+    Public Const SYS_L_TEXT As String = "KCS_TEXT"
 
     Public SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh As String = "%%c"
     Public SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach As String = "@"
@@ -49,5 +49,6 @@
     Public TK_Dot_L2 As Decimal
 
     Public ThangBo_Config As STR_ThangBo_CONFIG
-
+    Public index As Integer
+    Public index2 As Integer
 End Module

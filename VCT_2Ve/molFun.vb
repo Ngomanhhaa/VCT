@@ -464,11 +464,15 @@ Module molFun
 
         For i As Integer = 0 To N
             If i = 2 AndAlso ThepCham_L1_LopTren = True Then
-                'AddLine(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y)
+                'addline(l.getpointatdist(52 + i * a + center_snode).x, l.getpointatdist(52 + i * a + center_snode).y)
                 Dim P1_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y, 0)
                 Dim P2_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
                 Dim P3_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X - 400, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
-                Add_QLeader(P1_TagThep, P2_TagThep, P3_TagThep, "_DotBlank")
+                'Add_QLeader(P1_TagThep, P2_TagThep, P3_TagThep, "_DotBlank")
+                'AddLine(P1_TagThep.X1, P1_TagThep.Y1, P2_TagThep.Y2, P2_TagThep.Y2, SYS_LAYER_THIN_NAME)
+                'AddLine(P2_TagThep.Y, P2_TagThep.Y, P3_TagThep.Y, P3_TagThep.Y, SYS_LAYER_THIN_NAME)
+                'Add_SoThep(P1.X + 62.5, P1.Y + 62.5, "D", True)
+                'Add_Text_R_SMText(P1.X - 15, P1.Y + 25, "P2", True)
             End If
             Add_SNode(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y)
             If i = N \ 3 Then
@@ -508,6 +512,76 @@ Module molFun
         End If
         Return L
     End Function
+    Sub Add_Circle_ST(ByVal X As Decimal, ByVal Y As Decimal)
+        Dim acDoc As Document = ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acCurDb As Database = acDoc.Database
+        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+            Dim acBlkTbl As BlockTable
+            acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId, DatabaseServices.OpenMode.ForRead)
+            Dim acBlkTblRec As BlockTableRecord
+            acBlkTblRec = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), DatabaseServices.OpenMode.ForWrite)
+            Dim acCirc As Circle = New Circle()
+            acCirc.SetDatabaseDefaults()
+            acCirc.Center = New Point3d(X, Y, 0)
+            acCirc.Radius = SYS_D_TextH_SM
+            acCirc.Layer = SYS_L_SOTHEP_CIRCLE
+            acCirc.ColorIndex = 1
+            acBlkTblRec.AppendEntity(acCirc)
+            acTrans.AddNewlyCreatedDBObject(acCirc, True)
+            acTrans.Commit()
+        End Using
+    End Sub
+    Sub Add_Text_ST(ByVal X As Decimal, ByVal Y As Decimal, ByVal tText As String)
+        Dim acDoc As Document = ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acCurDb As Database = acDoc.Database
+        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+            Dim acBlkTbl As BlockTable
+            acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId, DatabaseServices.OpenMode.ForRead)
+            Dim acBlkTblRec As BlockTableRecord
+            acBlkTblRec = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), DatabaseServices.OpenMode.ForWrite)
+            Dim acTextStyleTblRec As TextStyleTable
+            acTextStyleTblRec = acTrans.GetObject(acCurDb.TextStyleTableId, DatabaseServices.OpenMode.ForRead)
+            Dim acText As DBText = New DBText()
+            acText.SetDatabaseDefaults()
+            acText.HorizontalMode = TextHorizontalMode.TextCenter
+            acText.VerticalMode = TextVerticalMode.TextVerticalMid
+            acText.AlignmentPoint = New Point3d(X, Y, 0)
+            SET_TEXT_STYLE(acText, acTextStyleTblRec.Item(SYS_TextStyle))
+            acText.Height = SYS_D_TextH_SM
+            acText.TextString = tText
+            acText.Layer = SYS_L_SOTHEP_TEXT
+            acText.WidthFactor = SYS_D_TextWF
+            acBlkTblRec.AppendEntity(acText)
+            acTrans.AddNewlyCreatedDBObject(acText, True)
+            acTrans.Commit()
+        End Using
+    End Sub
+    Sub Add_Text_ST_2(ByVal X As Decimal, ByVal Y As Decimal, ByVal tText As String)
+        Dim acDoc As Document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acCurDb As Database = acDoc.Database
+        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+            Dim acBlkTbl As BlockTable
+            acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId, Autodesk.AutoCAD.DatabaseServices.OpenMode.ForRead)
+            Dim acBlkTblRec As BlockTableRecord
+            acBlkTblRec = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), Autodesk.AutoCAD.DatabaseServices.OpenMode.ForWrite)
+            Dim acTextStyleTblRec As TextStyleTable
+            acTextStyleTblRec = acTrans.GetObject(acCurDb.TextStyleTableId, Autodesk.AutoCAD.DatabaseServices.OpenMode.ForRead)
+            Dim acText As DBText = New DBText()
+            acText.SetDatabaseDefaults()
+
+            acText.SetDatabaseDefaults()
+            acText.Position = New Point3d(X, Y, 0)
+
+            SET_TEXT_STYLE(acText, acTextStyleTblRec.Item(SYS_TextStyle))
+            acText.Height = SYS_D_TextH_SM
+            acText.TextString = tText
+            acText.Layer = SYS_L_SOTHEP_TEXT
+            acText.WidthFactor = SYS_D_TextWF
+            acBlkTblRec.AppendEntity(acText)
+            acTrans.AddNewlyCreatedDBObject(acText, True)
+            acTrans.Commit()
+        End Using
+    End Sub
 End Module
 
 
