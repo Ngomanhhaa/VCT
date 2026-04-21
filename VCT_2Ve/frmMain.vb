@@ -53,6 +53,8 @@ Public Class frmMain
         Dim a7 As Double = txta3L2.Text
         Dim a8 As Double = txta4L2.Text
 
+        Dim Bar1_Dot As STR_CONFIG_BAR = ThangBo_Config.Bar1_X_Bot
+
         Dim P1b, P2a, P2b, P3a, P3b As New Point3dCollection 'Intersect Point Border
         've truc
         Dim pTrx1 As New cSTR_Point(P1.X, P1.Y + 450)
@@ -126,11 +128,11 @@ Public Class frmMain
         'Phương Y (thep cham) 
         Dim a_bardot As Integer = 22
         Dim Loca_Bar3 As ArrayList
-        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, False, a_bardot)
-        Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, True, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, False, False, a_bardot)
+        Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, True, True, a_bardot)
 
-        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, False, a_bardot)
-        Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, True, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, False, False, a_bardot)
+        Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, True, False, a_bardot)
 
         'L2
         'Phương X
@@ -164,36 +166,17 @@ Public Class frmMain
 
 
         'Phương Y (thep cham) 
+
         Dim pGiao3 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(ThepNgangTr, lineNgangTr)
         Dim lineNull3_offset As cSTR_Line = Return_Offset_Line(pGiao3, Giaothep, -15)
-        Loca_Bar3 = Add_Bar_Dot(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, False, a_bardot)
-        Add_Bar_Dot(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a6, True, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, False, False, a_bardot)
+        Add_Bar_Dot(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a6, True, False, a_bardot)
+
 
         Dim pGiao4 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineNgangTr, lineOffset_Thep_Cheo_Duoi)
         Dim lineNull4_offset As cSTR_Line = Return_Offset_Line(pGiao4, GiaoThep2, 15)
-        Loca_Bar3 = Add_Bar_Dot(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, False, a_bardot)
-        Add_Bar_Dot(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, True, a_bardot)
-
-
-        Dim Bar1_X_Bot As STR_CONFIG_BAR = ThangBo_Config.Bar1_X_Bot
-        Dim Bar1_X_Top As STR_CONFIG_BAR = ThangBo_Config.Bar1_X_Top
-        Dim Bar1_Y_Bot As STR_CONFIG_BAR = ThangBo_Config.Bar1_Y_Bot
-        Dim Bar1_Y_Top As STR_CONFIG_BAR = ThangBo_Config.Bar1_Y_Top
-        Dim Bar3_X_Bot As STR_CONFIG_BAR = ThangBo_Config.Bar3_X_Bot
-        Dim Bar3_X_Top As STR_CONFIG_BAR = ThangBo_Config.Bar3_X_Top
-        Dim Bar3_Y_Bot As STR_CONFIG_BAR = ThangBo_Config.Bar3_Y_Bot
-        Dim Bar3_Y_Top As STR_CONFIG_BAR = ThangBo_Config.Bar3_Y_Top
-
-        Dim bar_num_even As Integer = 2
-        Dim bar_num_odd As Integer = 1
-        Dim Pdb1, Pdb2 As New Point3dCollection 'Point Dot Bar 1 and 2
-        Dim Location_Bar_Bot_Tag_L2 As ArrayList
-        Location_Bar_Bot_Tag_L2 = Add_Bar_Dot(Pdb1(0).X, Pdb1(0).Y, Pdb2(0).X, Pdb2(0).Y, Bar1_X_Bot.A, True) 'Add Bar Dot Bot L2
-        Dim Bot_L2 As Line = New Line(P2a(0), P2b(0))
-        Dim Bar_Bot_Dot_L2_Text As String = SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Bar1_X_Bot.Fi & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Bar1_X_Bot.A
-        Dim Bar_Bot_Long_L2_Text As String = SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Bar1_Y_Bot.Fi & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Bar1_Y_Bot.A
-        Add_Bar_Tag(Location_Bar_Bot_Tag_L2(0), Location_Bar_Bot_Tag_L2(1), Bot_L2, Bar_Bot_Dot_L2_Text, Bar_Bot_Long_L2_Text, bar_num_even, bar_num_odd, True)
-        TK_Dot_L2 = Get_Length_TK(Pdb1(0), Pdb2(0))
+        Loca_Bar3 = Add_Bar_Dot(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, False, False, a_bardot)
+        Add_Bar_Dot(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, True, False, a_bardot)
 
         DialogResult = Windows.Forms.DialogResult.OK
 

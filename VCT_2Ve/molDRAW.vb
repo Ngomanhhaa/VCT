@@ -316,7 +316,7 @@ Module molDRAW
             acLdr.AppendVertex(P3)
             acLdr.Dimldrblk = GetArrowObjectId(ArrLdrName) '"_ArchTick" "_DotBlank"
             acLdr.DimensionStyle = acDimStyleTbl.Item(SYS_DIM_STYLE)
-            acLdr.Layer = SYS_L_DIM
+            acLdr.Layer = SYS_LAYER_THIN_NAME
             '' Add the new object to Model space and the transaction
             acBlkTblRec.AppendEntity(acLdr)
             acTrans.AddNewlyCreatedDBObject(acLdr, True)

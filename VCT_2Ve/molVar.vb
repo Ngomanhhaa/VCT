@@ -49,4 +49,5 @@
     Public TK_Dot_L2 As Decimal
 
     Public ThangBo_Config As STR_ThangBo_CONFIG
+
 End Module

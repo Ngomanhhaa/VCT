@@ -453,16 +453,23 @@ Module molFun
             acTrans.Commit()
         End Using
     End Sub
-    Function Add_Bar_Dot(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, A As Decimal, Is_bot As Boolean, Optional a_bardot As Integer = 15) As ArrayList
+    Function Add_Bar_Dot(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, A As Decimal, Is_bot As Boolean, ThepCham_L1_LopTren As Boolean, Optional a_bardot As Integer = 15) As ArrayList
         Dim L As Line = New Line(New Point3d(X1, Y1, 0), New Point3d(X2, Y2, 0))
         Dim Length As Decimal = L.Length - 104
-        Dim N As Decimal = Length \ A
+        Dim N As Decimal = Length \ A ' ví dụ N = 5
         Dim Center_SNode As Decimal = (Length - A * N) / 2
         Dim P1 As Point3d
         Dim P2 As Point3d
         Dim L1 As Line
 
         For i As Integer = 0 To N
+            If i = 2 AndAlso ThepCham_L1_LopTren = True Then
+                'AddLine(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y)
+                Dim P1_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y, 0)
+                Dim P2_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
+                Dim P3_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X - 400, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
+                Add_QLeader(P1_TagThep, P2_TagThep, P3_TagThep, "_DotBlank")
+            End If
             Add_SNode(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y)
             If i = N \ 3 Then
                 If Is_bot = True Then
