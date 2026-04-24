@@ -285,7 +285,7 @@ Module molDRAW
             SET_TEXT_STYLE(acText, acTextStyleTblRec.Item(SYS_TextStyle))
             acText.Height = SYS_D_TextH_SM
             acText.TextString = tText
-            acText.Layer = SYS_L_SOTHEP_TEXT
+            acText.Layer = SYS_TEXT_STYLE_NAME
             acText.WidthFactor = SYS_D_TextWF
             acBlkTblRec.AppendEntity(acText)
             acTrans.AddNewlyCreatedDBObject(acText, True)

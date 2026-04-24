@@ -16,7 +16,7 @@
     Public Const SYS_TAG_CIRCLE_DIA As Double = 5
     Public Const SYS_TEXT_HEIGHT As Double = 2.5
 
-    Public Const SYS_TextStyle As String = "KCS_TEXT"
+    Public Const SYS_TextStyle As String = "KCS_SMTEXT"
 
     Public t As Double
     Public Abv As Double = 20

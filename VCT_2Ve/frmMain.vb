@@ -128,11 +128,11 @@ Public Class frmMain
         'Phương Y (thep cham) 
         Dim a_bardot As Integer = 22
         Dim Loca_Bar3 As ArrayList
-        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, False, False, a_bardot)
-        Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, True, True, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, Fi1, a1, False, False, a_bardot)
+        Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, Fi1, a1, True, True, a_bardot)
 
-        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, False, False, a_bardot)
-        Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, True, False, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, Fi2, a2, False, False, a_bardot)
+        Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, Fi2, a2, True, False, a_bardot)
 
         'L2
         'Phương X
@@ -169,14 +169,14 @@ Public Class frmMain
 
         Dim pGiao3 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(ThepNgangTr, lineNgangTr)
         Dim lineNull3_offset As cSTR_Line = Return_Offset_Line(pGiao3, Giaothep, -15)
-        Loca_Bar3 = Add_Bar_Dot(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, False, False, a_bardot)
-        Add_Bar_Dot(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a6, True, False, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot2(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, Fi5, a5, False, False, a_bardot)
+        Add_Bar_Dot2(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, Fi5, a5, True, True, a_bardot)
 
 
         Dim pGiao4 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineNgangTr, lineOffset_Thep_Cheo_Duoi)
         Dim lineNull4_offset As cSTR_Line = Return_Offset_Line(pGiao4, GiaoThep2, 15)
-        Loca_Bar3 = Add_Bar_Dot(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, False, False, a_bardot)
-        Add_Bar_Dot(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, True, False, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot2(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, False, False, a_bardot)
+        Add_Bar_Dot2(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, True, False, a_bardot)
 
         DialogResult = Windows.Forms.DialogResult.OK
 
