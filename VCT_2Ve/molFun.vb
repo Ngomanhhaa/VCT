@@ -544,7 +544,7 @@ Module molFun
         Return New ArrayList({P1, P2})
     End Function
 
-    Function Add_Bar_Dot_Y_L2_Tren(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, A As Decimal, Fi As Decimal, Aa As Decimal, Is_bot As Boolean, ThepCham_L2_LopTren As Boolean, Optional a_bardot As Integer = 15) As ArrayList
+    Function Add_Bar_Dot_Y_L2_Tren(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, A As Decimal, Fi1 As Decimal, Aa1 As Decimal, Fi2 As Decimal, Aa2 As Decimal, Is_bot As Boolean, ThepCham_L2_LopTren As Boolean, Optional a_bardot As Integer = 15) As ArrayList
         Dim L As Line = New Line(New Point3d(X1, Y1, 0), New Point3d(X2, Y2, 0))
         Dim Length As Decimal = L.Length - 104
         Dim N As Decimal = Length \ A ' ví dụ N = 5
@@ -570,19 +570,19 @@ Module molFun
             If i = 4 AndAlso ThepCham_L2_LopTren = True Then
                 'addline(l.getpointatdist(52 + i * a + center_snode).x, l.getpointatdist(52 + i * a + center_snode).y)
                 Dim P1_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y, 0)
-                Dim P2_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
+                Dim P2_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X + 75, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
                 Dim P3_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X + 425, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
 
                 AddLine(P1_TagThep.X, P1_TagThep.Y, P2_TagThep.X, P2_TagThep.Y, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X, P2_TagThep.Y, P3_TagThep.X, P3_TagThep.Y, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 62.5, "5", True)
-                AddLText(P2_TagThep.X + 100, P2_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa, SYS_D_TextH_SM)
+                AddLText(P2_TagThep.X + 100, P2_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
 
                 AddLine(P1_TagThep.X - 100, P1_TagThep.Y + 15, P2_TagThep.X - 100, P2_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X - 100, P2_TagThep.Y + 125, P3_TagThep.X, P3_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
                 AddLine(P1_TagThep.X - 100 - 20, P1_TagThep.Y + 15 - 20, P1_TagThep.X - 100 + 20, P1_TagThep.Y + 15 + 20, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 125 + 62.5, "6", True)
-                AddLText(P2_TagThep.X + 100, P2_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa, SYS_D_TextH_SM)
+                AddLText(P2_TagThep.X + 100, P2_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
             End If
         Next
         Return New ArrayList({P1, P2})
