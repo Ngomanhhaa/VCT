@@ -115,6 +115,7 @@ Public Class frmMain
         'Add_CosCD(P1.X - 50 - 175 + 50 * SYS_D_DimFoot1, P1.Y, h1)
         'Dim xText As String = "%%UMẶT CẮT 1-1"
         'Add_Text_M_BIGText_with_Layer_WFactor(X0 + (L1 + L2 + L3) / 2, Y0 - Y - 300 - SYS_D_DimFoot1 - SYS_D_TextH_BIG - 200, xText, SYS_L_TEXT_TCK, 0.8)
+
         'thep
         'L1
         AddLine(P1.X + 35, P1.Y - t + Abv, P1.X + L1 - 35, P1.Y - t + Abv, SYS_LAYER_STEEL_NAME)
@@ -128,11 +129,11 @@ Public Class frmMain
         'Phương Y (thep cham) 
         Dim a_bardot As Integer = 22
         Dim Loca_Bar3 As ArrayList
-        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, Fi1, a1, False, False, a_bardot)
-        Add_Bar_Dot(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a1, Fi1, a1, True, True, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot_YL1_Tren(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a2, Fi2, a2, Fi4, a4, False, False, a_bardot)
+        Add_Bar_Dot_YL1_Tren(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a2, Fi2, a2, Fi4, a4, True, True, a_bardot)
 
-        Loca_Bar3 = Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, Fi2, a2, False, False, a_bardot)
-        Add_Bar_Dot(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a2, Fi2, a2, True, False, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot_YL1_Duoi(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a1, Fi1, a1, Fi3, a3, False, False, a_bardot)
+        Add_Bar_Dot_YL1_Duoi(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a1, Fi1, a1, Fi3, a3, True, True, a_bardot)
 
         'L2
         'Phương X
@@ -169,14 +170,14 @@ Public Class frmMain
 
         Dim pGiao3 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(ThepNgangTr, lineNgangTr)
         Dim lineNull3_offset As cSTR_Line = Return_Offset_Line(pGiao3, Giaothep, -15)
-        Loca_Bar3 = Add_Bar_Dot2(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, Fi5, a5, False, False, a_bardot)
-        Add_Bar_Dot2(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, Fi5, a5, True, True, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot_Y_L2_Tren(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, Fi5, a5, False, False, a_bardot)
+        Add_Bar_Dot_Y_L2_Tren(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, Fi5, a5, True, True, a_bardot)
 
 
         Dim pGiao4 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineNgangTr, lineOffset_Thep_Cheo_Duoi)
         Dim lineNull4_offset As cSTR_Line = Return_Offset_Line(pGiao4, GiaoThep2, 15)
-        Loca_Bar3 = Add_Bar_Dot2(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, False, False, a_bardot)
-        Add_Bar_Dot2(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, True, False, a_bardot)
+        Loca_Bar3 = Add_Bar_Dot_Y_L2_Tren(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, False, False, a_bardot)
+        Add_Bar_Dot_Y_L2_Tren(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, True, False, a_bardot)
 
         DialogResult = Windows.Forms.DialogResult.OK
 
