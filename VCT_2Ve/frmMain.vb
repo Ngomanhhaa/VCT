@@ -33,6 +33,7 @@ Public Class frmMain
         Dim h2 As Double = txtH2.Text * 1000
         Dim t As Double = txtT.Text
         Dim x As Double = txtX.Text
+
         'L1 (chieu nghi)
         Dim Fi1 As Double = cbxFi1L1.Text
         Dim Fi2 As Double = cbxFi2L1.Text
@@ -53,9 +54,6 @@ Public Class frmMain
         Dim a7 As Double = txta3L2.Text
         Dim a8 As Double = txta4L2.Text
 
-        Dim Bar1_Dot As STR_CONFIG_BAR = ThangBo_Config.Bar1_X_Bot
-
-        Dim P1b, P2a, P2b, P3a, P3b As New Point3dCollection 'Intersect Point Border
         've truc
         Dim pTrx1 As New cSTR_Point(P1.X, P1.Y + 450)
         Dim pTrx2 As New cSTR_Point(P1.X, P1.Y - h1 - 600)
@@ -109,7 +107,7 @@ Public Class frmMain
         AddDimX(P1.X + L1, P1.X + L1 + L2, P1.Y - h1 - 600 - 50, -175)
 
         AddDimY(P1.X + L1 + 200, P1.Y, P1.Y - x, 175)
-        AddDimY(P1.X + L1 + +L2 + 600 + 200, P1.Y, P1.Y - h1, 175)
+        AddDimY(P1.X + L1 + +L2 + 600 + 110, P1.Y, P1.Y - h1, 175)
         AddDimY(P1.X - 50, P1.Y, P1.Y - t, -175)
 
         'Add_CosCD(P1.X - 50 - 175 + 50 * SYS_D_DimFoot1, P1.Y, h1)
@@ -145,8 +143,6 @@ Public Class frmMain
         Dim ThepNgangTr As New cSTR_Line(Giaothep.X, Giaothep.Y, GiaoThepMoc1.X, GiaoThepMoc1.Y)
         AddLine(ThepNgangTr.X1, ThepNgangTr.Y1, ThepNgangTr.X2, ThepNgangTr.Y2, SYS_LAYER_STEEL_NAME)
 
-
-
         Dim Point_Array1 As New ArrayList()
         Point_Array1.Add(New Point2d(GiaoThepMoc1.X, GiaoThepMoc1.Y))
         Point_Array1.Add(New Point2d(GiaoThepMoc1.X - 200, GiaoThepMoc1.Y))
@@ -165,14 +161,13 @@ Public Class frmMain
         Point_Array2.Add(New Point2d(GiaoThepMoc2.X - 200 + 50, GiaoThepMoc2.Y - 30))
         Add_PLine(Point_Array2, SYS_LAYER_STEEL_NAME)
 
-
         'Phương Y (thep cham) 
 
         Dim pGiao3 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(ThepNgangTr, lineNgangTr)
         Dim lineNull3_offset As cSTR_Line = Return_Offset_Line(pGiao3, Giaothep, -15)
+        'Dim pGiao_Tag As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang()
         Loca_Bar3 = Add_Bar_Dot_Y_L2_Tren(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, Fi5, a5, Fi5, a5, False, False, a_bardot)
-        Add_Bar_Dot_Y_L2_Tren(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, Fi5, a5, Fi6, a6, True, True, a_bardot)
-
+        Add_Bar_Dot_Y_L2_Tren(lineNull3_offset.X1, lineNull3_offset.Y1, lineNull3_offset.X2, lineNull3_offset.Y2, a5, Fi5, a5, Fi5, a5, True, True, a_bardot)
 
         Dim pGiao4 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineNgangTr, lineOffset_Thep_Cheo_Duoi)
         Dim lineNull4_offset As cSTR_Line = Return_Offset_Line(pGiao4, GiaoThep2, 15)

@@ -107,7 +107,7 @@ Module molFun
 
     End Sub
 
-    Public Sub AddLText(X As Double, Y As Double, contents As String, height As Double, Optional layerName As String = SYS_LAYER_TEXT_NAME)
+    Public Sub AddText(X As Double, Y As Double, contents As String, height As Double, Optional layerName As String = SYS_LAYER_TEXT_NAME)
         Dim doc As Document = Application.DocumentManager.MdiActiveDocument
         Dim db As Database = doc.Database
         Dim ed As Editor = doc.Editor
@@ -120,6 +120,8 @@ Module molFun
             dtext.Layer = layerName
             dtext.Height = height
             dtext.TextString = contents
+            dtext.HorizontalMode = TextHorizontalMode.TextRight
+            dtext.AlignmentPoint = New Point3d(X, Y, 0)
             dtext.TextStyleId = textStyleTable(SYS_TextStyle)
             dtext.WidthFactor = SYS_TEXT_WIDTH_FACTOR
             curSpace.AppendEntity(dtext)
@@ -237,19 +239,7 @@ Module molFun
         End Using
     End Sub
 
-    'Public Sub AddTagThepChu(X As Double, Y As Double, sh As String, info As String, listPointRebar As List(Of Point2d))
-    '    AddCircle(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, SYS_TAG_CIRCLE_DIA / 2 * 25, SYS_LAYER_THIN_NAME)
-    '    AddMCText(X - SYS_TAG_CIRCLE_DIA / 2 * 25, Y, sh, SYS_TEXT_HEIGHT * 25)
 
-    '    For i = 0 To listPointRebar.Count - 1
-    '        Dim pt As Point2d = listPointRebar(i)
-    '        AddLine(pt.X, pt.Y, pt.X - 62.5, Y, SYS_LAYER_THIN_NAME)
-    '    Next
-    '    AddLine(X, Y, listPointRebar.Last.X - 62.5, Y, SYS_LAYER_THIN_NAME)
-
-    '    AddLText(X + 25, Y + 20, info, SYS_TEXT_HEIGHT * 25)
-
-    'End Sub
 
     Public Class cSTR_Point
         Public Property id As Integer
@@ -391,47 +381,6 @@ Module molFun
         Return P1
     End Function
 
-    Public Sub Add_SNode(ByVal X As Decimal, ByVal Y As Decimal, ByVal Draw_Scale As Decimal)
-        Dim acDoc As Document = AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
-        Dim acCurDb As Database = acDoc.Database
-        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
-            Dim acBlkTbl As BlockTable = acTrans.GetObject(acCurDb.BlockTableId, DatabaseServices.OpenMode.ForRead)
-            Dim acBlkTblRec As BlockTableRecord = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), DatabaseServices.OpenMode.ForWrite)
-            Dim InsertID As ObjectId = acBlkTbl.Item("KCS_SNODE")
-            Dim BlockRef As BlockReference = New BlockReference(New Point3d(X, Y, 0), InsertID)
-            BlockRef.Layer = SYS_LAYER_STEEL_NAME
-            BlockRef.ScaleFactors = New Scale3d(Draw_Scale / 25, Draw_Scale / 25, Draw_Scale / 25)
-            acBlkTblRec.AppendEntity(BlockRef)
-            acTrans.AddNewlyCreatedDBObject(BlockRef, True)
-            acTrans.Commit()
-        End Using
-    End Sub
-
-    Sub Add_SteelTop(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, Is_X_Direction As Boolean)
-        Dim Point_Array As ArrayList = New ArrayList()
-        Select Case Is_X_Direction
-            Case True
-                Dim P1 As Point2d = New Point2d(X1, Y1 - 75)
-                Point_Array.Add(P1)
-                P1 = New Point2d(X1, Y1)
-                Point_Array.Add(P1)
-                P1 = New Point2d(X2, Y2)
-                Point_Array.Add(P1)
-                P1 = New Point2d(X2, Y2 - 75)
-                Point_Array.Add(P1)
-            Case False
-                Dim P1 As Point2d = New Point2d(X1 + 75, Y1)
-                Point_Array.Add(P1)
-                P1 = New Point2d(X1, Y1)
-                Point_Array.Add(P1)
-                P1 = New Point2d(X2, Y2)
-                Point_Array.Add(P1)
-                P1 = New Point2d(X2 + 75, Y2)
-                Point_Array.Add(P1)
-        End Select
-        Add_PLine(Point_Array, SYS_LAYER_STEEL_NAME)
-    End Sub
-
     Function Get_OffSet_Line(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, Curves As Decimal) As DBObjectCollection
         Dim acDbObjColl As DBObjectCollection
         Dim acLine1 As Line = New Line(New Point3d(X1, Y1, 0), New Point3d(X2, Y2, 0))
@@ -486,13 +435,13 @@ Module molFun
                 AddLine(P1_TagThep.X, P1_TagThep.Y, P2_TagThep.X, P2_TagThep.Y, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X, P2_TagThep.Y, P3_TagThep.X, P3_TagThep.Y, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 62.5, "1", True)
-                AddLText(P2_TagThep.X + 100, P2_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
+                AddText(P3_TagThep.X - 25, P3_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
 
                 AddLine(P1_TagThep.X - 100, P1_TagThep.Y + 15, P2_TagThep.X - 100, P2_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X - 100, P2_TagThep.Y + 125, P3_TagThep.X, P3_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
                 AddLine(P1_TagThep.X - 100 - 20, P1_TagThep.Y + 15 - 20, P1_TagThep.X - 100 + 20, P1_TagThep.Y + 15 + 20, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 125 + 62.5, "2", True)
-                AddLText(P2_TagThep.X + 100, P2_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
+                AddText(P3_TagThep.X - 25, P2_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
             End If
 
         Next
@@ -531,13 +480,13 @@ Module molFun
                 AddLine(P1_TagThep.X, P1_TagThep.Y, P2_TagThep.X, P2_TagThep.Y, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X, P2_TagThep.Y, P3_TagThep.X, P3_TagThep.Y, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 62.5, "3", True)
-                AddLText(P2_TagThep.X + 100, P2_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
+                AddText(P3_TagThep.X - 25, P3_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
 
                 AddLine(P1_TagThep.X - 100, P1_TagThep.Y - 15, P2_TagThep.X - 100, P2_TagThep.Y - 125, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X - 100, P2_TagThep.Y - 125, P3_TagThep.X, P3_TagThep.Y - 125, SYS_LAYER_THIN_NAME)
                 AddLine(P1_TagThep.X - 100 - 20, P1_TagThep.Y - 15 - 20, P1_TagThep.X - 100 + 20, P1_TagThep.Y - 15 + 20, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y - 125 + 62.5, "4", True)
-                AddLText(P2_TagThep.X + 100, P2_TagThep.Y - 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
+                AddText(P3_TagThep.X - 25, P3_TagThep.Y - 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
             End If
 
         Next
@@ -576,16 +525,23 @@ Module molFun
                 AddLine(P1_TagThep.X, P1_TagThep.Y, P2_TagThep.X, P2_TagThep.Y, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X, P2_TagThep.Y, P3_TagThep.X, P3_TagThep.Y, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 62.5, "5", True)
-                AddLText(P2_TagThep.X + 100, P2_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
+                AddText(P3_TagThep.X - 25, P3_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
 
                 AddLine(P1_TagThep.X - 100, P1_TagThep.Y + 15, P2_TagThep.X - 100, P2_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X - 100, P2_TagThep.Y + 125, P3_TagThep.X, P3_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
                 AddLine(P1_TagThep.X - 100 - 20, P1_TagThep.Y + 15 - 20, P1_TagThep.X - 100 + 20, P1_TagThep.Y + 15 + 20, SYS_LAYER_THIN_NAME)
+
+                'Dim p As Point3d = Return_Point_By_Line(L, pGiao, -100)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 125 + 62.5, "6", True)
-                AddLText(P2_TagThep.X + 100, P2_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
+                AddText(P3_TagThep.X - 25, P3_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
             End If
         Next
         Return New ArrayList({P1, P2})
+    End Function
+
+    Public Function Return_Point_By_Line(L As Line, pBase As Point3d, distance As Double) As Point3d
+        Dim dist0 As Double = L.GetDistAtPoint(L.GetClosestPointTo(pBase, False))
+        Return L.GetPointAtDist(dist0 + distance)
     End Function
     Function Return_Bar_Notes_N_Fi(ByVal N As Integer, ByVal Fi As Integer) As String
         Dim tValue As String = N & SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi
@@ -596,90 +552,7 @@ Module molFun
         Dim tValue As String = SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & A
         Return tValue
     End Function
-    Function Get_Length_TK(P1 As Point3d, P2 As Point3d) As Decimal
-        Dim L As Decimal = Math.Round(P1.DistanceTo(P2), 0)
-        If L Mod 10 <> 0 Then
-            L = L + (10 - L Mod 10)
-        End If
-        Return L
-    End Function
-    Function Get_Length_TK(Length As Decimal) As Decimal
-        Dim L As Decimal = Math.Round(Length, 0)
-        If L Mod 50 <> 0 Then
-            L = L + (50 - L Mod 50)
-        End If
-        Return L
-    End Function
-    Sub Add_Circle_ST(ByVal X As Decimal, ByVal Y As Decimal)
-        Dim acDoc As Document = ApplicationServices.Application.DocumentManager.MdiActiveDocument
-        Dim acCurDb As Database = acDoc.Database
-        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
-            Dim acBlkTbl As BlockTable
-            acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId, DatabaseServices.OpenMode.ForRead)
-            Dim acBlkTblRec As BlockTableRecord
-            acBlkTblRec = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), DatabaseServices.OpenMode.ForWrite)
-            Dim acCirc As Circle = New Circle()
-            acCirc.SetDatabaseDefaults()
-            acCirc.Center = New Point3d(X, Y, 0)
-            acCirc.Radius = SYS_D_TextH_SM
-            acCirc.Layer = SYS_L_SOTHEP_CIRCLE
-            acCirc.ColorIndex = 1
-            acBlkTblRec.AppendEntity(acCirc)
-            acTrans.AddNewlyCreatedDBObject(acCirc, True)
-            acTrans.Commit()
-        End Using
-    End Sub
-    Sub Add_Text_ST(ByVal X As Decimal, ByVal Y As Decimal, ByVal tText As String)
-        Dim acDoc As Document = ApplicationServices.Application.DocumentManager.MdiActiveDocument
-        Dim acCurDb As Database = acDoc.Database
-        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
-            Dim acBlkTbl As BlockTable
-            acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId, DatabaseServices.OpenMode.ForRead)
-            Dim acBlkTblRec As BlockTableRecord
-            acBlkTblRec = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), DatabaseServices.OpenMode.ForWrite)
-            Dim acTextStyleTblRec As TextStyleTable
-            acTextStyleTblRec = acTrans.GetObject(acCurDb.TextStyleTableId, DatabaseServices.OpenMode.ForRead)
-            Dim acText As DBText = New DBText()
-            acText.SetDatabaseDefaults()
-            acText.HorizontalMode = TextHorizontalMode.TextCenter
-            acText.VerticalMode = TextVerticalMode.TextVerticalMid
-            acText.AlignmentPoint = New Point3d(X, Y, 0)
-            SET_TEXT_STYLE(acText, acTextStyleTblRec.Item(SYS_TextStyle))
-            acText.Height = SYS_D_TextH_SM
-            acText.TextString = tText
-            acText.Layer = SYS_L_SOTHEP_TEXT
-            acText.WidthFactor = SYS_D_TextWF
-            acBlkTblRec.AppendEntity(acText)
-            acTrans.AddNewlyCreatedDBObject(acText, True)
-            acTrans.Commit()
-        End Using
-    End Sub
-    Sub Add_Text_ST_2(ByVal X As Decimal, ByVal Y As Decimal, ByVal tText As String)
-        Dim acDoc As Document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
-        Dim acCurDb As Database = acDoc.Database
-        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
-            Dim acBlkTbl As BlockTable
-            acBlkTbl = acTrans.GetObject(acCurDb.BlockTableId, Autodesk.AutoCAD.DatabaseServices.OpenMode.ForRead)
-            Dim acBlkTblRec As BlockTableRecord
-            acBlkTblRec = acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), Autodesk.AutoCAD.DatabaseServices.OpenMode.ForWrite)
-            Dim acTextStyleTblRec As TextStyleTable
-            acTextStyleTblRec = acTrans.GetObject(acCurDb.TextStyleTableId, Autodesk.AutoCAD.DatabaseServices.OpenMode.ForRead)
-            Dim acText As DBText = New DBText()
-            acText.SetDatabaseDefaults()
 
-            acText.SetDatabaseDefaults()
-            acText.Position = New Point3d(X, Y, 0)
-
-            SET_TEXT_STYLE(acText, acTextStyleTblRec.Item(SYS_TextStyle))
-            acText.Height = SYS_D_TextH_SM
-            acText.TextString = tText
-            acText.Layer = SYS_L_SOTHEP_TEXT
-            acText.WidthFactor = SYS_D_TextWF
-            acBlkTblRec.AppendEntity(acText)
-            acTrans.AddNewlyCreatedDBObject(acText, True)
-            acTrans.Commit()
-        End Using
-    End Sub
 End Module
 
 

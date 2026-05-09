@@ -169,7 +169,7 @@ Module molDRAW
             If Left(Right(tText, 4), 1) <> "." Then tText = tText & ".000"
         End If
         If EL = 0 Then tText = "%%p" & tText
-        AddLText(X + 87.5 - 75 + 100, Y + 115 + 20, tText, 62.5)
+        AddText(X + 87.5 - 75 + 100, Y + 115 + 20, tText, 62.5)
     End Sub
 
     Sub Add_CosCD_Symbol(ByVal X As Decimal, ByVal Y As Decimal)
@@ -197,7 +197,7 @@ Module molDRAW
         Next
         AddLine(X, Y, listPointRebar.Last.X - 62.5, Y, SYS_LAYER_THIN_NAME)
 
-        AddLText(X + 25, Y + 20, ChieuCaoText, SYS_TEXT_HEIGHT * 25)
+        AddText(X + 25, Y + 20, ChieuCaoText, SYS_TEXT_HEIGHT * 25)
 
     End Sub
     Public Sub Add_PLine(ByVal pArray As ArrayList, ByVal tLayer As String)
