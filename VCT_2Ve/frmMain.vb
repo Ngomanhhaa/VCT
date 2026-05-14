@@ -22,10 +22,74 @@ Public Class frmMain
         End If
 
         Dim P1 As Point3d = ptRs.Value
-
         'Copy file vào bản vẽ
         CopyStyle("C:\KetcauSoft\Com\KCS_STYLE.dwg")
+        Ve_Thang2V(P1.X, P1.Y)
 
+    End Sub
+    Sub Ve_Thang2V(X0 As Decimal, Y0 As Decimal)
+        VeMB(X0, Y0)
+        VeMC1(X0, Y0 - 3000)
+        veMC2(X0 + 4000, Y0 - 3000)
+    End Sub
+    Sub VeMB(X0 As Double, Y0 As Double)
+        Dim P1 As New cSTR_Point(X0, Y0, 0)
+
+        Dim L1 As Double = txtL1.Text
+        Dim L2 As Double = txtL2.Text
+        Dim L3 As Double = txtL3.Text
+        Dim h1 As Double = txtH1.Text * 1000
+        Dim h2 As Double = txtH2.Text * 1000
+        'Dim a As Double = txtA.Text * 1000
+        Dim t As Double = txtT.Text
+        Dim x As Double = txtX.Text
+
+#Region "vẽ trục"
+        Dim pTr1 As New cSTR_Point(P1.X, P1.Y - 600)
+        Dim pTr2 As New cSTR_Point(P1.X, P1.Y + L1 + L2 + 300)
+        AddLine(pTr1.X, pTr1.Y, pTr2.X, pTr2.Y, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTr1 As cSTR_Line = Return_Offset_Line(pTr1, pTr2, -L1)
+        AddLine(lineOffsetTr1.X1, lineOffsetTr1.Y1, lineOffsetTr1.X2, lineOffsetTr1.Y2, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTr2 As cSTR_Line = Return_Offset_Line(pTr1, pTr2, -L1 - L3)
+        AddLine(lineOffsetTr2.X1, lineOffsetTr2.Y1, lineOffsetTr2.X2, lineOffsetTr2.Y2, SYS_LAYER_AXIS_NAME)
+
+        Dim pTr3 As New cSTR_Point(P1.X - 300, P1.Y)
+        Dim pTr4 As New cSTR_Point(P1.X + L1 + L3 + 300, P1.Y)
+        AddLine(pTr3.X, pTr3.Y, pTr4.X, pTr4.Y, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTr3 As cSTR_Line = Return_Offset_Line(pTr3, pTr4, L2)
+        AddLine(lineOffsetTr3.X1, lineOffsetTr3.Y1, lineOffsetTr3.X2, lineOffsetTr3.Y2, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTr4 As cSTR_Line = Return_Offset_Line(pTr3, pTr4, L2 + L1)
+        AddLine(lineOffsetTr4.X1, lineOffsetTr4.Y1, lineOffsetTr4.X2, lineOffsetTr4.Y2, SYS_LAYER_AXIS_NAME)
+
+        AddDimX(P1.X, P1.X + L1, P1.Y + L1 + L2 + 300 + 50, 175)
+        AddDimX(P1.X + L1, P1.X + L1 + L3, P1.Y + L1 + L2 + 300 + 50, 175)
+        AddDimX(P1.X, P1.X + L1 + L3, P1.Y + L1 + L2 + 300 + 50, 350)
+
+        AddDimY(P1.X - 300 - 50, P1.Y, P1.Y + L2, -175)
+        AddDimY(P1.X - 300 - 50, P1.Y + L2, P1.Y + L2 + L1, -175)
+        AddDimY(P1.X - 300 - 50, P1.Y, P1.Y + L2 + L1, -350)
+#End Region
+#Region "vẽ mb"
+        Dim P2 As New cSTR_Point(P1.X, P1.Y + L1 + L2)
+        Dim P3 As New cSTR_Point(P1.X + L1 + L3, P1.Y + L1 + L2)
+        Dim P4 As New cSTR_Point(P1.X + L1 + L3, P1.Y + L2)
+        Dim P5 As New cSTR_Point(P1.X + L1, P1.Y + L2)
+        Dim P6 As New cSTR_Point(P1.X + L1, P1.Y)
+
+        AddLine(P1.X, P1.Y, P2.X, P2.Y)
+        AddLine(P2.X, P2.Y, P3.X, P3.Y)
+        AddLine(P4.X, P4.Y, P5.X, P5.Y)
+        AddLine(P5.X, P5.Y, P6.X, P6.Y)
+        Add_BreakLineY(P3.X, P3.Y, P4.Y, SYS_LAYER_THIN_NAME)
+        Add_BreakLineX(P1.Y, P1.X, P6.X, SYS_LAYER_THIN_NAME)
+        Add_CosCD(P1.X + 200, P1.Y + 100, 0)
+        Add_CosCD(P1.X + 200, P1.Y + L2 + 100, h1 / 1000)
+        Add_CosCD(P4.X - 400, P4.Y + 100, h2 / 1000)
+#End Region
+    End Sub
+    Sub VeMC1(X0 As Double, Y0 As Double)
+
+        Dim P1 As New Point3d(X0, Y0, 0)
         Dim L1 As Double = txtL1.Text
         Dim L2 As Double = txtL2.Text
         Dim L3 As Double = txtL3.Text
@@ -33,7 +97,7 @@ Public Class frmMain
         Dim h2 As Double = txtH2.Text * 1000
         Dim t As Double = txtT.Text
         Dim x As Double = txtX.Text
-
+#Region "khai báo chung"
         'L1 (chieu nghi)
         Dim Fi1 As Double = cbxFi1L1.Text
         Dim Fi2 As Double = cbxFi2L1.Text
@@ -53,8 +117,8 @@ Public Class frmMain
         Dim a6 As Double = txta2L2.Text
         Dim a7 As Double = txta3L2.Text
         Dim a8 As Double = txta4L2.Text
-
-        've truc
+#End Region
+#Region "vẽ trục"
         Dim pTrx1 As New cSTR_Point(P1.X, P1.Y + 450)
         Dim pTrx2 As New cSTR_Point(P1.X, P1.Y - h1 - 600)
         AddLine(pTrx1.X, pTrx1.Y, pTrx2.X, pTrx2.Y, SYS_LAYER_AXIS_NAME)
@@ -68,7 +132,8 @@ Public Class frmMain
         AddLine(pTry1.X, pTry1.Y, pTry2.X, pTry2.Y, SYS_LAYER_AXIS_NAME)
         Dim lineOffsetTry As cSTR_Line = Return_Offset_Line(pTry1, pTry2, -h1)
         AddLine(lineOffsetTry.X1, lineOffsetTry.Y1, lineOffsetTry.X2, lineOffsetTry.Y2, SYS_LAYER_AXIS_NAME)
-
+#End Region
+#Region " MC1"
         ' vẽ hình dưới
         Dim pNgang1 As New cSTR_Point(P1.X, P1.Y)
         Dim pNgang2 As New cSTR_Point(P1.X + L1, P1.Y)
@@ -173,9 +238,10 @@ Public Class frmMain
         Dim lineNull4_offset As cSTR_Line = Return_Offset_Line(pGiao4, GiaoThep2, 15)
         Loca_Bar3 = Add_Bar_Dot_Y_L2_Tren(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, Fi6, a6, False, False, a_bardot)
         Add_Bar_Dot_Y_L2_Tren(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, Fi6, a6, True, False, a_bardot)
-
+#End Region
         DialogResult = Windows.Forms.DialogResult.OK
 
     End Sub
-
+    Sub veMC2(X0 As Double, Y0 As Double)
+    End Sub
 End Class

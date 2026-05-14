@@ -102,6 +102,8 @@ Partial Class frmMain
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.txtA = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.ptb1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
@@ -115,11 +117,13 @@ Partial Class frmMain
         Me.txtL1.Name = "txtL1"
         Me.txtL1.Size = New System.Drawing.Size(74, 20)
         Me.txtL1.TabIndex = 0
-        Me.txtL1.Text = "1500"
+        Me.txtL1.Text = "900"
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label40)
         Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Controls.Add(Me.txtA)
         Me.GroupBox1.Controls.Add(Me.txtX)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.txtH2)
@@ -136,7 +140,7 @@ Partial Class frmMain
         Me.GroupBox1.ForeColor = System.Drawing.Color.Blue
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(200, 189)
+        Me.GroupBox1.Size = New System.Drawing.Size(200, 227)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Thông số"
@@ -163,7 +167,7 @@ Partial Class frmMain
         '
         Me.Label6.AutoSize = True
         Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(14, 166)
+        Me.Label6.Location = New System.Drawing.Point(14, 195)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(75, 13)
         Me.Label6.TabIndex = 17
@@ -171,7 +175,7 @@ Partial Class frmMain
         '
         'txtH2
         '
-        Me.txtH2.Location = New System.Drawing.Point(107, 159)
+        Me.txtH2.Location = New System.Drawing.Point(107, 188)
         Me.txtH2.Name = "txtH2"
         Me.txtH2.Size = New System.Drawing.Size(74, 20)
         Me.txtH2.TabIndex = 16
@@ -181,7 +185,7 @@ Partial Class frmMain
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(14, 144)
+        Me.Label5.Location = New System.Drawing.Point(14, 173)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(76, 13)
         Me.Label5.TabIndex = 15
@@ -189,7 +193,7 @@ Partial Class frmMain
         '
         'txtH1
         '
-        Me.txtH1.Location = New System.Drawing.Point(107, 137)
+        Me.txtH1.Location = New System.Drawing.Point(107, 166)
         Me.txtH1.Name = "txtH1"
         Me.txtH1.Size = New System.Drawing.Size(74, 20)
         Me.txtH1.TabIndex = 14
@@ -239,7 +243,7 @@ Partial Class frmMain
         Me.txtL2.Name = "txtL2"
         Me.txtL2.Size = New System.Drawing.Size(74, 20)
         Me.txtL2.TabIndex = 10
-        Me.txtL2.Text = "1000"
+        Me.txtL2.Text = "500"
         '
         'Label2
         '
@@ -261,7 +265,7 @@ Partial Class frmMain
         '
         'btnVe
         '
-        Me.btnVe.Location = New System.Drawing.Point(41, 221)
+        Me.btnVe.Location = New System.Drawing.Point(38, 245)
         Me.btnVe.Name = "btnVe"
         Me.btnVe.Size = New System.Drawing.Size(75, 23)
         Me.btnVe.TabIndex = 3
@@ -270,7 +274,7 @@ Partial Class frmMain
         '
         'btnThoat
         '
-        Me.btnThoat.Location = New System.Drawing.Point(122, 221)
+        Me.btnThoat.Location = New System.Drawing.Point(119, 245)
         Me.btnThoat.Name = "btnThoat"
         Me.btnThoat.Size = New System.Drawing.Size(75, 23)
         Me.btnThoat.TabIndex = 4
@@ -941,6 +945,24 @@ Partial Class frmMain
         Me.Label37.TabIndex = 7
         Me.Label37.Text = "D"
         '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.ForeColor = System.Drawing.Color.Black
+        Me.Label40.Location = New System.Drawing.Point(14, 147)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(84, 13)
+        Me.Label40.TabIndex = 21
+        Me.Label40.Text = "Chiều rộng (a) m"
+        '
+        'txtA
+        '
+        Me.txtA.Location = New System.Drawing.Point(107, 140)
+        Me.txtA.Name = "txtA"
+        Me.txtA.Size = New System.Drawing.Size(74, 20)
+        Me.txtA.TabIndex = 20
+        Me.txtA.Text = "0.9"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1053,4 +1075,6 @@ Partial Class frmMain
     Friend WithEvents cb2 As System.Windows.Forms.CheckBox
     Friend WithEvents Label38 As System.Windows.Forms.Label
     Friend WithEvents Label39 As System.Windows.Forms.Label
+    Friend WithEvents Label40 As System.Windows.Forms.Label
+    Friend WithEvents txtA As System.Windows.Forms.TextBox
 End Class

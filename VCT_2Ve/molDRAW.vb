@@ -169,7 +169,7 @@ Module molDRAW
             If Left(Right(tText, 4), 1) <> "." Then tText = tText & ".000"
         End If
         If EL = 0 Then tText = "%%p" & tText
-        AddText(X + 87.5 - 75 + 100, Y + 115 + 20, tText, 62.5)
+        AddTextCD(X + 87.5 - 75 + 100, Y + 115 + 20, tText, 62.5)
     End Sub
 
     Sub Add_CosCD_Symbol(ByVal X As Decimal, ByVal Y As Decimal)

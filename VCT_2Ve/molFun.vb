@@ -130,6 +130,29 @@ Module molFun
         End Using
     End Sub
 
+    Public Sub AddTextCD(X As Double, Y As Double, contents As String, height As Double, Optional layerName As String = SYS_LAYER_TEXT_NAME)
+        Dim doc As Document = Application.DocumentManager.MdiActiveDocument
+        Dim db As Database = doc.Database
+        Dim ed As Editor = doc.Editor
+        Using tr = db.TransactionManager.StartTransaction()
+            Dim bt As BlockTable = tr.GetObject(db.BlockTableId, OpenMode.ForRead)
+            Dim textStyleTable As TextStyleTable = tr.GetObject(db.TextStyleTableId, OpenMode.ForRead)
+            Dim curSpace As BlockTableRecord = tr.GetObject(db.CurrentSpaceId, OpenMode.ForWrite)
+            Dim dtext As New DBText
+            dtext.Position = New Point3d(X, Y, 0)
+            dtext.Layer = layerName
+            dtext.Height = height
+            dtext.TextString = contents
+            dtext.HorizontalMode = TextHorizontalMode.TextLeft
+            'dtext.AlignmentPoint = New Point3d(X, Y, 0)
+            dtext.TextStyleId = textStyleTable(SYS_TextStyle)
+            dtext.WidthFactor = SYS_TEXT_WIDTH_FACTOR
+            curSpace.AppendEntity(dtext)
+            tr.AddNewlyCreatedDBObject(dtext, True)
+            tr.Commit()
+        End Using
+    End Sub
+
     Sub SET_TEXT_STYLE(ByVal acText As Object, ByVal TextTypeTable As Object)
         Try
             acText.TextStyle = TextTypeTable
@@ -208,7 +231,6 @@ Module molFun
         End Using
     End Sub
 
-
     Public Sub Add_BreakLineY(X As Double, tY1 As Double, tY2 As Double, layer As String)
         Dim acDoc As Document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
         Dim acCurDb As Database = acDoc.Database
@@ -232,14 +254,42 @@ Module molFun
             objPLine.AddVertexAt(4, New Point2d(X, Y3 + DY / 2), 0, 0, 0)
             objPLine.AddVertexAt(5, New Point2d(X, Y2 + DX), 0, 0, 0)
             objPLine.Layer = layer
-            objPLine.ColorIndex = 1
+            'objPLine.ColorIndex = 1
             acBlkTblRec.AppendEntity(objPLine)
             acTrans.AddNewlyCreatedDBObject(objPLine, True)
             acTrans.Commit()
         End Using
     End Sub
 
+    Public Sub Add_BreakLineX(Y As Double, tX1 As Double, tX2 As Double, layer As String)
+        Dim acDoc As Document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acCurDb As Database = acDoc.Database
+        Using acTrans As Transaction = acCurDb.TransactionManager.StartTransaction()
+            Dim acBlkTbl As BlockTable =
+            acTrans.GetObject(acCurDb.BlockTableId, Autodesk.AutoCAD.DatabaseServices.OpenMode.ForRead)
+            Dim acBlkTblRec As BlockTableRecord =
+            acTrans.GetObject(acBlkTbl(BlockTableRecord.ModelSpace), Autodesk.AutoCAD.DatabaseServices.OpenMode.ForWrite)
+            Dim X1 As Double = Math.Min(tX1, tX2)
+            Dim X2 As Double = Math.Max(tX1, tX2)
+            Dim objPLine As New Polyline()
+            Dim X3 As Decimal = (X1 + X2) / 2
+            Dim DX As Decimal = 25
+            Dim DY As Decimal = 25
+            objPLine.SetDatabaseDefaults()
+            objPLine.AddVertexAt(0, New Point2d(X1 - DX, Y), 0, 0, 0)
+            objPLine.AddVertexAt(1, New Point2d(X3 - DX / 2, Y), 0, 0, 0)
+            objPLine.AddVertexAt(2, New Point2d(X3 - DX / 2, Y - DY), 0, 0, 0)
+            objPLine.AddVertexAt(3, New Point2d(X3 + DX / 2, Y + DY), 0, 0, 0)
+            objPLine.AddVertexAt(4, New Point2d(X3 + DX / 2, Y), 0, 0, 0)
+            objPLine.AddVertexAt(5, New Point2d(X2 + DX, Y), 0, 0, 0)
+            objPLine.Layer = layer
+            'objPLine.ColorIndex = 1
+            acBlkTblRec.AppendEntity(objPLine)
+            acTrans.AddNewlyCreatedDBObject(objPLine, True)
+            acTrans.Commit()
+        End Using
 
+    End Sub
 
     Public Class cSTR_Point
         Public Property id As Integer
