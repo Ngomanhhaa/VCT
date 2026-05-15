@@ -43,9 +43,9 @@ Public Class frmMain
         'Dim a As Double = txtA.Text * 1000
         Dim t As Double = txtT.Text
         Dim x As Double = txtX.Text
-
+#Region "MB"
 #Region "vẽ trục"
-        Dim pTr1 As New cSTR_Point(P1.X, P1.Y - 600)
+        Dim pTr1 As New cSTR_Point(P1.X, P1.Y - 300)
         Dim pTr2 As New cSTR_Point(P1.X, P1.Y + L1 + L2 + 300)
         AddLine(pTr1.X, pTr1.Y, pTr2.X, pTr2.Y, SYS_LAYER_AXIS_NAME)
         Dim lineOffsetTr1 As cSTR_Line = Return_Offset_Line(pTr1, pTr2, -L1)
@@ -80,13 +80,38 @@ Public Class frmMain
         AddLine(P2.X, P2.Y, P3.X, P3.Y)
         AddLine(P4.X, P4.Y, P5.X, P5.Y)
         AddLine(P5.X, P5.Y, P6.X, P6.Y)
+        AddLine(P1.X, P1.Y + L2, P5.X, P5.Y)
+        AddLine(P2.X + L1, P2.Y, P5.X, P5.Y)
         Add_BreakLineY(P3.X, P3.Y, P4.Y, SYS_LAYER_THIN_NAME)
         Add_BreakLineX(P1.Y, P1.X, P6.X, SYS_LAYER_THIN_NAME)
         Add_CosCD(P1.X + 200, P1.Y + 100, 0)
         Add_CosCD(P1.X + 200, P1.Y + L2 + 100, h1 / 1000)
         Add_CosCD(P4.X - 400, P4.Y + 100, h2 / 1000)
 #End Region
+
+#Region "thep"
+#Region "thep L2"
+        AddLine(P1.X + Abv_PhanThan, P1.Y + L2 / 2, P1.X + L1 - Abv_PhanThan, P1.Y + L2 / 2, SYS_LAYER_STEEL_NAME)
+        Add_SteelTop(P1.X + Abv_PhanThan, P1.Y + L2 / 2 + 175, P1.X + L1 - Abv_PhanThan, P1.Y + L2 / 2 + 175, True)
+        AddLine(P6.X - 125, P6.Y + Abv_PhanThan, P5.X - 125, P5.Y - Abv_PhanThan, SYS_LAYER_STEEL_NAME)
+        Add_SteelTop(P6.X - 300, P6.Y + Abv_PhanThan, P5.X - 300, P5.Y - Abv_PhanThan, False)
+#End Region
+#Region "ThepL1"
+        AddLine(P1.X + Abv_PhanThan, P1.Y + L2 + L1 / 2, P1.X + L1 - Abv_PhanThan, P1.Y + L2 + L1 / 2, SYS_LAYER_STEEL_NAME)
+        Add_SteelTop(P1.X + Abv_PhanThan, P1.Y + L2 + L1 / 2 + 175, P1.X + L1 - Abv_PhanThan, P1.Y + L2 + L1 / 2 + 175, True)
+        AddLine(P5.X - 125, P5.Y + Abv_PhanThan, P5.X - 125, P5.Y + L1 - Abv_PhanThan, SYS_LAYER_STEEL_NAME)
+        Add_SteelTop(P5.X - 300, P5.Y + Abv_PhanThan, P5.X - 300, P5.Y + L1 - Abv_PhanThan, False)
+#End Region
+#Region "ThepL3"
+        AddLine(P3.X + L1 + Abv_PhanThan, P3.Y + L2 + L1 / 2, P3.X + L3 - Abv_PhanThan, P1.Y + L2 + L1 / 2, SYS_LAYER_STEEL_NAME)
+        Add_SteelTop(P3.X + L1 + Abv_PhanThan, P3.Y + L2 + L1 / 2 + 175, P3.X + L3 - Abv_PhanThan, P1.Y + L2 + L1 / 2 + 175, True)
+        AddLine(P5.X - 125, P5.Y + Abv_PhanThan, P5.X - 125, P5.Y + L1 - Abv_PhanThan, SYS_LAYER_STEEL_NAME)
+        Add_SteelTop(P5.X - 300, P5.Y + Abv_PhanThan, P5.X - 300, P5.Y + L1 - Abv_PhanThan, False)
+#End Region
+#End Region
     End Sub
+#End Region
+#Region "MC1"
     Sub VeMC1(X0 As Double, Y0 As Double)
 
         Dim P1 As New Point3d(X0, Y0, 0)
@@ -242,6 +267,7 @@ Public Class frmMain
         DialogResult = Windows.Forms.DialogResult.OK
 
     End Sub
+#End Region
     Sub veMC2(X0 As Double, Y0 As Double)
     End Sub
 End Class

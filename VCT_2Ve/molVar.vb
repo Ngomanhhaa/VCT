@@ -7,6 +7,7 @@
     Public Const SYS_LAYER_BORDER_NAME As String = "KCS_BORDER"
     Public Const SYS_LAYER_TEXT_NAME As String = "KCS_TEXT"
     Public Const SYS_LAYER_STEEL_NAME As String = "KCS_STEEL"
+    Public Const SYS_LAYER_STEEL_TOP_NAME As String = "KCS_STEEL_TOP"
     Public Const SYS_LAYER_STIRRUP_NAME As String = "THEP DAI"
     Public Const SYS_LAYER_HATCH_NAME As String = "HATCH"
     Public Const SYS_LAYER_DIM_NAME As String = "KCS_DIM"
@@ -20,6 +21,7 @@
 
     Public t As Double
     Public Abv As Double = 20
+    Public Abv_PhanThan As Double = 25
     Public Diembatdauvethep As Double
     Public sothanhmoc As Double
     Public Chieucaomoc As Double

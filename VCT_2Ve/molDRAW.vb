@@ -510,6 +510,30 @@ Module molDRAW
             acTrans.Commit()
         End Using
     End Sub
+    Sub Add_SteelTop(X1 As Decimal, Y1 As Decimal, X2 As Decimal, Y2 As Decimal, Is_X_Direction As Boolean)
+        Dim Point_Array As ArrayList = New ArrayList()
+        Select Case Is_X_Direction
+            Case True
+                Dim P1 As Point2d = New Point2d(X1, Y1 - 75)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X1, Y1)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X2, Y2)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X2, Y2 - 75)
+                Point_Array.Add(P1)
+            Case False
+                Dim P1 As Point2d = New Point2d(X1 + 75, Y1)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X1, Y1)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X2, Y2)
+                Point_Array.Add(P1)
+                P1 = New Point2d(X2 + 75, Y2)
+                Point_Array.Add(P1)
+        End Select
+        Add_PLine(Point_Array, SYS_LAYER_STEEL_TOP_NAME)
 
+    End Sub
 
 End Module
