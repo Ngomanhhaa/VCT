@@ -29,8 +29,8 @@ Public Class frmMain
     End Sub
     Sub Ve_Thang2V(X0 As Decimal, Y0 As Decimal)
         VeMB(X0, Y0)
-        VeMC1(X0, Y0 - 3000)
-        veMC2(X0 + 4000, Y0 - 3000)
+        VeMC1(X0 + 6000, Y0)
+        veMC2(X0 + 6000, Y0 - 6000)
     End Sub
     Sub VeMB(X0 As Double, Y0 As Double)
         Dim P1 As New cSTR_Point(X0, Y0, 0)
@@ -103,10 +103,10 @@ Public Class frmMain
         Add_SteelTop(P5.X - 300, P5.Y + Abv_PhanThan, P5.X - 300, P5.Y + L1 - Abv_PhanThan, False)
 #End Region
 #Region "ThepL3"
-        AddLine(P3.X + L1 + Abv_PhanThan, P3.Y + L2 + L1 / 2, P3.X + L3 - Abv_PhanThan, P1.Y + L2 + L1 / 2, SYS_LAYER_STEEL_NAME)
-        Add_SteelTop(P3.X + L1 + Abv_PhanThan, P3.Y + L2 + L1 / 2 + 175, P3.X + L3 - Abv_PhanThan, P1.Y + L2 + L1 / 2 + 175, True)
-        AddLine(P5.X - 125, P5.Y + Abv_PhanThan, P5.X - 125, P5.Y + L1 - Abv_PhanThan, SYS_LAYER_STEEL_NAME)
-        Add_SteelTop(P5.X - 300, P5.Y + Abv_PhanThan, P5.X - 300, P5.Y + L1 - Abv_PhanThan, False)
+        AddLine(P2.X + L1 + Abv_PhanThan, P2.Y - L1 / 2, P3.X - Abv_PhanThan, P3.Y - (L1 / 2), SYS_LAYER_STEEL_NAME)
+        Add_SteelTop(P2.X + L1 + Abv_PhanThan, P2.Y - L1 / 2 + 175, P3.X - Abv_PhanThan, P3.Y - (L1 / 2) + 175, True)
+        AddLine(P2.X + L1 + 500, P2.Y - Abv_PhanThan, P2.X + L1 + 500, P2.Y - L1 + Abv_PhanThan, SYS_LAYER_STEEL_NAME)
+        Add_SteelTop(P2.X + L1 + 500 - 175, P2.Y - Abv_PhanThan, P2.X + L1 + 500 - 175, P2.Y - L1 + Abv_PhanThan, False)
 #End Region
 #End Region
     End Sub
@@ -268,6 +268,50 @@ Public Class frmMain
 
     End Sub
 #End Region
+#Region "MC2"
     Sub veMC2(X0 As Double, Y0 As Double)
+        Dim P1 As New Point3d(X0, Y0, 0)
+        Dim L1 As Double = txtL1.Text
+        Dim L2 As Double = txtL2.Text
+        Dim L3 As Double = txtL3.Text
+        Dim h1 As Double = txtH1.Text * 1000
+        Dim h2 As Double = txtH2.Text * 1000
+        Dim t As Double = txtT.Text
+        Dim x As Double = txtX.Text
+#Region "ve truc"
+        Dim pTrx1 As New cSTR_Point(P1.X, P1.Y - 450)
+        Dim pTrx2 As New cSTR_Point(P1.X, P1.Y + h2 + 600)
+        AddLine(pTrx1.X, pTrx1.Y, pTrx2.X, pTrx2.Y, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTrx1 As cSTR_Line = Return_Offset_Line(pTrx1, pTrx2, -L1)
+        AddLine(lineOffsetTrx1.X1, lineOffsetTrx1.Y1, lineOffsetTrx1.X2, lineOffsetTrx1.Y2, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTrx2 As cSTR_Line = Return_Offset_Line(pTrx1, pTrx2, -L1 - L3)
+        AddLine(lineOffsetTrx2.X1, lineOffsetTrx2.Y1, lineOffsetTrx2.X2, lineOffsetTrx2.Y2, SYS_LAYER_AXIS_NAME)
+
+        Dim pTry1 As New cSTR_Point(P1.X - 300, P1.Y)
+        Dim pTry2 As New cSTR_Point(P1.X + L1 + L3 + 660, P1.Y)
+        AddLine(pTry1.X, pTry1.Y, pTry2.X, pTry2.Y, SYS_LAYER_AXIS_NAME)
+        Dim lineOffsetTry As cSTR_Line = Return_Offset_Line(pTry1, pTry2, h2)
+        AddLine(lineOffsetTry.X1, lineOffsetTry.Y1, lineOffsetTry.X2, lineOffsetTry.Y2, SYS_LAYER_AXIS_NAME)
+
+        AddDimX(P1.X, P1.X + L1, P1.Y - 450 - 50, -175)
+        AddDimX(P1.X + L1, P1.X + L1 + L3, P1.Y - 450 - 50, -175)
+
+        AddDimY(P1.X + L1 + +L3 + 600 + 110, P1.Y, P1.Y + h2, 175)
+        Add_CosCD(P1.X + L1 + L3 + 660 + 255 + 50, P1.Y, h1)
+        Add_CosCD(P1.X + L1 + L3 + 660 + 255 + 50, P1.Y + h2, h2)
+#End Region
+
+        Dim P2 As New cSTR_Point(P1.X + L1, P1.Y)
+        Dim P3 As New cSTR_Point(P2.X, P2.Y + 182)
+        Dim P4 As New cSTR_Point(P1.X, P1.Y + t)
+        Dim P5 As New cSTR_Point(P2.X - t, P1.Y + t)
+        Dim P6 As New cSTR_Point(P5.X, P5.Y + 108)
+
+        AddLine(P1.X, P1.Y, P2.X, P2.Y)
+        AddLine(P2.X, P2.Y, P3.X, P3.Y)
+        AddLine(P1.X, P1.Y, P4.X, P4.Y)
+        AddLine(P4.X, P4.Y, P5.X, P5.Y)
+        AddLine(P5.X, P5.Y, P6.X, P6.Y)
     End Sub
+#End Region
 End Class
