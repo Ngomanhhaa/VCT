@@ -11,6 +11,7 @@
     Public Const SYS_LAYER_STIRRUP_NAME As String = "THEP DAI"
     Public Const SYS_LAYER_HATCH_NAME As String = "HATCH"
     Public Const SYS_LAYER_DIM_NAME As String = "KCS_DIM"
+    Public Const SYS_LAYER_WALL_NAME As String = "KCS_BEAM"
     Public Const SYS_TEXT_WIDTH_FACTOR As Double = 0.75
     Public Const SYS_TEXT_STYLE_NAME As String = "KCS_TEXT"
     Public Const SYS_DIM_STYLE_NAME As String = "KCS_DIM25"

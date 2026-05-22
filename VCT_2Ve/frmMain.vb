@@ -43,6 +43,7 @@ Public Class frmMain
         'Dim a As Double = txtA.Text * 1000
         Dim t As Double = txtT.Text
         Dim x As Double = txtX.Text
+        Dim Tuong As Double = txt_TuongXay.Text
 #Region "MB"
 #Region "vẽ trục"
         Dim pTr1 As New cSTR_Point(P1.X, P1.Y - 300)
@@ -87,6 +88,9 @@ Public Class frmMain
         Add_CosCD(P1.X + 200, P1.Y + 100, 0)
         Add_CosCD(P1.X + 200, P1.Y + L2 + 100, h1 / 1000)
         Add_CosCD(P4.X - 400, P4.Y + 100, h2 / 1000)
+        If Ckb_TuongXay.Checked Then
+            AddLine(P2.X, P2.Y - Tuong, P3.X, P3.Y - Tuong, SYS_LAYER_WALL_NAME)
+        End If
 #End Region
 
 #Region "thep"
@@ -159,7 +163,6 @@ Public Class frmMain
         AddLine(lineOffsetTry.X1, lineOffsetTry.Y1, lineOffsetTry.X2, lineOffsetTry.Y2, SYS_LAYER_AXIS_NAME)
 #End Region
 #Region " MC1"
-        ' vẽ hình dưới
         Dim pNgang1 As New cSTR_Point(P1.X, P1.Y)
         Dim pNgang2 As New cSTR_Point(P1.X + L1, P1.Y)
         Dim lineNgangTr As New cSTR_Line(pNgang1.X, pNgang1.Y, pNgang2.X, pNgang2.Y)
@@ -170,13 +173,8 @@ Public Class frmMain
 
         Dim lineNgangDuoi As New cSTR_Line(pNgangD1.X, pNgangD1.Y, pNgangD2.X, pNgangD2.Y)
         AddLine(lineNgangDuoi.X1, lineNgangDuoi.Y1, lineNgangDuoi.X2, lineNgangDuoi.Y2)
-        'Dim lineOffsetN As cSTR_Line = Return_Offset_Line(pNgang1, pNgang2, -t)
-        'AddLine(lineOffsetN.X1, lineOffsetN.Y1, lineOffsetN.X2, lineOffsetN.Y2)
-        'AddLine(P1.X, P1.Y, P1.X + L1, P1.Y)
         AddLine(P1.X + L1, P1.Y, P1.X + L1, P1.Y - x)
-        'AddLine(P1.X + L1, P1.Y - x, P1.X + L1 + L2, P1.Y - h1)
         AddLine(P1.X, P1.Y, P1.X, P1.Y - t)
-        'OffsetLine(P1.X + L1, P1.Y - x, P1.X + L1 + L2, P1.Y - h1, -t)
 
         'đoạn chéo trên
         Dim pCheo1 As New cSTR_Point(P1.X + L1, P1.Y - x)
@@ -185,7 +183,6 @@ Public Class frmMain
 
         ' offset xuống khoảng t
         Dim lineOffsetC As cSTR_Line = Return_Offset_Line(pCheo1, pCheo2, -t)
-        'AddLine(lineOffsetC.X1, lineOffsetC.Y1, lineOffsetC.X2, lineOffsetC.Y2)
 
         Dim pGiao As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineNgangDuoi, lineOffsetC)
         AddLine(lineNgangDuoi.X1, lineNgangDuoi.Y1, pGiao.X, pGiao.Y)
@@ -203,8 +200,8 @@ Public Class frmMain
         'Add_CosCD(P1.X - 50 - 175 + 50 * SYS_D_DimFoot1, P1.Y, h1)
         'Dim xText As String = "%%UMẶT CẮT 1-1"
         'Add_Text_M_BIGText_with_Layer_WFactor(X0 + (L1 + L2 + L3) / 2, Y0 - Y - 300 - SYS_D_DimFoot1 - SYS_D_TextH_BIG - 200, xText, SYS_L_TEXT_TCK, 0.8)
-
-        'thep
+#End Region
+#Region "thép mc1"
         'L1
         AddLine(P1.X + 35, P1.Y - t + Abv, P1.X + L1 - 35, P1.Y - t + Abv, SYS_LAYER_STEEL_NAME)
         Dim Point_Array As New ArrayList()
@@ -288,7 +285,7 @@ Public Class frmMain
         AddLine(lineOffsetTrx2.X1, lineOffsetTrx2.Y1, lineOffsetTrx2.X2, lineOffsetTrx2.Y2, SYS_LAYER_AXIS_NAME)
 
         Dim pTry1 As New cSTR_Point(P1.X - 300, P1.Y)
-        Dim pTry2 As New cSTR_Point(P1.X + L1 + L3 + 660, P1.Y)
+        Dim pTry2 As New cSTR_Point(P1.X + L1 + L3 + 740 + 300, P1.Y)
         AddLine(pTry1.X, pTry1.Y, pTry2.X, pTry2.Y, SYS_LAYER_AXIS_NAME)
         Dim lineOffsetTry As cSTR_Line = Return_Offset_Line(pTry1, pTry2, h2)
         AddLine(lineOffsetTry.X1, lineOffsetTry.Y1, lineOffsetTry.X2, lineOffsetTry.Y2, SYS_LAYER_AXIS_NAME)
@@ -296,22 +293,88 @@ Public Class frmMain
         AddDimX(P1.X, P1.X + L1, P1.Y - 450 - 50, -175)
         AddDimX(P1.X + L1, P1.X + L1 + L3, P1.Y - 450 - 50, -175)
 
-        AddDimY(P1.X + L1 + +L3 + 600 + 110, P1.Y, P1.Y + h2, 175)
-        Add_CosCD(P1.X + L1 + L3 + 660 + 255 + 50, P1.Y, h1)
-        Add_CosCD(P1.X + L1 + L3 + 660 + 255 + 50, P1.Y + h2, h2)
+        'AddDimY(P1.X + L1 + +L3 + 600 + 110, P1.Y - t, P1.Y + h2, 175)
+        Add_CosCD(P1.X + L1 + L3 + 1040 + 175, P1.Y, h1 / 1000)
+        Add_CosCD(P1.X + L1 + L3 + 1040 + 175, P1.Y + h2, h2 / 1000)
 #End Region
-
-        Dim P2 As New cSTR_Point(P1.X + L1, P1.Y)
-        Dim P3 As New cSTR_Point(P2.X, P2.Y + 182)
-        Dim P4 As New cSTR_Point(P1.X, P1.Y + t)
-        Dim P5 As New cSTR_Point(P2.X - t, P1.Y + t)
+#Region "MC2-2"
+        Dim P2 As New cSTR_Point(P1.X, P1.Y - t)
+        Dim P3 As New cSTR_Point(P2.X + L1, P2.Y)
+        Dim P4 As New cSTR_Point(P3.X, P3.Y + 182)
+        Dim P5 As New cSTR_Point(P3.X - t, P3.Y + t)
         Dim P6 As New cSTR_Point(P5.X, P5.Y + 108)
 
         AddLine(P1.X, P1.Y, P2.X, P2.Y)
+        Dim L34 As New cSTR_Line(P3.X, P3.Y, P4.X, P4.Y)
         AddLine(P2.X, P2.Y, P3.X, P3.Y)
-        AddLine(P1.X, P1.Y, P4.X, P4.Y)
-        AddLine(P4.X, P4.Y, P5.X, P5.Y)
-        AddLine(P5.X, P5.Y, P6.X, P6.Y)
+        'AddLine(P3.X, P3.Y, P4.X, P4.Y)
+        AddLine(P1.X, P1.Y, P5.X, P5.Y)
+        AddLine(P6.X, P6.Y, P5.X, P5.Y)
+
+
+        Dim pSan As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineOffsetTrx2, lineOffsetTry)
+        Dim Psan2 As New cSTR_Point(pSan.X + 740, pSan.Y)
+        AddLine(pSan.X, pSan.Y, pSan.X + 740, pSan.Y)
+        Dim Psan1 As New cSTR_Point(pSan.X, pSan.Y - 150)
+        AddLine(pSan.X, pSan.Y, Psan1.X, Psan1.Y)
+        Dim L_cheo As New cSTR_Line(P6.X, P6.Y, pSan.X, pSan.Y - 150)
+        AddLine(P6.X, P6.Y, pSan.X, pSan.Y - 150)
+        Dim Psan3 As New cSTR_Point(pSan.X + 740, pSan.Y - t)
+
+        Dim L_ao As cSTR_Line = Return_Offset_Line(P6, Psan1, -t) 'offset đoạn chéo xuống t
+        'AddLine(L_ao.X1, L_ao.Y1, L_ao.X2, L_ao.Y2)
+        Dim L_san2 As cSTR_Line = Return_Offset_Line(pSan, Psan1, t) ' ofset đoạn đi xuống 150
+        Dim L_ao3 As cSTR_Line = Return_Offset_Line(pSan, Psan2, -t) ' offset đoạn l sàn xuống t
+        Dim P7 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(L_ao, L34)
+        Dim P8 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(L_ao, L_san2)
+        AddLine(P7.X, P7.Y, P8.X, P8.Y)
+        AddLine(P3.X, P3.Y, P7.X, P7.Y)
+        Dim P9 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(L_san2, L_ao3)
+        AddLine(P9.X, P9.Y, P8.X, P8.Y)
+        AddLine(P9.X, P9.Y, P9.X + 740 - 120, P9.Y)
+        Add_BreakLineY(Psan2.X, Psan2.Y, Psan2.Y - t, SYS_LAYER_THIN_NAME)
+        AddDimY(Psan2.X + 150, Psan2.Y, Psan2.Y - t, 175)
+        AddDimY(P5.X - 50, P5.Y, P6.Y, -175)
+        AddDimY(Psan2.X + 300, Psan2.Y, P1.Y, 175)
+        AddDimY(pSan.X - 50, pSan.Y, Psan1.Y, -175)
+#End Region
+#Region "thép MC2"
+        'L1
+        '(lớp dưới_Phương X)
+        AddLine(P2.X + 35, P2.Y + Abv, P3.X - Abv, P3.Y + Abv, SYS_LAYER_STEEL_NAME)
+        Dim Lthep34 As New cSTR_Line(P3.X - Abv, P3.Y + Abv, P4.X - Abv, P4.Y)
+        'AddLine(P3.X - Abv, P3.Y + Abv, P4.X - Abv, P4.Y, SYS_LAYER_STEEL_NAME)
+        Dim Lthep_cheo_duoi As cSTR_Line = Return_Offset_Line(P7, P8, Abv)
+        Dim Pgiao_Thep1 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep34, Lthep_cheo_duoi)
+        AddLine(P3.X - Abv, P3.Y + Abv, Pgiao_Thep1.X, Pgiao_Thep1.Y, SYS_LAYER_STEEL_NAME)
+        'AddLine(Lthep_cheo_duoi.X1, Lthep_cheo_duoi.Y1, Lthep_cheo_duoi.X2, Lthep_cheo_duoi.Y2, SYS_LAYER_STEEL_NAME)
+        Dim Lthep89 As cSTR_Line = Return_Offset_Line(P8, P9, Abv)
+        Dim Pgiao_Thep2 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep89, Lthep_cheo_duoi)
+        AddLine(Pgiao_Thep1.X, Pgiao_Thep1.Y, Pgiao_Thep2.X, Pgiao_Thep2.Y, SYS_LAYER_STEEL_NAME)
+        'Dim Lthep2 As cSTR_Line = Return_Offset_Line(Psan3, P9, -Abv)
+        'AddLine(Lthep2.X1, Lthep2.Y1, Lthep2.X2, Lthep2.Y2, SYS_LAYER_STEEL_NAME)
+        AddLine(Pgiao_Thep2.X, Pgiao_Thep2.Y, P9.X - Abv, P9.Y + t - Abv, SYS_LAYER_STEEL_NAME)
+        AddLine(P9.X - Abv, P9.Y + t - Abv, P9.X - Abv - 30, P9.Y + t - Abv - 50, SYS_LAYER_STEEL_NAME)
+        'AddLine(pSan.X, pSan.Y - t + Abv, Psan3.X, Psan3.Y + Abv, SYS_LAYER_STEEL_NAME)
+
+        'Lớp trên(X)
+        AddLine(P2.X + Abv, P2.Y + Abv, P1.X + Abv, P1.Y - Abv, SYS_LAYER_STEEL_NAME)
+        AddLine(P1.X + Abv, P1.Y - Abv, P5.X + Abv, P5.Y - Abv, SYS_LAYER_STEEL_NAME)
+        Dim Lthep_cheo_tren As cSTR_Line = Return_Offset_Line(P6, Psan1, -Abv)
+        'AddLine(Lthep_cheo_tren.X1, Lthep_cheo_tren.Y1, Lthep_cheo_tren.X2, Lthep_cheo_tren.Y2, SYS_LAYER_STEEL_NAME)
+        Dim Lthep56 As New cSTR_Line(P5.X + Abv, P5.Y - Abv, P5.X + Abv, P5.Y + 108)
+        Dim Pgiao_Thep3 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep56, Lthep_cheo_tren)
+        AddLine(P5.X + Abv, P5.Y - Abv, Pgiao_Thep3.X, Pgiao_Thep3.Y, SYS_LAYER_STEEL_NAME)
+        Dim Lthep89_loptren As cSTR_Line = Return_Offset_Line(pSan, Psan1, Abv)
+        Dim Pgiao_thep4 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep89_loptren, Lthep_cheo_tren)
+        AddLine(Pgiao_Thep3.X, Pgiao_Thep3.Y, Pgiao_thep4.X, Pgiao_thep4.Y, SYS_LAYER_STEEL_NAME)
+        AddLine(Pgiao_thep4.X, Pgiao_thep4.Y, pSan.X + Abv, pSan.Y - Abv, SYS_LAYER_STEEL_NAME)
+        AddLine(pSan.X + Abv, pSan.Y - Abv, pSan.X + Abv + 30, pSan.Y - Abv - 50, SYS_LAYER_STEEL_NAME)
+
+
+
+#End Region
+
     End Sub
 #End Region
 End Class
