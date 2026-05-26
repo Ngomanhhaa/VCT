@@ -105,8 +105,12 @@ Partial Class frmMain
         Me.Label36 = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.txt_TuongXay = New System.Windows.Forms.TextBox()
         Me.Ckb_TuongXay = New System.Windows.Forms.CheckBox()
+        Me.txt_TuongXay = New System.Windows.Forms.TextBox()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.txtX1 = New System.Windows.Forms.TextBox()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.txtX2 = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.ptb1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -127,6 +131,10 @@ Partial Class frmMain
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label42)
+        Me.GroupBox1.Controls.Add(Me.txtX2)
+        Me.GroupBox1.Controls.Add(Me.Label41)
+        Me.GroupBox1.Controls.Add(Me.txtX1)
         Me.GroupBox1.Controls.Add(Me.Label40)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.txtA)
@@ -146,7 +154,7 @@ Partial Class frmMain
         Me.GroupBox1.ForeColor = System.Drawing.Color.Blue
         Me.GroupBox1.Location = New System.Drawing.Point(12, 83)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(200, 227)
+        Me.GroupBox1.Size = New System.Drawing.Size(200, 277)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Thông số mặt cắt"
@@ -155,7 +163,7 @@ Partial Class frmMain
         '
         Me.Label40.AutoSize = True
         Me.Label40.ForeColor = System.Drawing.Color.Black
-        Me.Label40.Location = New System.Drawing.Point(14, 147)
+        Me.Label40.Location = New System.Drawing.Point(14, 191)
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(84, 13)
         Me.Label40.TabIndex = 21
@@ -165,7 +173,7 @@ Partial Class frmMain
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(14, 121)
+        Me.Label7.Location = New System.Drawing.Point(14, 119)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(37, 13)
         Me.Label7.TabIndex = 19
@@ -173,7 +181,7 @@ Partial Class frmMain
         '
         'txtA
         '
-        Me.txtA.Location = New System.Drawing.Point(107, 140)
+        Me.txtA.Location = New System.Drawing.Point(107, 184)
         Me.txtA.Name = "txtA"
         Me.txtA.Size = New System.Drawing.Size(74, 20)
         Me.txtA.TabIndex = 20
@@ -182,7 +190,7 @@ Partial Class frmMain
         '
         'txtX
         '
-        Me.txtX.Location = New System.Drawing.Point(107, 114)
+        Me.txtX.Location = New System.Drawing.Point(107, 112)
         Me.txtX.Name = "txtX"
         Me.txtX.Size = New System.Drawing.Size(74, 20)
         Me.txtX.TabIndex = 18
@@ -193,7 +201,7 @@ Partial Class frmMain
         '
         Me.Label6.AutoSize = True
         Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(14, 195)
+        Me.Label6.Location = New System.Drawing.Point(14, 239)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(75, 13)
         Me.Label6.TabIndex = 17
@@ -201,7 +209,7 @@ Partial Class frmMain
         '
         'txtH2
         '
-        Me.txtH2.Location = New System.Drawing.Point(107, 188)
+        Me.txtH2.Location = New System.Drawing.Point(107, 232)
         Me.txtH2.Name = "txtH2"
         Me.txtH2.Size = New System.Drawing.Size(74, 20)
         Me.txtH2.TabIndex = 16
@@ -212,7 +220,7 @@ Partial Class frmMain
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(14, 173)
+        Me.Label5.Location = New System.Drawing.Point(14, 215)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(76, 13)
         Me.Label5.TabIndex = 15
@@ -220,7 +228,7 @@ Partial Class frmMain
         '
         'txtH1
         '
-        Me.txtH1.Location = New System.Drawing.Point(107, 166)
+        Me.txtH1.Location = New System.Drawing.Point(107, 208)
         Me.txtH1.Name = "txtH1"
         Me.txtH1.Size = New System.Drawing.Size(74, 20)
         Me.txtH1.TabIndex = 14
@@ -231,7 +239,7 @@ Partial Class frmMain
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(14, 96)
+        Me.Label4.Location = New System.Drawing.Point(14, 95)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(35, 13)
         Me.Label4.TabIndex = 13
@@ -239,7 +247,7 @@ Partial Class frmMain
         '
         'txtT
         '
-        Me.txtT.Location = New System.Drawing.Point(107, 89)
+        Me.txtT.Location = New System.Drawing.Point(107, 88)
         Me.txtT.Name = "txtT"
         Me.txtT.Size = New System.Drawing.Size(74, 20)
         Me.txtT.TabIndex = 12
@@ -296,7 +304,7 @@ Partial Class frmMain
         '
         'btnVe
         '
-        Me.btnVe.Location = New System.Drawing.Point(245, 450)
+        Me.btnVe.Location = New System.Drawing.Point(245, 512)
         Me.btnVe.Name = "btnVe"
         Me.btnVe.Size = New System.Drawing.Size(75, 23)
         Me.btnVe.TabIndex = 3
@@ -305,7 +313,7 @@ Partial Class frmMain
         '
         'btnThoat
         '
-        Me.btnThoat.Location = New System.Drawing.Point(326, 450)
+        Me.btnThoat.Location = New System.Drawing.Point(326, 512)
         Me.btnThoat.Name = "btnThoat"
         Me.btnThoat.Size = New System.Drawing.Size(75, 23)
         Me.btnThoat.TabIndex = 4
@@ -355,7 +363,7 @@ Partial Class frmMain
         Me.GroupBox3.Controls.Add(Me.Label8)
         Me.GroupBox3.Controls.Add(Me.Label13)
         Me.GroupBox3.ForeColor = System.Drawing.Color.Blue
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 328)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 390)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(227, 116)
         Me.GroupBox3.TabIndex = 7
@@ -555,7 +563,7 @@ Partial Class frmMain
         Me.GroupBox4.Controls.Add(Me.Label26)
         Me.GroupBox4.Controls.Add(Me.Label27)
         Me.GroupBox4.ForeColor = System.Drawing.Color.Blue
-        Me.GroupBox4.Location = New System.Drawing.Point(245, 328)
+        Me.GroupBox4.Location = New System.Drawing.Point(245, 390)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(227, 116)
         Me.GroupBox4.TabIndex = 33
@@ -755,7 +763,7 @@ Partial Class frmMain
         Me.GroupBox5.Controls.Add(Me.Label36)
         Me.GroupBox5.Controls.Add(Me.Label37)
         Me.GroupBox5.ForeColor = System.Drawing.Color.Blue
-        Me.GroupBox5.Location = New System.Drawing.Point(478, 328)
+        Me.GroupBox5.Location = New System.Drawing.Point(478, 390)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(271, 113)
         Me.GroupBox5.TabIndex = 34
@@ -989,15 +997,6 @@ Partial Class frmMain
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Thông số mặt bằng"
         '
-        'txt_TuongXay
-        '
-        Me.txt_TuongXay.Location = New System.Drawing.Point(102, 25)
-        Me.txt_TuongXay.Name = "txt_TuongXay"
-        Me.txt_TuongXay.Size = New System.Drawing.Size(74, 20)
-        Me.txt_TuongXay.TabIndex = 0
-        Me.txt_TuongXay.Text = "220"
-        Me.txt_TuongXay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'Ckb_TuongXay
         '
         Me.Ckb_TuongXay.AutoSize = True
@@ -1009,12 +1008,59 @@ Partial Class frmMain
         Me.Ckb_TuongXay.Text = "Tường xây"
         Me.Ckb_TuongXay.UseVisualStyleBackColor = True
         '
+        'txt_TuongXay
+        '
+        Me.txt_TuongXay.Location = New System.Drawing.Point(102, 25)
+        Me.txt_TuongXay.Name = "txt_TuongXay"
+        Me.txt_TuongXay.Size = New System.Drawing.Size(74, 20)
+        Me.txt_TuongXay.TabIndex = 0
+        Me.txt_TuongXay.Text = "220"
+        Me.txt_TuongXay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label41
+        '
+        Me.Label41.AutoSize = True
+        Me.Label41.ForeColor = System.Drawing.Color.Black
+        Me.Label41.Location = New System.Drawing.Point(14, 143)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(43, 13)
+        Me.Label41.TabIndex = 23
+        Me.Label41.Text = "x1 (mm)"
+        '
+        'txtX1
+        '
+        Me.txtX1.Location = New System.Drawing.Point(107, 136)
+        Me.txtX1.Name = "txtX1"
+        Me.txtX1.Size = New System.Drawing.Size(74, 20)
+        Me.txtX1.TabIndex = 22
+        Me.txtX1.Text = "108"
+        Me.txtX1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.ForeColor = System.Drawing.Color.Black
+        Me.Label42.Location = New System.Drawing.Point(14, 167)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(43, 13)
+        Me.Label42.TabIndex = 25
+        Me.Label42.Text = "x2 (mm)"
+        '
+        'txtX2
+        '
+        Me.txtX2.Location = New System.Drawing.Point(107, 160)
+        Me.txtX2.Name = "txtX2"
+        Me.txtX2.Size = New System.Drawing.Size(74, 20)
+        Me.txtX2.TabIndex = 24
+        Me.txtX2.Text = "150"
+        Me.txtX2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ClientSize = New System.Drawing.Size(775, 490)
+        Me.ClientSize = New System.Drawing.Size(775, 546)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
@@ -1129,4 +1175,8 @@ Partial Class frmMain
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents Ckb_TuongXay As System.Windows.Forms.CheckBox
     Friend WithEvents txt_TuongXay As System.Windows.Forms.TextBox
+    Friend WithEvents Label42 As System.Windows.Forms.Label
+    Friend WithEvents txtX2 As System.Windows.Forms.TextBox
+    Friend WithEvents Label41 As System.Windows.Forms.Label
+    Friend WithEvents txtX1 As System.Windows.Forms.TextBox
 End Class

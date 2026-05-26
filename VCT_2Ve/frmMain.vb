@@ -161,6 +161,8 @@ Public Class frmMain
         AddLine(pTry1.X, pTry1.Y, pTry2.X, pTry2.Y, SYS_LAYER_AXIS_NAME)
         Dim lineOffsetTry As cSTR_Line = Return_Offset_Line(pTry1, pTry2, -h1)
         AddLine(lineOffsetTry.X1, lineOffsetTry.Y1, lineOffsetTry.X2, lineOffsetTry.Y2, SYS_LAYER_AXIS_NAME)
+        Add_CosCD(P1.X + L1 + L2 + 915, P1.Y - h1, 0)
+        Add_CosCD(P1.X + L1 + L2 + 915, P1.Y, h1 / 1000)
 #End Region
 #Region " MC1"
         Dim pNgang1 As New cSTR_Point(P1.X, P1.Y)
@@ -193,9 +195,9 @@ Public Class frmMain
         AddDimX(P1.X, P1.X + L1, P1.Y - h1 - 600 - 50, -175)
         AddDimX(P1.X + L1, P1.X + L1 + L2, P1.Y - h1 - 600 - 50, -175)
 
-        AddDimY(P1.X + L1 + 200, P1.Y, P1.Y - x, 175)
+        AddDimY(P1.X + L1 + 50, P1.Y, P1.Y - x, 150)
         AddDimY(P1.X + L1 + +L2 + 600 + 110, P1.Y, P1.Y - h1, 175)
-        AddDimY(P1.X - 50, P1.Y, P1.Y - t, -175)
+        AddDimY(P1.X - 50, P1.Y, P1.Y - t, -150)
 
         'Add_CosCD(P1.X - 50 - 175 + 50 * SYS_D_DimFoot1, P1.Y, h1)
         'Dim xText As String = "%%UMẶT CẮT 1-1"
@@ -261,7 +263,6 @@ Public Class frmMain
         Loca_Bar3 = Add_Bar_Dot_Y_L2_Tren(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, Fi6, a6, False, False, a_bardot)
         Add_Bar_Dot_Y_L2_Tren(lineNull4_offset.X1, lineNull4_offset.Y1, lineNull4_offset.X2, lineNull4_offset.Y2, a6, Fi6, a6, Fi6, a6, True, False, a_bardot)
 #End Region
-        DialogResult = Windows.Forms.DialogResult.OK
 
     End Sub
 #End Region
@@ -275,6 +276,18 @@ Public Class frmMain
         Dim h2 As Double = txtH2.Text * 1000
         Dim t As Double = txtT.Text
         Dim x As Double = txtX.Text
+        Dim x1 As Double = txtX1.Text
+        Dim x2 As Double = txtX2.Text
+
+        'L1 (chieu nghi)
+        Dim Fi1 As Double = cbxFi1L1.Text
+        Dim Fi2 As Double = cbxFi2L1.Text
+        Dim Fi3 As Double = cbxFi3L1.Text
+        Dim Fi4 As Double = cbxFi4L1.Text
+        Dim a1 As Double = txta1L1.Text
+        Dim a2 As Double = txta2L1.Text
+        Dim a3 As Double = txta3L1.Text
+        Dim a4 As Double = txta4L1.Text
 #Region "ve truc"
         Dim pTrx1 As New cSTR_Point(P1.X, P1.Y - 450)
         Dim pTrx2 As New cSTR_Point(P1.X, P1.Y + h2 + 600)
@@ -302,7 +315,7 @@ Public Class frmMain
         Dim P3 As New cSTR_Point(P2.X + L1, P2.Y)
         Dim P4 As New cSTR_Point(P3.X, P3.Y + 182)
         Dim P5 As New cSTR_Point(P3.X - t, P3.Y + t)
-        Dim P6 As New cSTR_Point(P5.X, P5.Y + 108)
+        Dim P6 As New cSTR_Point(P5.X, P5.Y + x1)
 
         AddLine(P1.X, P1.Y, P2.X, P2.Y)
         Dim L34 As New cSTR_Line(P3.X, P3.Y, P4.X, P4.Y)
@@ -315,15 +328,15 @@ Public Class frmMain
         Dim pSan As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineOffsetTrx2, lineOffsetTry)
         Dim Psan2 As New cSTR_Point(pSan.X + 740, pSan.Y)
         AddLine(pSan.X, pSan.Y, pSan.X + 740, pSan.Y)
-        Dim Psan1 As New cSTR_Point(pSan.X, pSan.Y - 150)
+        Dim Psan1 As New cSTR_Point(pSan.X, pSan.Y - x2)
         AddLine(pSan.X, pSan.Y, Psan1.X, Psan1.Y)
-        Dim L_cheo As New cSTR_Line(P6.X, P6.Y, pSan.X, pSan.Y - 150)
-        AddLine(P6.X, P6.Y, pSan.X, pSan.Y - 150)
+        Dim L_cheo As New cSTR_Line(P6.X, P6.Y, pSan.X, pSan.Y - x2)
+        AddLine(P6.X, P6.Y, pSan.X, pSan.Y - x2)
         Dim Psan3 As New cSTR_Point(pSan.X + 740, pSan.Y - t)
 
         Dim L_ao As cSTR_Line = Return_Offset_Line(P6, Psan1, -t) 'offset đoạn chéo xuống t
         'AddLine(L_ao.X1, L_ao.Y1, L_ao.X2, L_ao.Y2)
-        Dim L_san2 As cSTR_Line = Return_Offset_Line(pSan, Psan1, t) ' ofset đoạn đi xuống 150
+        Dim L_san2 As cSTR_Line = Return_Offset_Line(pSan, Psan1, t) ' ofset đoạn đi xuống x2
         Dim L_ao3 As cSTR_Line = Return_Offset_Line(pSan, Psan2, -t) ' offset đoạn l sàn xuống t
         Dim P7 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(L_ao, L34)
         Dim P8 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(L_ao, L_san2)
@@ -333,13 +346,13 @@ Public Class frmMain
         AddLine(P9.X, P9.Y, P8.X, P8.Y)
         AddLine(P9.X, P9.Y, P9.X + 740 - 120, P9.Y)
         Add_BreakLineY(Psan2.X, Psan2.Y, Psan2.Y - t, SYS_LAYER_THIN_NAME)
-        AddDimY(Psan2.X + 150, Psan2.Y, Psan2.Y - t, 175)
-        AddDimY(P5.X - 50, P5.Y, P6.Y, -175)
+        AddDimY(Psan2.X + x2, Psan2.Y, Psan2.Y - t, 175)
+        AddDimY(P5.X - 25, P5.Y, P6.Y, -75)
         AddDimY(Psan2.X + 300, Psan2.Y, P1.Y, 175)
-        AddDimY(pSan.X - 50, pSan.Y, Psan1.Y, -175)
+        AddDimY(pSan.X - 50, pSan.Y, Psan1.Y, -75)
 #End Region
 #Region "thép MC2"
-        'L1
+
         '(lớp dưới_Phương X)
         AddLine(P2.X + 35, P2.Y + Abv, P3.X - Abv, P3.Y + Abv, SYS_LAYER_STEEL_NAME)
         Dim Lthep34 As New cSTR_Line(P3.X - Abv, P3.Y + Abv, P4.X - Abv, P4.Y)
@@ -362,7 +375,7 @@ Public Class frmMain
         AddLine(P1.X + Abv, P1.Y - Abv, P5.X + Abv, P5.Y - Abv, SYS_LAYER_STEEL_NAME)
         Dim Lthep_cheo_tren As cSTR_Line = Return_Offset_Line(P6, Psan1, -Abv)
         'AddLine(Lthep_cheo_tren.X1, Lthep_cheo_tren.Y1, Lthep_cheo_tren.X2, Lthep_cheo_tren.Y2, SYS_LAYER_STEEL_NAME)
-        Dim Lthep56 As New cSTR_Line(P5.X + Abv, P5.Y - Abv, P5.X + Abv, P5.Y + 108)
+        Dim Lthep56 As New cSTR_Line(P5.X + Abv, P5.Y - Abv, P5.X + Abv, P5.Y + x1)
         Dim Pgiao_Thep3 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep56, Lthep_cheo_tren)
         AddLine(P5.X + Abv, P5.Y - Abv, Pgiao_Thep3.X, Pgiao_Thep3.Y, SYS_LAYER_STEEL_NAME)
         Dim Lthep89_loptren As cSTR_Line = Return_Offset_Line(pSan, Psan1, Abv)
@@ -371,10 +384,18 @@ Public Class frmMain
         AddLine(Pgiao_thep4.X, Pgiao_thep4.Y, pSan.X + Abv, pSan.Y - Abv, SYS_LAYER_STEEL_NAME)
         AddLine(pSan.X + Abv, pSan.Y - Abv, pSan.X + Abv + 30, pSan.Y - Abv - 50, SYS_LAYER_STEEL_NAME)
 
+        'lớp dưới X
+        Dim a_bardot As Integer = 22
+        Dim Loca_Bar3 As ArrayList
+        Loca_Bar3 = Add_Bar_Dot_YL1_Tren(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a2, Fi2, a2, Fi4, a4, False, False, a_bardot)
+        Add_Bar_Dot_YL1_Tren(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a2, Fi2, a2, Fi4, a4, True, True, a_bardot)
 
-
+        Loca_Bar3 = Add_Bar_Dot_YL1_Duoi(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a1, Fi1, a1, Fi3, a3, False, False, a_bardot)
+        Add_Bar_Dot_YL1_Duoi(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a1, Fi1, a1, Fi3, a3, True, True, a_bardot)
 #End Region
+        DialogResult = Windows.Forms.DialogResult.OK
 
     End Sub
 #End Region
+
 End Class

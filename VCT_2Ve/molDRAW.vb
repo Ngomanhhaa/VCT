@@ -197,7 +197,7 @@ Module molDRAW
         Next
         AddLine(X, Y, listPointRebar.Last.X - 62.5, Y, SYS_LAYER_THIN_NAME)
 
-        AddText(X + 25, Y + 20, ChieuCaoText, SYS_TEXT_HEIGHT * 25)
+        AddRText(X + 25, Y + 20, ChieuCaoText, SYS_TEXT_HEIGHT * 25)
 
     End Sub
     Public Sub Add_PLine(ByVal pArray As ArrayList, ByVal tLayer As String)

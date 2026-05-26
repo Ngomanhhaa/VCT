@@ -107,7 +107,7 @@ Module molFun
 
     End Sub
 
-    Public Sub AddText(X As Double, Y As Double, contents As String, height As Double, Optional layerName As String = SYS_LAYER_TEXT_NAME)
+    Public Sub AddRText(X As Double, Y As Double, contents As String, height As Double, Optional layerName As String = SYS_LAYER_TEXT_NAME)
         Dim doc As Document = Application.DocumentManager.MdiActiveDocument
         Dim db As Database = doc.Database
         Dim ed As Editor = doc.Editor
@@ -122,6 +122,28 @@ Module molFun
             dtext.TextString = contents
             dtext.HorizontalMode = TextHorizontalMode.TextRight
             dtext.AlignmentPoint = New Point3d(X, Y, 0)
+            dtext.TextStyleId = textStyleTable(SYS_TextStyle)
+            dtext.WidthFactor = SYS_TEXT_WIDTH_FACTOR
+            curSpace.AppendEntity(dtext)
+            tr.AddNewlyCreatedDBObject(dtext, True)
+            tr.Commit()
+        End Using
+    End Sub
+    Public Sub AddLText(X As Double, Y As Double, contents As String, height As Double, Optional layerName As String = SYS_LAYER_TEXT_NAME)
+        Dim doc As Document = Application.DocumentManager.MdiActiveDocument
+        Dim db As Database = doc.Database
+        Dim ed As Editor = doc.Editor
+        Using tr = db.TransactionManager.StartTransaction()
+            Dim bt As BlockTable = tr.GetObject(db.BlockTableId, OpenMode.ForRead)
+            Dim textStyleTable As TextStyleTable = tr.GetObject(db.TextStyleTableId, OpenMode.ForRead)
+            Dim curSpace As BlockTableRecord = tr.GetObject(db.CurrentSpaceId, OpenMode.ForWrite)
+            Dim dtext As New DBText
+            dtext.Position = New Point3d(X, Y, 0)
+            dtext.Layer = layerName
+            dtext.Height = height
+            dtext.TextString = contents
+            dtext.HorizontalMode = TextHorizontalMode.TextLeft
+            'dtext.AlignmentPoint = New Point3d(X, Y, 0)
             dtext.TextStyleId = textStyleTable(SYS_TextStyle)
             dtext.WidthFactor = SYS_TEXT_WIDTH_FACTOR
             curSpace.AppendEntity(dtext)
@@ -476,22 +498,22 @@ Module molFun
                 End If
             End If
 
-            If i = 1 AndAlso ThepCham_L1_LopTren = True Then
+            If i = N - 2 AndAlso ThepCham_L1_LopTren = True Then
                 'addline(l.getpointatdist(52 + i * a + center_snode).x, l.getpointatdist(52 + i * a + center_snode).y)
                 Dim P1_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y, 0)
                 Dim P2_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
-                Dim P3_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X + 425, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
+                Dim P3_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X - 400, L.GetPointAtDist(52 + i * A + Center_SNode).Y + 150, 0)
 
                 AddLine(P1_TagThep.X, P1_TagThep.Y, P2_TagThep.X, P2_TagThep.Y, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X, P2_TagThep.Y, P3_TagThep.X, P3_TagThep.Y, SYS_LAYER_THIN_NAME)
-                Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 62.5, "1", True)
-                AddText(P3_TagThep.X - 25, P3_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
+                Add_SoThep(P3_TagThep.X - 62.5, P3_TagThep.Y + 62.5, "1", True)
+                AddLText(P3_TagThep.X + 25, P3_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
 
-                AddLine(P1_TagThep.X - 100, P1_TagThep.Y + 15, P2_TagThep.X - 100, P2_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
-                AddLine(P2_TagThep.X - 100, P2_TagThep.Y + 125, P3_TagThep.X, P3_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
-                AddLine(P1_TagThep.X - 100 - 20, P1_TagThep.Y + 15 - 20, P1_TagThep.X - 100 + 20, P1_TagThep.Y + 15 + 20, SYS_LAYER_THIN_NAME)
-                Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 125 + 62.5, "2", True)
-                AddText(P3_TagThep.X - 25, P2_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
+                AddLine(P1_TagThep.X + 100, P1_TagThep.Y + 15, P2_TagThep.X + 100, P2_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
+                AddLine(P2_TagThep.X + 100, P2_TagThep.Y + 125, P3_TagThep.X, P3_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
+                AddLine(P1_TagThep.X + 100 - 20, P1_TagThep.Y + 15 - 20, P1_TagThep.X + 100 + 20, P1_TagThep.Y + 15 + 20, SYS_LAYER_THIN_NAME)
+                Add_SoThep(P3_TagThep.X - 62.5, P3_TagThep.Y + 250 - 62.5, "2", True)
+                AddLText(P3_TagThep.X + 25, P2_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
             End If
 
         Next
@@ -525,18 +547,18 @@ Module molFun
                 'addline(l.getpointatdist(52 + i * a + center_snode).x, l.getpointatdist(52 + i * a + center_snode).y)
                 Dim P1_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y, 0)
                 Dim P2_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X, L.GetPointAtDist(52 + i * A + Center_SNode).Y - 150, 0)
-                Dim P3_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X + 425, L.GetPointAtDist(52 + i * A + Center_SNode).Y - 150, 0)
+                Dim P3_TagThep As New Point3d(L.GetPointAtDist(52 + i * A + Center_SNode).X + 400, L.GetPointAtDist(52 + i * A + Center_SNode).Y - 150, 0)
 
                 AddLine(P1_TagThep.X, P1_TagThep.Y, P2_TagThep.X, P2_TagThep.Y, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X, P2_TagThep.Y, P3_TagThep.X, P3_TagThep.Y, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 62.5, "3", True)
-                AddText(P3_TagThep.X - 25, P3_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
+                AddRText(P3_TagThep.X - 25, P3_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
 
                 AddLine(P1_TagThep.X - 100, P1_TagThep.Y - 15, P2_TagThep.X - 100, P2_TagThep.Y - 125, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X - 100, P2_TagThep.Y - 125, P3_TagThep.X, P3_TagThep.Y - 125, SYS_LAYER_THIN_NAME)
                 AddLine(P1_TagThep.X - 100 - 20, P1_TagThep.Y - 15 - 20, P1_TagThep.X - 100 + 20, P1_TagThep.Y - 15 + 20, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y - 125 + 62.5, "4", True)
-                AddText(P3_TagThep.X - 25, P3_TagThep.Y - 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
+                AddRText(P3_TagThep.X - 25, P3_TagThep.Y - 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
             End If
 
         Next
@@ -575,7 +597,7 @@ Module molFun
                 AddLine(P1_TagThep.X, P1_TagThep.Y, P2_TagThep.X, P2_TagThep.Y, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X, P2_TagThep.Y, P3_TagThep.X, P3_TagThep.Y, SYS_LAYER_THIN_NAME)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 62.5, "5", True)
-                AddText(P3_TagThep.X - 25, P3_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
+                AddRText(P3_TagThep.X - 25, P3_TagThep.Y + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi1 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa1, SYS_D_TextH_SM)
 
                 AddLine(P1_TagThep.X - 100, P1_TagThep.Y + 15, P2_TagThep.X - 100, P2_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
                 AddLine(P2_TagThep.X - 100, P2_TagThep.Y + 125, P3_TagThep.X, P3_TagThep.Y + 125, SYS_LAYER_THIN_NAME)
@@ -583,7 +605,7 @@ Module molFun
 
                 'Dim p As Point3d = Return_Point_By_Line(L, pGiao, -100)
                 Add_SoThep(P3_TagThep.X + 62.5, P3_TagThep.Y + 125 + 62.5, "6", True)
-                AddText(P3_TagThep.X - 25, P3_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
+                AddRText(P3_TagThep.X - 25, P3_TagThep.Y + 125 + 25, SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi2 & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & Aa2, SYS_D_TextH_SM)
             End If
         Next
         Return New ArrayList({P1, P2})
