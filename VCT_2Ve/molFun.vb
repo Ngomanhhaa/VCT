@@ -611,10 +611,6 @@ Module molFun
         Return New ArrayList({P1, P2})
     End Function
 
-    Public Function Return_Point_By_Line(L As Line, pBase As Point3d, distance As Double) As Point3d
-        Dim dist0 As Double = L.GetDistAtPoint(L.GetClosestPointTo(pBase, False))
-        Return L.GetPointAtDist(dist0 + distance)
-    End Function
     Function Return_Bar_Notes_N_Fi(ByVal N As Integer, ByVal Fi As Integer) As String
         Dim tValue As String = N & SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi
         Return tValue
@@ -624,7 +620,23 @@ Module molFun
         Dim tValue As String = SYS_KCS_CONFIG_BarNote_KyHieuDuongKinh & Fi & SYS_KCS_CONFIG_BarNote_KyHieuKhoangCach & A
         Return tValue
     End Function
+    Public Function Return_Point_In_Line(line1 As cSTR_Line, pBase As cSTR_Point, distance As Double) As cSTR_Point
+        Dim L As New Line(
+        New Point3d(line1.X1, line1.Y1, 0),
+        New Point3d(line1.X2, line1.Y2, 0)
+    )
 
+        Dim pCAD As New Point3d(pBase.X, pBase.Y, 0)
+
+        Dim dist0 As Double = L.GetDistAtPoint(L.GetClosestPointTo(pCAD, False))
+        Dim pResult As Point3d = L.GetPointAtDist(dist0 + distance)
+
+        Dim p As New cSTR_Point()
+        p.X = CDec(pResult.X)
+        p.Y = CDec(pResult.Y)
+        p.Z = 0
+        Return p
+    End Function
 End Module
 
 
