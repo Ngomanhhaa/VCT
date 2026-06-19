@@ -621,21 +621,13 @@ Module molFun
         Return tValue
     End Function
     Public Function Return_Point_In_Line(line1 As cSTR_Line, pBase As cSTR_Point, distance As Double) As cSTR_Point
-        Dim L As New Line(
-        New Point3d(line1.X1, line1.Y1, 0),
-        New Point3d(line1.X2, line1.Y2, 0)
-    )
-
-        Dim pCAD As New Point3d(pBase.X, pBase.Y, 0)
-
-        Dim dist0 As Double = L.GetDistAtPoint(L.GetClosestPointTo(pCAD, False))
-        Dim pResult As Point3d = L.GetPointAtDist(dist0 + distance)
-
-        Dim p As New cSTR_Point()
-        p.X = CDec(pResult.X)
-        p.Y = CDec(pResult.Y)
-        p.Z = 0
-        Return p
+        Dim dx As Double = CDbl(line1.X2 - line1.X1)
+        Dim dy As Double = CDbl(line1.Y2 - line1.Y1)
+        Dim len As Double = Math.Sqrt(dx * dx + dy * dy)
+        If len = 0 Then Return Nothing
+        Dim ux As Double = dx / len
+        Dim uy As Double = dy / len
+        Return New cSTR_Point(pBase.X + CDec(ux * distance), pBase.Y + CDec(uy * distance), 0)
     End Function
 End Module
 
