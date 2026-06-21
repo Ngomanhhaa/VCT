@@ -629,6 +629,24 @@ Module molFun
         Dim uy As Double = dy / len
         Return New cSTR_Point(pBase.X + CDec(ux * distance), pBase.Y + CDec(uy * distance), 0)
     End Function
+
+    Public Function Return_Point_In_Line(P1 As cSTR_Point, P2 As cSTR_Point, KC As Decimal) As cSTR_Point
+        ' Vector từ P1 đến P2
+        Dim dx As Double = CDbl(P2.X - P1.X)
+        Dim dy As Double = CDbl(P2.Y - P1.Y)
+        ' Chiều dài đoạn P1-P2
+        Dim L As Double = Math.Sqrt(dx * dx + dy * dy)
+        If L = 0 Then Return Nothing
+        ' Vector đơn vị
+        Dim ux As Double = dx / L
+        Dim uy As Double = dy / L
+        ' P3 = P1 + vector đơn vị * khoảng cách
+        Dim P3 As New cSTR_Point()
+        P3.X = P1.X + CDec(ux * CDbl(KC))
+        P3.Y = P1.Y + CDec(uy * CDbl(KC))
+        P3.Z = 0
+        Return P3
+    End Function
 End Module
 
 

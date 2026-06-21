@@ -24,6 +24,10 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.txtL1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.txtX2 = New System.Windows.Forms.TextBox()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.txtX1 = New System.Windows.Forms.TextBox()
         Me.Label40 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtA = New System.Windows.Forms.TextBox()
@@ -107,10 +111,6 @@ Partial Class frmMain
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Ckb_TuongXay = New System.Windows.Forms.CheckBox()
         Me.txt_TuongXay = New System.Windows.Forms.TextBox()
-        Me.Label41 = New System.Windows.Forms.Label()
-        Me.txtX1 = New System.Windows.Forms.TextBox()
-        Me.Label42 = New System.Windows.Forms.Label()
-        Me.txtX2 = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.ptb1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -158,6 +158,44 @@ Partial Class frmMain
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Thông số mặt cắt"
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.ForeColor = System.Drawing.Color.Black
+        Me.Label42.Location = New System.Drawing.Point(14, 167)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(43, 13)
+        Me.Label42.TabIndex = 25
+        Me.Label42.Text = "x2 (mm)"
+        '
+        'txtX2
+        '
+        Me.txtX2.Location = New System.Drawing.Point(107, 160)
+        Me.txtX2.Name = "txtX2"
+        Me.txtX2.Size = New System.Drawing.Size(74, 20)
+        Me.txtX2.TabIndex = 24
+        Me.txtX2.Text = "150"
+        Me.txtX2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label41
+        '
+        Me.Label41.AutoSize = True
+        Me.Label41.ForeColor = System.Drawing.Color.Black
+        Me.Label41.Location = New System.Drawing.Point(14, 143)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(43, 13)
+        Me.Label41.TabIndex = 23
+        Me.Label41.Text = "x1 (mm)"
+        '
+        'txtX1
+        '
+        Me.txtX1.Location = New System.Drawing.Point(107, 136)
+        Me.txtX1.Name = "txtX1"
+        Me.txtX1.Size = New System.Drawing.Size(74, 20)
+        Me.txtX1.TabIndex = 22
+        Me.txtX1.Text = "300"
+        Me.txtX1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label40
         '
@@ -1016,44 +1054,6 @@ Partial Class frmMain
         Me.txt_TuongXay.TabIndex = 0
         Me.txt_TuongXay.Text = "220"
         Me.txt_TuongXay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label41
-        '
-        Me.Label41.AutoSize = True
-        Me.Label41.ForeColor = System.Drawing.Color.Black
-        Me.Label41.Location = New System.Drawing.Point(14, 143)
-        Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(43, 13)
-        Me.Label41.TabIndex = 23
-        Me.Label41.Text = "x1 (mm)"
-        '
-        'txtX1
-        '
-        Me.txtX1.Location = New System.Drawing.Point(107, 136)
-        Me.txtX1.Name = "txtX1"
-        Me.txtX1.Size = New System.Drawing.Size(74, 20)
-        Me.txtX1.TabIndex = 22
-        Me.txtX1.Text = "108"
-        Me.txtX1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label42
-        '
-        Me.Label42.AutoSize = True
-        Me.Label42.ForeColor = System.Drawing.Color.Black
-        Me.Label42.Location = New System.Drawing.Point(14, 167)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(43, 13)
-        Me.Label42.TabIndex = 25
-        Me.Label42.Text = "x2 (mm)"
-        '
-        'txtX2
-        '
-        Me.txtX2.Location = New System.Drawing.Point(107, 160)
-        Me.txtX2.Name = "txtX2"
-        Me.txtX2.Size = New System.Drawing.Size(74, 20)
-        Me.txtX2.TabIndex = 24
-        Me.txtX2.Text = "150"
-        Me.txtX2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'frmMain
         '

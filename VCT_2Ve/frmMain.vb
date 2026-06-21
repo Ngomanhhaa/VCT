@@ -317,14 +317,14 @@ Public Class frmMain
         Dim P4 As New cSTR_Point(P3.X, P3.Y + 182)
         Dim P5 As New cSTR_Point(P3.X - t, P3.Y + t)
         Dim P6 As New cSTR_Point(P5.X, P5.Y + x1)
+        Dim P5A As New cSTR_Point(P5.X + Abv, P5.Y - t + Abv)
+
 
         AddLine(P1.X, P1.Y, P2.X, P2.Y)
         Dim L34 As New cSTR_Line(P3.X, P3.Y, P4.X, P4.Y)
         AddLine(P2.X, P2.Y, P3.X, P3.Y)
-        'AddLine(P3.X, P3.Y, P4.X, P4.Y)
         AddLine(P1.X, P1.Y, P5.X, P5.Y)
         AddLine(P6.X, P6.Y, P5.X, P5.Y)
-
 
         Dim pSan As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(lineOffsetTrx2, lineOffsetTry)
         Dim Psan2 As New cSTR_Point(pSan.X + 740, pSan.Y)
@@ -336,8 +336,7 @@ Public Class frmMain
         Dim Psan3 As New cSTR_Point(pSan.X + 740, pSan.Y - t)
 
         Dim L_ao As cSTR_Line = Return_Offset_Line(P6, Psan1, -t) 'offset đoạn chéo xuống t
-        'AddLine(L_ao.X1, L_ao.Y1, L_ao.X2, L_ao.Y2)
-        Dim L_san2 As cSTR_Line = Return_Offset_Line(pSan, Psan1, t) ' ofset đoạn đi xuống x2
+        Dim L_san2 As cSTR_Line = Return_Offset_Line(pSan, Psan1, t) ' ofset đoạn đi xuống t
         Dim L_ao3 As cSTR_Line = Return_Offset_Line(pSan, Psan2, -t) ' offset đoạn l sàn xuống t
         Dim P7 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(L_ao, L34)
         Dim P8 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(L_ao, L_san2)
@@ -357,24 +356,12 @@ Public Class frmMain
         '(lớp dưới_Phương X)
         AddLine(P2.X + 35, P2.Y + Abv, P3.X - Abv, P3.Y + Abv, SYS_LAYER_STEEL_NAME)
         Dim Lthep34 As New cSTR_Line(P3.X - Abv, P3.Y + Abv, P4.X - Abv, P4.Y)
-        'AddLine(P3.X - Abv, P3.Y + Abv, P4.X - Abv, P4.Y, SYS_LAYER_STEEL_NAME)
         Dim Lthep_cheo_duoi As cSTR_Line = Return_Offset_Line(P7, P8, Abv)
         Dim Pgiao_Thep1 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep34, Lthep_cheo_duoi)
-        AddLine(P3.X - Abv, P3.Y + Abv, Pgiao_Thep1.X, Pgiao_Thep1.Y, SYS_LAYER_STEEL_NAME)
-        'AddLine(Lthep_cheo_duoi.X1, Lthep_cheo_duoi.Y1, Lthep_cheo_duoi.X2, Lthep_cheo_duoi.Y2, SYS_LAYER_STEEL_NAME)
         Dim Lthep89 As cSTR_Line = Return_Offset_Line(P8, P9, Abv)
         Dim Pgiao_Thep2 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep89, Lthep_cheo_duoi)
-        AddLine(Pgiao_Thep1.X, Pgiao_Thep1.Y, Pgiao_Thep2.X, Pgiao_Thep2.Y, SYS_LAYER_STEEL_NAME)
-        'Dim Lthep2 As cSTR_Line = Return_Offset_Line(Psan3, P9, -Abv)
-        'AddLine(Lthep2.X1, Lthep2.Y1, Lthep2.X2, Lthep2.Y2, SYS_LAYER_STEEL_NAME)
         AddLine(Pgiao_Thep2.X, Pgiao_Thep2.Y, P9.X - Abv, P9.Y + t - Abv, SYS_LAYER_STEEL_NAME)
         AddLine(P9.X - Abv, P9.Y + t - Abv, P9.X - Abv - 30, P9.Y + t - Abv - 50, SYS_LAYER_STEEL_NAME)
-        'AddLine(pSan.X, pSan.Y - t + Abv, Psan3.X, Psan3.Y + Abv, SYS_LAYER_STEEL_NAME)
-
-        AddLine(P2.X + 35, P2.Y + Abv, P3.X - Abv, P3.Y + Abv, SYS_LAYER_STEEL_NAME)
-        'Dim Lthep34 As New cSTR_Line(P3.X - Abv, P3.Y + Abv, P4.X - Abv, P4.Y)
-        AddLine(P3.X - Abv, P3.Y + Abv, P4.X - Abv, P4.Y, SYS_LAYER_STEEL_NAME)
-
 
         'Lớp trên(X)
         AddLine(P2.X + Abv, P2.Y + Abv, P1.X + Abv, P1.Y - Abv, SYS_LAYER_STEEL_NAME)
@@ -382,10 +369,11 @@ Public Class frmMain
         AddLine(P3.X - Abv, P3.Y + t - Abv, P3.X - Abv, P3.Y + t - Abv + 200, SYS_LAYER_STEEL_NAME)
         AddLine(P3.X - Abv, P3.Y + t - Abv + 200, P3.X - 30 - Abv, P3.Y + t - Abv - 50 + 200, SYS_LAYER_STEEL_NAME)
         Dim Lthep_cheo_tren As cSTR_Line = Return_Offset_Line(P6, Psan1, -Abv)
-        'AddLine(Lthep_cheo_tren.X1, Lthep_cheo_tren.Y1, Lthep_cheo_tren.X2, Lthep_cheo_tren.Y2, SYS_LAYER_STEEL_NAME)
-        Dim Lthep56 As New cSTR_Line(P5.X + Abv, P5.Y - Abv, P5.X + Abv, P5.Y + x1)
+        Dim Lthep56 As New cSTR_Line(P5.X + Abv, P5.Y - t + Abv, P5.X + Abv, P5.Y + x1)
         Dim Pgiao_Thep3 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep56, Lthep_cheo_tren)
-        AddLine(P5.X + Abv, P5.Y - Abv, Pgiao_Thep3.X, Pgiao_Thep3.Y, SYS_LAYER_STEEL_NAME)
+        AddLine(P5.X + Abv, P5.Y - t + Abv, Pgiao_Thep3.X, Pgiao_Thep3.Y, SYS_LAYER_STEEL_NAME)
+        AddLine(P5.X + Abv, P5.Y - t + Abv, P5.X + Abv - 200, P5.Y - t + Abv, SYS_LAYER_STEEL_NAME)
+        AddLine(P5.X + Abv - 200, P5.Y - t + Abv, P5.X + Abv - 200 + 50, P5.Y - t + Abv + 30, SYS_LAYER_STEEL_NAME)
         Dim Lthep89_loptren As cSTR_Line = Return_Offset_Line(pSan, Psan1, Abv)
         Dim Pgiao_thep4 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep89_loptren, Lthep_cheo_tren)
         AddLine(Pgiao_Thep3.X, Pgiao_Thep3.Y, Pgiao_thep4.X, Pgiao_thep4.Y, SYS_LAYER_STEEL_NAME)
@@ -393,14 +381,18 @@ Public Class frmMain
         AddLine(pSan.X + Abv, pSan.Y - Abv, pSan.X + Abv + 30, pSan.Y - Abv - 50, SYS_LAYER_STEEL_NAME)
 
         Dim P_moc1 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep34, Lthep_cheo_tren)
-        Dim P_moc2 As cSTR_Point = Return_Point_In_Line(Lthep89_loptren, P6, -200)
-        AddLine(P6.X, P6.Y, P_moc2.X, P_moc2.Y)
+        Dim P_ao As cSTR_Point = Return_Point_In_Line(P6, Psan1, 200)
+        Dim P_moc_34 As cSTR_Point = Return_Offset_Point(P6, Psan1, P_ao, -Abv)
+        AddLine(P_moc1.X, P_moc1.Y, P_moc_34.X, P_moc_34.Y, SYS_LAYER_STEEL_NAME)
+        AddLine(P_moc_34.X, P_moc_34.Y, P_moc_34.X - 30, P_moc_34.Y - 50, SYS_LAYER_STEEL_NAME)
+        AddLine(P3.X - Abv, P3.Y + Abv, P_moc1.X, P_moc1.Y, SYS_LAYER_STEEL_NAME)
 
         Dim P10 As cSTR_Point = Return_Giao_Diem_Hai_Doan_Thang(Lthep_cheo_duoi, Lthep56)
-        AddLine(Lthep_cheo_duoi.X1, Lthep_cheo_duoi.Y1, P10.X, P10.Y)
-        AddLine(P10.X, P10.Y, P10.X, P10.Y - 200)
-        AddLine(P10.X, P10.Y - 200, P10.X + 30, P10.Y - 200 + 50)
+        AddLine(Pgiao_Thep2.X, Pgiao_Thep2.Y, P10.X, P10.Y, SYS_LAYER_STEEL_NAME)
+        AddLine(P10.X, P10.Y, P10.X, P10.Y - 200, SYS_LAYER_STEEL_NAME)
+        AddLine(P10.X, P10.Y - 200, P10.X + 30, P10.Y - 200 + 50, SYS_LAYER_STEEL_NAME)
         'lớp dưới X ( thép chấm)
+        'L1
         Dim a_bardot As Integer = 22
         Dim Loca_Bar3 As ArrayList
         Loca_Bar3 = Add_Bar_Dot_YL1_Tren(P1.X, P1.Y - Abv - 15, P1.X + L1, P1.Y - Abv - 15, a2, Fi2, a2, Fi4, a4, False, False, a_bardot)
@@ -408,7 +400,23 @@ Public Class frmMain
 
         Loca_Bar3 = Add_Bar_Dot_YL1_Duoi(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a1, Fi1, a1, Fi3, a3, False, False, a_bardot)
         Add_Bar_Dot_YL1_Duoi(P1.X, P1.Y - t + Abv + 15, P1.X + L1, P1.Y - t + Abv + 15, a1, Fi1, a1, Fi3, a3, True, True, a_bardot)
+        'L3
+        Dim L_Null_Offset As cSTR_Line = Return_Offset_Line(Pgiao_Thep3, Pgiao_thep4, -15)
+        Loca_Bar3 = Add_Bar_Dot_Y_L2_Tren(L_Null_Offset.X1, L_Null_Offset.Y1, L_Null_Offset.X2, L_Null_Offset.Y2, a2, Fi2, a2, Fi4, a4, False, False, a_bardot)
+        Add_Bar_Dot_Y_L2_Tren(L_Null_Offset.X1, L_Null_Offset.Y1, L_Null_Offset.X2, L_Null_Offset.Y2, a2, Fi2, a2, Fi4, a4, True, True, a_bardot)
 
+        Dim L_Null_Offset1 As cSTR_Line = Return_Offset_Line(P10, Pgiao_Thep2, 15)
+        Loca_Bar3 = Add_Bar_Dot_Y_L2_Tren(L_Null_Offset1.X1, L_Null_Offset1.Y1, L_Null_Offset1.X2, L_Null_Offset1.Y2, a2, Fi2, a2, Fi4, a4, False, False, a_bardot)
+        Add_Bar_Dot_Y_L2_Tren(L_Null_Offset1.X1, L_Null_Offset1.Y1, L_Null_Offset1.X2, L_Null_Offset1.Y2, a2, Fi2, a2, Fi4, a4, True, True, a_bardot)
+
+        'hạ cốt
+        Dim L_Null56 As cSTR_Line = Return_Offset_Line(Pgiao_Thep3, P5A, 15)
+        Loca_Bar3 = Add_Bar_Dot_YL1_Tren(L_Null56.X1, L_Null56.Y1, L_Null56.X2, L_Null56.Y2, a2, Fi2, a2, Fi4, a4, False, False, a_bardot)
+        Add_Bar_Dot_YL1_Tren(L_Null56.X1, L_Null56.Y1, L_Null56.X2, L_Null56.Y2, a2, Fi2, a2, Fi4, a4, True, True, a_bardot)
+
+        Dim L_Null34 As cSTR_Line = Return_Offset_Line(P3, P_moc1, -15)
+        Loca_Bar3 = Add_Bar_Dot_YL1_Duoi(L_Null34.X1, L_Null34.Y1, L_Null34.X2, L_Null34.Y2, a2, Fi2, a2, Fi4, a4, False, False, a_bardot)
+        Add_Bar_Dot_YL1_Duoi(L_Null34.X1, L_Null34.Y1, L_Null34.X2, L_Null34.Y2, a2, Fi2, a2, Fi4, a4, True, True, a_bardot)
 
 #End Region
         DialogResult = Windows.Forms.DialogResult.OK
